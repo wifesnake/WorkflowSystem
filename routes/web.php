@@ -22,8 +22,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
 Route::get('/workinprogress', [App\Http\Controllers\WorkinprogressController::class, 'index'])->name('workinprogress');
 Route::get('/complete', [App\Http\Controllers\CompleteController::class, 'index'])->name('complete');
 Route::get('/cancel', [App\Http\Controllers\CancelController::class, 'index'])->name('cancel');
-
-
