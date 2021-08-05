@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home'
 Route::get('/workinprogress', [App\Http\Controllers\WorkinprogressController::class, 'index'])->name('workinprogress');
 Route::get('/complete', [App\Http\Controllers\CompleteController::class, 'index'])->name('complete');
 Route::get('/cancel', [App\Http\Controllers\CancelController::class, 'index'])->name('cancel');
+
+Route::get('/employee',[EmployeeController::class, 'index']);
