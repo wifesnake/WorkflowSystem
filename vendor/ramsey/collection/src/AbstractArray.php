@@ -25,7 +25,7 @@ use function unserialize;
  * the effort required to implement this interface.
  *
  * @template T
- * @template-implements ArrayInterface<T>
+ * @implements ArrayInterface<T>
  */
 abstract class AbstractArray implements ArrayInterface
 {
@@ -55,7 +55,7 @@ abstract class AbstractArray implements ArrayInterface
      *
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php IteratorAggregate::getIterator()
      *
-     * @return Traversable<T>
+     * @return Traversable<array-key, T>
      */
     public function getIterator(): Traversable
     {
