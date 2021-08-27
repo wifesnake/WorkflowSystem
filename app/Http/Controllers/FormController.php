@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\DataModel;
+use Illuminate\Http\Request;
 
-class CancelController extends Controller
+class FormController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,13 +17,17 @@ class CancelController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index()
     {
-        $menu = new DataModel;
-
+        $menu = new DataModel();
         $leftmenu = $menu->getmenu();
         //dd($leftmenu);
 
-        return view('cancel',$leftmenu);
+        return view('form',$leftmenu);
     }
 }
