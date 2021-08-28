@@ -15,7 +15,6 @@ try {
     require('datatables.net-bs4');
     require('datatables.net-bs4');
     require('datatables.net-responsive-bs4');
-    require('vue');
 } catch (e) {}
 
 /**

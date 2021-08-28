@@ -11,5 +11,5 @@ class Flow extends Model
 
     protected $table = 'flows';
 
-    protected $fillable = ['from_state','to_state','updated_by'];
+    protected $fillable = ['from_state','to_state','formdata','updated_by'];
 }
