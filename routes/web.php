@@ -26,5 +26,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 Route::get('/employee',[EmployeeController::class, 'index']);
+Route::get('/request',[EmployeeController::class, 'index']);
 
 Route::get('/form',[FormController::class, 'index']);
+
+Route::get('/user',function(){
+    return view('user');
+});

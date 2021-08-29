@@ -14,11 +14,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Styles -->
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&amp;display=swap" rel="stylesheet">
 
   <style>
     .table.dataTable{
       width: 100% !important;
     }
+
+    body{
+      font-family: 'Kanit', sans-serif !important;
+    }
+
   </style>
 
 </head>

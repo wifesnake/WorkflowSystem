@@ -6,8 +6,8 @@
     @else
       <a href="{{ url('/') }}" class="brand-link">  
     @endif
-      <img src="{{ asset('storage/images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">System  Miler</span>
+      <img src="{{ asset('storage/images/WCLogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">วิเชียรทรานสปอร์ต</span>
     </a>
 
     <!-- Sidebar -->
