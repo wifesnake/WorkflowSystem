@@ -39,6 +39,7 @@ class FlowController extends Controller
         $flow = new Flow();
         $flow->from_state = $request->from_state;
         $flow->to_state = $request->to_state;
+        $flow->formdata = $request->formdata;
         $flow->updated_by = $request->updated_by;
         if($flow->save())
         {

@@ -44,11 +44,11 @@ class LoginController extends Controller
         $input = $request->all();
 
         $this->validate($request,[
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
-        if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
+        if(auth()->attempt(array('name'=>$input['email'], 'password'=>$input['password']))){
             if(auth()->user()->is_admin == 1){
                 return redirect()->route('admin.home');
             }else{

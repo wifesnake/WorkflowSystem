@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\RequestController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,10 @@ use App\Http\Controllers\FormController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 Route::get('/employee',[EmployeeController::class, 'index']);
 Route::get('/request',[EmployeeController::class, 'index']);
 
-Route::get('/form',[FormController::class, 'index']);
-
-Route::get('/user',function(){
-    return view('user');
-});
+Route::get('/request',[RequestController::class, 'index']);
