@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FlowController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ListdataController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,4 +34,6 @@ Route::get('/request',[EmployeeController::class, 'index']);
 
 Route::get('/request',[RequestController::class, 'index']);
 
-Route::get('/form',[FormController::class, 'index']);
+Route::get('/form/{id}',[FormController::class, 'detail']);
+
+Route::get('/workinprogress',[ListdataController::class, 'workinprogress']);

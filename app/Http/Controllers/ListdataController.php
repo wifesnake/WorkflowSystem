@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataModel;
 use Illuminate\Http\Request;
 
-class FormController extends Controller
+class ListdataController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,18 +24,20 @@ class FormController extends Controller
      */
     public function index()
     {
-        $menu = new DataModel();
-        $leftmenu = $menu->getmenu();
-        //dd($leftmenu);
-
-        return view('form',$leftmenu);
+        //
     }
 
-    public function detail($id){
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function workinprogress()
+    {
         $menu = new DataModel();
         $leftmenu = $menu->getmenu();
         //dd($leftmenu);
 
-        return view('form',$leftmenu);
+        return view('listdata/workinprogress',$leftmenu);
     }
 }

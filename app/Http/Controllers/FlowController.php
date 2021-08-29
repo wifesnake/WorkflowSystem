@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\FlowResource;
+use App\Models\DataModel;
 use App\Models\Flow;
 use App\Models\Runorderno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FlowController extends Controller
 {
@@ -16,7 +18,17 @@ class FlowController extends Controller
      */
     public function index()
     {
-        //
+        // $menu = new DataModel();
+        // $leftmenu = $menu->getmenu();
+        // //dd($leftmenu);
+
+        // return view('flows',$leftmenu);
+
+        //$flows = Flow::where('status','=',1)->paginate(10);
+        //return FlowResource::collection($flows);
+
+        $flows = DB::select('select * from flows where status = ?;',[1]);
+        return ["data" => $flows];
     }
 
     /**
@@ -46,9 +58,9 @@ class FlowController extends Controller
         if($flow->save())
         {
             $t = $request->ordno;
-            $t = str_replace("OR","",$t);
+            $t = str_replace("VE","",$t);
             $t = (int)$t +1;
-            $runordno = Runorderno::findOrFail(1);
+            $runordno = Runorderno::findOrFail(2);
             $runordno->runno = $t;
             $runordno->save();
 

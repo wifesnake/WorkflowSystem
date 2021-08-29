@@ -17,6 +17,7 @@ class CreateTbRunordernoTable extends Migration
             $table->id();
             $table->string('runno');
             $table->string('status');
+            $table->string("istype");
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateFlowsTable extends Migration
             $table->integer('from_state');
             $table->integer('to_state');
             $table->string('formdata');
+            $table->boolean('status');
             $table->string('updated_by');
             $table->timestamps();
         });
