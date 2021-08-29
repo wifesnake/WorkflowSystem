@@ -27,5 +27,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 Route::get('/employee',[EmployeeController::class, 'index']);
+Route::get('/request',[EmployeeController::class, 'index']);
 
 Route::get('/request',[RequestController::class, 'index']);
