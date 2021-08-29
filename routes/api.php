@@ -26,4 +26,5 @@ Route::get('/posts/{id}',[PostController::class, 'show']);
 Route::put('/posts/{id}',[PostController::class, 'update']);
 Route::delete('/posts/{id}',[PostController::class, 'destroy']);
 
+Route::get('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
