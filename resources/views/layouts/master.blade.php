@@ -52,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script>
         $("#form1").submit(function($this){
+            let ordno = $("input[name=orderno]").val();
             let fromstate = $("input[name=fromstate]").val();
             let tostate = $("input[name=tostate]").val();
             let updatedby = $("input[name=updatedby]").val();
@@ -77,6 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 url: "/api/flow",
                 type:"POST",
                 data:{
+                    ordno: ordno,
                     from_state:fromstate,
                     to_state:tostate,
                     formdata:Base64.encode(JSON.stringify(formdata)),

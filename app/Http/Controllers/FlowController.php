@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\FlowResource;
 use App\Models\Flow;
+use App\Models\Runorderno;
 use Illuminate\Http\Request;
 
 class FlowController extends Controller
@@ -37,12 +38,20 @@ class FlowController extends Controller
     public function store(Request $request)
     {
         $flow = new Flow();
+        $flow->ordno = $request->ordno;
         $flow->from_state = $request->from_state;
         $flow->to_state = $request->to_state;
         $flow->formdata = $request->formdata;
         $flow->updated_by = $request->updated_by;
         if($flow->save())
         {
+            $t = $request->ordno;
+            $t = str_replace("OR","",$t);
+            $t = (int)$t +1;
+            $runordno = Runorderno::findOrFail(1);
+            $runordno->runno = $t;
+            $runordno->save();
+
             return new FlowResource($flow);
         }
     }

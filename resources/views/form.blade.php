@@ -2,24 +2,27 @@
 
 @section('content')
 
+<form action="#" id="form1">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="position: relative">
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div id="vueapp"></div>
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+                <input type="text" name="fromstate" id="fromstate" value="0">
+                <input type="text" name="tostate" id="tostate" value="1">
+                <input type="text" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
+
+                @include("form.state1")
+
+            </div>
+            <!-- /.container-fluid -->
         </div>
         <!-- /.content -->
-
         <div style="position: absolute; bottom: 0; padding: 10px 5px;">
-            <div class="btn btn-primary">Request</div>
+            <button type="submit" class="btn btn-primary">Request</button>
         </div>
-
     </div>
     <!-- /.content-wrapper -->
+</form>
 
 @endsection
