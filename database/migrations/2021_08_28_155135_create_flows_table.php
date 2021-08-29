@@ -15,6 +15,7 @@ class CreateFlowsTable extends Migration
     {
         Schema::create('flows', function (Blueprint $table) {
             $table->id();
+            $table->string("ordno");
             $table->integer('from_state');
             $table->integer('to_state');
             $table->string('formdata');

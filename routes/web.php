@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,3 +30,5 @@ Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home'
 Route::get('/employee',[EmployeeController::class, 'index']);
 
 Route::get('/request',[RequestController::class, 'index']);
+
+Route::get('/form',[FormController::class, 'index']);

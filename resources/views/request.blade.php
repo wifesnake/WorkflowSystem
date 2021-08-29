@@ -7,6 +7,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
+                <input type="text" name="orderno" id="orderno" value="{{ __($ordno) }}">
                 <input type="text" name="fromstate" id="fromstate" value="0">
                 <input type="text" name="tostate" id="tostate" value="1">
                 <input type="text" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">

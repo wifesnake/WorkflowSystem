@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Flow extends Model
+class Runorderno extends Model
 {
     use HasFactory;
 
-    protected $table = 'flows';
+    protected $table = 'tb_runorderno';
 
-    protected $fillable = ['ordno','from_state','to_state','formdata','updated_by'];
+    protected $fillable = ['runno'];
 }
