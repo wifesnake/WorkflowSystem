@@ -55,7 +55,6 @@ class FlowController extends Controller
         $flow->prev_state = $request->prev_state;
         $flow->current_state = $request->current_state;
         $flow->next_state = $request->next_state;
-        $flow->formdata = $request->formdata;
         $flow->status = 1;
         $flow->updated_by = $request->updated_by;
         if($flow->save())
@@ -72,6 +71,7 @@ class FlowController extends Controller
             $state->prev_state = $request->prev_state;
             $state->current_state = $request->current_state;
             $state->next_state = $request->next_state;
+            $state->formdata = $request->formdata;
             $state->save();
 
             return new FlowResource($flow);

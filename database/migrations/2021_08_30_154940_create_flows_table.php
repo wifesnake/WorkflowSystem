@@ -19,7 +19,6 @@ class CreateFlowsTable extends Migration
             $table->string('prev_state')->nullable();
             $table->string('current_state')->nullable();
             $table->string('next_state')->nullable();
-            $table->longText('formdata');
             $table->boolean('status');
             $table->string('updated_by');
             $table->timestamps();
