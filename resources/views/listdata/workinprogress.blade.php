@@ -9,10 +9,13 @@
                 <div class="card mt-2">
                     <section class="m-2">
                         <div class="com-md-12 table-responsive">
-                            <table id="table_id" class="table table-responsive">
+                            <table id="table_id" class="table dataTable">
                                 <thead>
                                     <tr>
                                         <th>Order No.</th>
+                                        <th>State Name</th>
+                                        <th>Update By</th>
+                                        <th>Request Time</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -49,8 +52,14 @@
                     "processing": true,
                     "columns": [
                         { "data": "ord_vehicle" },
+                        { "data": "state_name" },
+                        { "data": "updated_by" },
+                        { "data": "created_at" },
                         {
-                            data: null,render:function(data,type,row){return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ord_vehicle +"\");' >View</div>";}
+                            data: null,
+                            render:function(data,type,row){
+                                return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ord_vehicle +"\");' >View</div>";
+                            }
                         }
                     ]
                 });
