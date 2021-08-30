@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatesTable extends Migration
+class CreateTbStateconfigTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('tb_stateconfig', function (Blueprint $table) {
             $table->id();
-            $table->string('ord_vehicle');
-            $table->string('from_state')->nullable();
-            $table->string('current_state')->nullable();
-            $table->string('to_state')->nullable();
+            $table->string('from_state');
+            $table->string('to_state');
+            $table->string('formname');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('tb_stateconfig');
     }
 }

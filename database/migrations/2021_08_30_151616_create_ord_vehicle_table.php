@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFlowsTable extends Migration
+class CreateOrdVehicleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateFlowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('flows', function (Blueprint $table) {
+        Schema::create('ord_vehicle', function (Blueprint $table) {
             $table->id();
-            $table->string("ordno");
-            $table->integer('from_state');
-            $table->integer('to_state');
-            $table->string('formdata');
-            $table->boolean('status');
-            $table->string('updated_by');
+            $table->integer('id_vehicle');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateFlowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flows');
+        Schema::dropIfExists('ord_vehicle');
     }
 }

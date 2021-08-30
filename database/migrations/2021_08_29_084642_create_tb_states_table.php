@@ -15,7 +15,7 @@ class CreateTbStatesTable extends Migration
     {
         Schema::create('tb_states', function (Blueprint $table) {
             $table->id();
-            $table->string('state_id');
+            $table->string('id_state');
             $table->string('name');
             $table->timestamps();
         });
