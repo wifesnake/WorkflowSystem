@@ -7,10 +7,16 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <input type="text" name="orderno" id="orderno" value="{{ __($ordno) }}">
-                <input type="text" name="fromstate" id="fromstate" value="0">
-                <input type="text" name="tostate" id="tostate" value="1">
-                <input type="text" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
+                <input type="hidden" name="orderno" id="orderno" value="{{ __($ordno) }}">
+                <input type="hidden" name="prevstate" id="prevstate" value="">
+                <input type="hidden" name="currentstate" id="currentstate" value="00">
+                <input type="hidden" name="nextstate" id="nextstate" value="01">
+                <input type="hidden" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
+
+
+
+
+
             </div>
             <!-- /.container-fluid -->
         </div>
