@@ -19,6 +19,7 @@ class CreateStatesTable extends Migration
             $table->string('from_state')->nullable();
             $table->string('current_state')->nullable();
             $table->string('to_state')->nullable();
+            $table->longText('formdata');
             $table->timestamps();
         });
     }

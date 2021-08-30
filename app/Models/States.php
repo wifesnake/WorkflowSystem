@@ -11,5 +11,5 @@ class States extends Model
 
     protected $table = 'states';
 
-    protected $fillable = ['ord_vehicle','prev_state','current_state','next_state'];
+    protected $fillable = ['ord_vehicle','prev_state','current_state','next_state','formdata'];
 }

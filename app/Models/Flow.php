@@ -11,5 +11,5 @@ class Flow extends Model
 
     protected $table = 'flows';
 
-    protected $fillable = ['ord_vehicle','prev_state','current_state','next_state','formdata','status','updated_by'];
+    protected $fillable = ['ord_vehicle','prev_state','current_state','next_state','status','updated_by'];
 }
