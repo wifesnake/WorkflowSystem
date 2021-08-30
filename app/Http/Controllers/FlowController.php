@@ -28,7 +28,7 @@ class FlowController extends Controller
         //$flows = Flow::where('status','=',1)->paginate(10);
         //return FlowResource::collection($flows);
 
-        $flows = DB::select('select * from flows where status = ?;',[1]);
+        $flows = DB::select('select t1.ord_vehicle,t2.current_state as prev_state,t3.from_state as current_state,t3.to_state as next_state,t4.name as state_name,t3.formname,t1.updated_by,t1.created_at from flows t1 left join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle left join tb_stateconfig t3 on t3.from_state = t2.next_state left join tb_states t4 on t4.id_state = t3.from_state where t1.status = ? ORDER BY t1.created_at desc;',[1]);
         return ["data" => $flows];
     }
 
