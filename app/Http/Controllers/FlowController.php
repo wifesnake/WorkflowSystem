@@ -6,6 +6,7 @@ use App\Http\Resources\FlowResource;
 use App\Models\DataModel;
 use App\Models\Flow;
 use App\Models\Runorderno;
+use App\Models\States;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,19 +51,28 @@ class FlowController extends Controller
     public function store(Request $request)
     {
         $flow = new Flow();
-        $flow->ordno = $request->ordno;
-        $flow->from_state = $request->from_state;
-        $flow->to_state = $request->to_state;
+        $flow->ord_vehicle = $request->ord_vehicle;
+        $flow->prev_state = $request->prev_state;
+        $flow->current_state = $request->current_state;
+        $flow->next_state = $request->next_state;
         $flow->formdata = $request->formdata;
+        $flow->status = 1;
         $flow->updated_by = $request->updated_by;
         if($flow->save())
         {
-            $t = $request->ordno;
+            $t = $request->ord_vehicle;
             $t = str_replace("VE","",$t);
             $t = (int)$t +1;
             $runordno = Runorderno::findOrFail(2);
             $runordno->runno = $t;
             $runordno->save();
+
+            $state = new States();
+            $state->ord_vehicle = $request->ord_vehicle;
+            $state->prev_state = $request->prev_state;
+            $state->current_state = $request->current_state;
+            $state->next_state = $request->next_state;
+            $state->save();
 
             return new FlowResource($flow);
         }

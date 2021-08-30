@@ -31,36 +31,35 @@
 
     <script>
         $(document).ready(function(){
-            // $.get("/api/flows",function(data,status){
-            //     $('#table_id').DataTable({
-            //         "processing": true,
-            //         "data": data["data"],
-            //         "columns": [
-            //             { "data": "ordno" },
-            //             {
-            //                 data: null,
-            //                 className: "dt-center editor-edit",
-            //                 defaultContent: '<i class="fa fa-pencil"/>',
-            //                 orderable: false
-            //             }
-            //         ]
-            //     });
-            // });
 
-            $('#table_id').DataTable({
-                "ajax":{
-                    url: "/api/flows",
-                    type: "get"
-                },
-                "processing": true,
-                "columns": [
-                    { "data": "ordno" },
-                    {
-                        data: null,render:function(data,type,row){return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ordno +"\");' >View</div>";}
-                    }
-                ]
-            });
+            // on load
+            init_onload();
+
+            // call function
+            function init_onload(){
+                getDatable();
+            }
+
+            function getDatable(){
+                $('#table_id').DataTable({
+                    "ajax":{
+                        url: "/api/flows",
+                        type: "get"
+                    },
+                    "processing": true,
+                    "columns": [
+                        { "data": "ord_vehicle" },
+                        {
+                            data: null,render:function(data,type,row){return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ord_vehicle +"\");' >View</div>";}
+                        }
+                    ]
+                });
+            }
         });
+
+        function ViewData(ordno){
+            window.location.href = "{{ url('/form/') }}/" + ordno;
+        }
     </script>
 
 @endsection

@@ -8,20 +8,26 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <input type="text" name="orderno" id="orderno" value="001">
-                <input type="text" name="fromstate" id="fromstate" value="0">
-                <input type="text" name="tostate" id="tostate" value="1">
-                <input type="text" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
+                @foreach ($flowdatas as $flowdata)
+                    <input type="hidden" name="orderno" id="orderno" value="{{ $flowdata->ord_vehicle }}">
+                    <input type="hidden" name="prevstate" id="prevstate" value="{{ $flowdata->prev_state }}">
+                    <input type="hidden" name="currentstate" id="currentstate" value="{{ $flowdata->current_state }}">
+                    <input type="hidden" name="nextstate" id="nextstate" value="{{ $flowdata->next_state }}">
+                    <input type="hidden" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
 
-                @include("form.state1")
+                    <h1>State {{ __($flowdata->current_state) }} - {{ __($flowdata->state_name) }}</h1>
+
+                    @include("form.$flowdata->formname")
+
+                @endforeach
 
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /.content -->
-        <div style="position: absolute; bottom: 0; padding: 10px 5px;">
+        {{-- <div style="position: absolute; bottom: 0; padding: 10px 5px;">
             <button type="submit" class="btn btn-primary">Request</button>
-        </div>
+        </div> --}}
     </div>
     <!-- /.content-wrapper -->
 </form>
