@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import "../assets/fonts/Kanit300.css";
 
 // Variables
 @import 'variables';
@@ -17,3 +18,5 @@ $fa-font-path:"../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+@import "../assets/css/bootstrap4.min.css";
