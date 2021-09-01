@@ -28,6 +28,7 @@ class RequestController extends Controller
         $menu = new DataModel();
         $leftmenu = $menu->getmenu();
         $leftmenu["ordno"] = $this->GetLastOrder();
+        $leftmenu["formnames"] = $this->getFormDependency();
         //dd($leftmenu);
 
         return view('request',$leftmenu);
@@ -44,5 +45,12 @@ class RequestController extends Controller
         }
 
         return $isRunno;
+    }
+
+    protected function getFormDependency(){
+
+        $forms = DB::select("select formname from tb_stateconfig where from_state = '00';");
+
+        return $forms;
     }
 }
