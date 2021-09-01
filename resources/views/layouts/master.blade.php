@@ -23,12 +23,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{-- <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> --}}
 
-    <!-- REQUIRED SCRIPTS -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
     <style>
         .table.dataTable{
         width: 100% !important;
+        }
+
+        .brand-link .brand-image{
+            margin-left: .25rem !important;
         }
 
         body{
@@ -91,12 +92,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @if ($is_admin == 1)
                         window.location.href = "{{ url("/admin/home") }}";
                     @else
-                    window.location.href = "{{ url("/home") }}";
+                        window.location.href = "{{ url("/home") }}";
                     @endif
                 },
            });
         });
     </script>
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 </body>
 </html>
