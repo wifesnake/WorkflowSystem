@@ -50,11 +50,12 @@
                         type: "get"
                     },
                     "processing": true,
+                    "order": [[ 2, "desc" ]],
                     "columns": [
                         { "data": "ord_vehicle" },
                         { "data": "state_name" },
                         { "data": "updated_by" },
-                        { "data": "created_at" },
+                        { "data": "datetime_th" },
                         {
                             data: null,
                             render:function(data,type,row){
