@@ -11,6 +11,7 @@ class EmployeeController extends Controller
     public function index(EmployeeDataTable $dataTable){
         $menu = new DataModel;
         $leftmenu = $menu->getmenu();
-        return $dataTable->render('employee', $leftmenu);
+        // dd($leftmenu);
+        return $dataTable->render('employee',$leftmenu);
     }
 }
