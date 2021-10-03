@@ -52,8 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
-    //'url' => env('APP_URL', 'https://vichean.net'),
+    'url' => env('APP_URL', 'https://vichean.net'),
 
     'asset_url' => env('ASSET_URL', null),
 
