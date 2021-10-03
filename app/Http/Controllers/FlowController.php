@@ -29,7 +29,7 @@ class FlowController extends Controller
         //$flows = Flow::where('status','=',1)->paginate(10);
         //return FlowResource::collection($flows);
 
-        $flows = DB::select('select distinct t2.id,t1.ord_vehicle,t2.prev_state,t3.from_state as current_state, t3.to_state as next_state,t4.name as state_name,t1.updated_by,t2.created_at, CONVERT_TZ(t2.created_at,"+00:00","+07:00") as datetime_th from flows t1 inner join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle inner join tb_stateconfig t3 on t3.from_state = t2.current_state inner join tb_states t4 on t4.id_state = t3.to_state where t1.status = ? ORDER BY t2.created_at desc;',[1]);
+        $flows = DB::select('select distinct t2.id,t1.ord_vehicle,t2.prev_state,t3.from_state as current_state, t3.to_state as next_state,t4.name as state_name,t1.updated_by,t2.created_at, CONVERT_TZ(t2.created_at,"+00:00","+07:00") as datetime_th from flows t1 inner join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle inner join tb_state_action t3 on t3.from_state = t2.current_state inner join tb_states t4 on t4.id_state = t3.to_state where t1.status = ? ORDER BY t2.created_at desc;',[1]);
         return ["data" => $flows];
     }
 
