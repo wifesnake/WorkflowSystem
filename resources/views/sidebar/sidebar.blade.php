@@ -9,8 +9,7 @@
       <img src="{{ asset('storage/images/WCLogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">วิเชียรทรานสปอร์ต</span>
     </a>
-    <?php echo url()->full(); ?>
-    {{-- <?php echo url(); ?> --}}
+
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar Menu -->
@@ -20,11 +19,13 @@
                with font-awesome or any other icon font library -->
           @foreach ($menus as $menu)
 
-            @if (url($menu->link) == url()->full())
+            {{-- @if (url($menu->link) == url()->full())
                 <li class="nav-item menu-is-opening menu-open">
             @else
                 <li class="nav-item">
-            @endif
+            @endif --}}
+
+            <li class="nav-item">
 
             @if ($menu->link !== NULL)
                 <a href="{{ url($menu->link) }}" class="nav-link">
