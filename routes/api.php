@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FlowController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostEmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,5 @@ Route::get('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
 
 Route::post('/state',[FlowController::class, 'updateStates']);
+
+Route::post('/employee',[PostEmployeeController::class, 'store']);
