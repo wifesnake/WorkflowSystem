@@ -4,7 +4,7 @@
     @if ($is_admin == '1')
       <a href="{{ url('admin/home') }}" class="brand-link">
     @else
-      <a href="{{ url('/') }}" class="brand-link">  
+      <a href="{{ url('/') }}" class="brand-link">
     @endif
       <img src="{{ asset('storage/images/WCLogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">วิเชียรทรานสปอร์ต</span>
@@ -28,15 +28,15 @@
               <p>
                 {{ $menu->name }}
                 @if ($menu->is_menu)
-                  <i class="right fas fa-angle-left"></i>  
-                @endif                
+                  <i class="right fas fa-angle-left"></i>
+                @endif
               </p>
             </a>
             @foreach ($submenus as $submenu)
                 @if ($menu->id == $submenu->menu_id)
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="{{ $submenu->link }}" class="nav-link">
                         <i class="nav-icon fas fa-chevron-right"></i>
                         <p>{{ $submenu->name }}</p>
                       </a>
