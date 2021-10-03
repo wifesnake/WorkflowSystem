@@ -18,7 +18,7 @@
                                             <label for="name">Titlename</label>
                                             <select name="titlename" id="titlename" class="form-control" required>
                                                 <option value="">-- Please Select --</option>
-                                                @foreach ($titlename as $item)
+                                                @foreach ($titlenames as $item)
                                                     <option value="{{ $item->code_lookup }}">{{ $item->value_lookup }}</option>
                                                 @endforeach
                                             </select>
