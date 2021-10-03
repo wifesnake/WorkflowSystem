@@ -15,17 +15,17 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
+            <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @foreach ($menus as $menu)
+            @foreach ($menus as $menu)
 
-            {{-- @if (url($menu->link) == url()->full())
-                <li class="nav-item menu-is-opening menu-open">
-            @else
-                <li class="nav-item">
-            @endif --}}
-
-            <li class="nav-item">
+            <li class="nav-item
+                @foreach ($submenus as $submenu)
+                    @if (url($submenu->link) == url()->full())
+                        nav-item menu-is-opening menu-open
+                    @endif
+                @endforeach
+            ">
 
             @if ($menu->link !== NULL)
                 <a href="{{ url($menu->link) }}" class="nav-link">
