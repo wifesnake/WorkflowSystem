@@ -8,6 +8,13 @@
                 <div class="card mt-2">
                     <section class="m-2">
                         <div class="com-md-12 table-responsive">
+                            <label>เพิ่มข้อมูลพนักงาน</label>
+                        </div>
+                    </section>
+                </div>
+                <div class="card mt-2">
+                    <section class="m-2">
+                        <div class="com-md-12 table-responsive">
                             {!! $dataTable->table() !!}
                         </div>
                     </section>

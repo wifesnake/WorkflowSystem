@@ -1,8 +1,8 @@
-/node_modules
+# /node_modules
 /public/hot
 /storage/*.key
-/vendor
-# .env
+# /vendor
+.env
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+config/app.php
