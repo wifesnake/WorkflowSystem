@@ -9,7 +9,8 @@
       <img src="{{ asset('storage/images/WCLogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">วิเชียรทรานสปอร์ต</span>
     </a>
-
+    <?php echo url()->full(); ?>
+    {{-- <?php echo url(); ?> --}}
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar Menu -->
@@ -18,11 +19,17 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @foreach ($menus as $menu)
-          <li class="nav-item">
-            @if ($menu->link !== NULL)
-              <a href="{{ url($menu->link) }}" class="nav-link">
+
+            @if (url($menu->link) == url()->full())
+                <li class="nav-item menu-is-opening menu-open">
             @else
-              <a href="#" class="nav-link">
+                <li class="nav-item">
+            @endif
+
+            @if ($menu->link !== NULL)
+                <a href="{{ url($menu->link) }}" class="nav-link">
+            @else
+                <a href="#" class="nav-link">
             @endif
               <i class="nav-icon {{ $menu->icon }}"></i>
               <p>
