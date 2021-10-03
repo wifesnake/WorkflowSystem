@@ -21,7 +21,7 @@
 
             <li class="nav-item
                 @foreach ($submenus as $submenu)
-                    @if (url($submenu->link) == url()->full() && $menu->like == "")
+                    @if ((url($submenu->link) == url()->full() && $menu->Islink == 1) || url($menu->link) == url()->full())
                         nav-item menu-is-opening menu-open
                     @endif
                 @endforeach
