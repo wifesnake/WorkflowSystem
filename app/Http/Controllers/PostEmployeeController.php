@@ -38,11 +38,19 @@ class PostEmployeeController extends Controller
     public function store(Request $request)
     {
         $post = new Employee();
+        $post->titlename = $request->titlename;
         $post->name = $request->name;
+        $post->lastname = $request->lastname;
+        $post->address = $request->address;
+        $post->id_card = $request->id_card;
+        $post->employee_code = $request->employee_code;
+        $post->employee_type = $request->employee_type;
         $post->email = $request->email;
         $post->phone = $request->phone;
         $post->salary = $request->salary;
         $post->department = $request->department;
+        $post->created_by = $request->created_by;
+        $post->updated_by = $request->updated_by;
         if($post->save())
         {
             return new PostEmployeeResource($post);

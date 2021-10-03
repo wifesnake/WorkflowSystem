@@ -46,6 +46,7 @@ class EmployeeDataTable extends DataTable
                     ->setTableId('employee-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->removeColumn('id')
                     ->orderBy(0, 'asc');
     }
 
