@@ -22,7 +22,7 @@
         <!-- Main content -->
         {{-- <div class="content"> --}}
             <div class="container-fluid">
-                <h1>State {{ __($flowdata->current_state) }} - {{ __($flowdata->state_name) }}</h1>
+                <h1>State {{ __($flowdata->next_state) }} - {{ __($flowdata->state_name) }}</h1>
                 <br>
                 @foreach ($formnames as $formname)
                     @include("form.$formname->formname", ["ordno" => $var1])
