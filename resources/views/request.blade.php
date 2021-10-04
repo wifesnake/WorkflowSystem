@@ -68,12 +68,10 @@
             url: "/api/flow",
             type: "POST",
             data: jsonData,
-            success:function(response){
-                @if ($is_admin == 1)
-                    window.location.href = "{{ url("/admin/home") }}";
-                @else
-                    window.location.href = "{{ url("/home") }}";
-                @endif
+            success:function(response,status){
+                if(status == "success"){
+                    window.location.href = "{{ url("/workinprogress") }}";
+                }
             },
        });
     });
