@@ -18,6 +18,7 @@ class DataModel extends Model
         $menu = DB::select("select t1.id,t1.name,isnull(t1.link) as Islink,t1.link,t1.icon,t1.status,t2.menu_id as is_menu FROM tb_menu t1 LEFT JOIN tb_submenu t2 on t2.menu_id = t1.id WHERE t1.status = ? GROUP BY t1.id,t1.name,t1.link,t1.icon,t1.status,t2.menu_id", ['1']);
         $submenu = DB::select('select * from tb_submenu where status = ?', ['1']);
         $titlename = DB::select("select * from tb_lookup where name_lookup = 'titlename'");
+        $employeetype = DB::select("select * from tb_lookup where name_lookup = 'employee_type'");
         //$runno = DB::select("select lpad(lpad(runno,6,'0'),8,'OR') as runno FROM tb_runorderno WHERE status = ?",['1']);
 
         // $isRunno = "";
@@ -33,6 +34,7 @@ class DataModel extends Model
                 'is_admin' => $user,
                 'email' => $email,
                 'name' => $name,
-                'titlenames' => $titlename];
+                'titlenames' => $titlename,
+                'employeetypes'=> $employeetype];
     }
 }
