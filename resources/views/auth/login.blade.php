@@ -1,3 +1,9 @@
+<style>
+    a.nav-link {
+        display: none;
+    }
+</style>
+
 @extends('layouts.app')
 
 @section('content')
