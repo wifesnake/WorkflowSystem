@@ -68192,3 +68192,9 @@ th {
   background-color: #156140;
   border-color: #156140;
 }
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #156140;
+  border-color: #156140;
+}
