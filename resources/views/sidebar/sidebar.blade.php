@@ -12,50 +12,49 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-            @foreach ($menus as $menu)
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                @foreach ($menus as $menu)
 
-            <li class="nav-item
-                @foreach ($submenus as $submenu)
-                    @if ((url($submenu->link) == url()->full() && $menu->Islink == 1) || url($menu->link) == url()->full())
-                        nav-item menu-is-opening menu-open
-                    @endif
-                @endforeach
-            ">
+                    <li class="nav-item
+                        @foreach ($submenus as $submenu)
+                            @if ((url($submenu->link) == url()->full() && $menu->Islink == 1) || url($menu->link) == url()->full())
+                                nav-item menu-is-opening menu-open
+                            @endif
+                        @endforeach
+                    ">
 
-            @if ($menu->link !== NULL)
-                <a href="{{ url($menu->link) }}" class="nav-link">
-            @else
-                <a href="#" class="nav-link">
-            @endif
-              <i class="nav-icon {{ $menu->icon }}"></i>
-              <p>
-                {{ $menu->name }}
-                @if ($menu->is_menu)
-                  <i class="right fas fa-angle-left"></i>
+                @if ($menu->link !== NULL)
+                        <a href="{{ url($menu->link) }}" class="nav-link">
+                @else
+                        <a href="#" class="nav-link">
                 @endif
-              </p>
-            </a>
-            @foreach ($submenus as $submenu)
-                @if ($menu->id == $submenu->menu_id)
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{ $submenu->link }}" class="nav-link">
-                        <i class="nav-icon fas fa-chevron-right"></i>
-                        <p>{{ $submenu->name }}</p>
-                      </a>
+                        <i class="nav-icon {{ $menu->icon }}"></i>
+                        <p>{{ $menu->name }}
+                            @if ($menu->is_menu)
+                                <i class="right fas fa-angle-left"></i>
+                            @endif
+                        </p>
+                        </a>
+                        @foreach ($submenus as $submenu)
+                            @if ($menu->id == $submenu->menu_id)
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ $submenu->link }}" class="nav-link">
+                                            <i class="nav-icon fas fa-chevron-right"></i>
+                                            <p>{{ $submenu->name }}</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endif
+                        @endforeach
                     </li>
-                  </ul>
-                @endif
-            @endforeach
-          </li>
-          @endforeach
-        </ul>
-      </nav>
+                @endforeach
+            </ul>
+        </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
