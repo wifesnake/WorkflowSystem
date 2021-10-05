@@ -9,7 +9,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>AdminLTE 3 | Starter</title>
+    <link rel="icon" href="{{ asset('storage/images/WCLogo.ico') }}" type="image/icon type">
+    <title>VICHIAN TRANSPORT LIMITED PARTNERSHIP</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&amp;display=swap" rel="stylesheet">
