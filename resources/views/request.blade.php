@@ -19,9 +19,9 @@ $var1 = $ordno;
         </div>
         <div class="content">
             <div class="container-fluid">
-                <!-- @foreach ($formnames as $formname)
+                @foreach ($formnames as $formname)
                     @include("form.$formname->formname",["ordno" => $var1])
-                @endforeach -->
+                @endforeach
 
                 <div class="group_data">
                     <div class="col-md-12">
@@ -292,28 +292,16 @@ $("#form1").submit(function($this) {
                 formdata[i] = subformdata;
         }
 
-    }
-
-    var jsonData = {
-        ord_vehicle: ordno,
-        prev_state: prevstate,
-        current_state: currentstate,
-        next_state: nextstate,
-        formdata: Base64.encode(JSON.stringify(formdata)),
-        updated_by: updatedby
-    }
-
-    $.ajax({
-        url: "/api/flow",
-        type: "POST",
-        data: jsonData,
-        success: function(response) {
-            @if($is_admin == 1)
-            window.location.href = "{{ url(" / admin / home ") }}";
-            @else
-            window.location.href = "{{ url(" / home ") }}";
-            @endif
-        },
+        $.ajax({
+            url: "/api/flow",
+            type: "POST",
+            data: jsonData,
+            success:function(response,status){
+                if(status == "success"){
+                    window.location.href = "{{ url("/workinprogress") }}";
+                }
+            },
+       });
     });
 });
 </script>

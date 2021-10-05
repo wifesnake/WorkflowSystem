@@ -50,13 +50,23 @@ class FlowController extends Controller
      */
     public function updateStates(Request $request)
     {
+        $tmp_prevstate = $request->current_state == "00" ? null : $request->prev_state;
         $state = new States();
+        $state->systemcode = null;
         $state->ord_vehicle = $request->ord_vehicle;
-        $state->prev_state = $request->prev_state;
+        $state->prev_state = $tmp_prevstate;
         $state->current_state = $request->current_state;
-        $state->next_state = $request->next_state;
         $state->formdata = $request->formdata;
+        $state->created_by = $request->created_by;
+        $state->updated_by = $request->updated_by;
         if($state->save()){
+
+            $flow = Flow::findOrFail($request->id);
+            $flow->prev_state = $tmp_prevstate;
+            $flow->current_state = $request->current_state;
+            $flow->updated_by = $request->updated_by;
+            $flow->save();
+
             return new StatesResource($state);
         }
     }
@@ -70,11 +80,12 @@ class FlowController extends Controller
     public function store(Request $request)
     {
         $flow = new Flow();
+        $flow->systemcode = null;
         $flow->ord_vehicle = $request->ord_vehicle;
         $flow->prev_state = $request->prev_state;
         $flow->current_state = $request->current_state;
-        $flow->next_state = $request->next_state;
         $flow->status = 1;
+        $flow->created_by = $request->updated_by;
         $flow->updated_by = $request->updated_by;
         if($flow->save())
         {
@@ -86,11 +97,13 @@ class FlowController extends Controller
             $runordno->save();
 
             $state = new States();
+            $state->systemcode = null;
             $state->ord_vehicle = $request->ord_vehicle;
-            $state->prev_state = $request->prev_state;
+            $state->prev_state = null;
             $state->current_state = $request->current_state;
-            $state->next_state = $request->next_state;
             $state->formdata = $request->formdata;
+            $state->created_by = $request->updated_by;
+            $state->updated_by = $request->updated_by;
             $state->save();
 
             return new FlowResource($flow);

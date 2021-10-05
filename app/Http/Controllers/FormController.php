@@ -37,6 +37,7 @@ class FormController extends Controller
         $leftmenu = $menu->getmenu();
         $leftmenu["flowdatas"] = $this->getFlowdata($id);
         $leftmenu["formnames"] = $this->getFormDependency($id);
+        $leftmenu["btnactions"] = $this->BtnAction(($id));
         // dd($leftmenu);
 
         return view('form',$leftmenu);
@@ -54,5 +55,10 @@ class FormController extends Controller
         $forms = DB::select("select t4.formname from flows t1 inner join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle inner join tb_state_action t3 on t3.from_state = t2.current_state inner join tb_stateconfig t4 on t4.from_state = t3.to_state where t1.ord_vehicle = ? and t1.status = ?;",[$id,1]);
 
         return $forms;
+    }
+
+    protected function BtnAction($id){
+        $btn = DB::select("SELECT DISTINCT t1.id, t2.prev_state, isnull(t2.prev_state) as isPrevstate, t2.current_state, isnull(t2.current_state) as isCurrentstate, t3.to_state, isnull(t3.to_state) as isTostate, t1.ord_vehicle FROM `flows` t1 INNER JOIN (SELECT * FROM states WHERE id IN (SELECT max(id) from states GROUP BY ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle INNER JOIN tb_state_action t3 on t3.from_state = t2.current_State WHERE t1.ord_vehicle = ?;", [$id]);
+        return $btn;
     }
 }
