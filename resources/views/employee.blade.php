@@ -6,10 +6,6 @@
     <div class="content">
         <div class="container-fluid">
 
-            <div class="menu-action col-md-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-
             <form action="#" id="f-employee">
                 <div class="group_data">
                     <div class="col-md-12">
@@ -62,10 +58,13 @@
                         <div class="col-md-2">
                             <select name="employee_type" id="employee_type" class="form-control" required>
                                 <option value="">-- Please Select --</option>
+                                @foreach ($employeetypes as $item)
+                                <option value="{{ $item->code_lookup }}">{{ $item->value_lookup }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="employee_code" id="employee_code" class="form-control"
+                            <input type="text" name="employee_id" id="employee_id" class="form-control"
                                 required>
                         </div>
 
@@ -107,6 +106,9 @@
                         </div>
                     </div>
 
+                    <div class="menu-action col-md-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
 
                 </div>
             </form>
@@ -139,7 +141,7 @@
                 "data": {}
             };
 
-            $.ajax(settings).done(function (response) {
+            $.ajax(settings).done(function (response,status) {
                 if(status=="success"){
                     window.location.href = "{{url('/employee')}}"
                 }
@@ -180,52 +182,53 @@
         });
     // });
     }
-$('#f-employee').submit(function($this) {
-    var settings = {
-        "url": "{{url('api/employee')}}",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        "data": {
-            "titlename": $("select[name~='titlename']").val() == "" ? "" : $("select[name~='titlename']")
-                .val(),
-            "name": $("input[name~='name']").val(),
-            "lastname": $("input[name~='lastname']").val(),
-            "address": $("input[name~='address']").val(),
-            "id_card": $("input[name~='id_card']").val(),
-            "employee_code": $("input[name~='employee_code']").val(),
-            "employee_type": $("input[name~='employee_type']").val(),
-            "email": $("input[name~='email']").val(),
-            "phone": $("input[name~='phone']").val(),
-            "salary": $("input[name~='salary']").val(),
-            "department": $("input[name~='department']").val(),
-            "created_by": '{{ Auth::user()->name }}',
-            "updated_by": '{{ Auth::user()->name }}'
 
-            // "titlename": "a",
-            // "name": "a",
-            // "lastname": "a",
-            // "address": "a",
-            // "id_card": "a",
-            // "employee_code": "a",
-            // "employee_type": "a",
-            // "email": "a",
-            // "phone": "a",
-            // "salary": "10",
-            // "department": "a",
-            // "created_by": "admin",
-            // "updated_by": "admin"
-        }
-    };
+    $('#f-employee').submit(function($this) {
+        var settings = {
+            "url": "{{url('api/employee')}}",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                "titlename": $("select[name~='titlename']").val() == "" ? "" : $("select[name~='titlename']")
+                    .val(),
+                "name": $("input[name~='name']").val(),
+                "lastname": $("input[name~='lastname']").val(),
+                "address": $("input[name~='address']").val(),
+                "id_card": $("input[name~='id_card']").val(),
+                "employee_id": $("input[name~='employee_id']").val(),
+                "employee_type": $("input[name~='employee_type']").val(),
+                "email": $("input[name~='email']").val(),
+                "phone": $("input[name~='phone']").val(),
+                "salary": $("input[name~='salary']").val(),
+                "department": $("input[name~='department']").val(),
+                "created_by": '{{ Auth::user()->name }}',
+                "updated_by": '{{ Auth::user()->name }}'
 
-    console.log(settings);
+                // "titlename": "a",
+                // "name": "a",
+                // "lastname": "a",
+                // "address": "a",
+                // "id_card": "a",
+                // "employee_id": "a",
+                // "employee_type": "a",
+                // "email": "a",
+                // "phone": "a",
+                // "salary": "10",
+                // "department": "a",
+                // "created_by": "admin",
+                // "updated_by": "admin"
+            }
+        };
 
-    $.ajax(settings).done(function(response) {
-        console.log(response);
+        console.log(settings);
+
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+        });
     });
-});
 </script>
 
 @endsection
