@@ -1,8 +1,3 @@
-<style>
-    .container-fluid {
-    margin-top: 30px;
-}
-</style>
 @extends('layouts.master')
 
 @section('content')
@@ -15,13 +10,18 @@ $var1 = $ordno;
 <input type="hidden" name="nextstate" id="nextstate" value="01">
 <input type="hidden" name="updatedby" id="updatedby" value="{{ Auth::user()->name }}">
 
+
 <form action="#" id="form1">
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="position: relative">
         <!-- Main content -->
 
         <div class="content">
             <div class="container-fluid">
+
+                <div class="title-header">เพิ่มข้อมูลการจัดส่งสินค้า</div>
+
                 <!-- @foreach ($formnames as $formname)
                 @include("form.$formname->formname",["ordno" => $var1])
                 @endforeach -->

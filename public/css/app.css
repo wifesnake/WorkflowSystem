@@ -68224,3 +68224,23 @@ button.btn.btn-danger {
   border: #df5c53;
   color: white;
 }
+
+.container-fluid {
+  margin-top: 30px;
+}
+
+.title-header {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.card.mt-2 {
+  padding: 15px;
+}
+
+.title-header-2 {
+  font-size: 22px;
+  margin-left: 35px;
+  margin-bottom: 15px;
+}
