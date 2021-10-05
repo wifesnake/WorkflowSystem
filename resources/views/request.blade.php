@@ -1,3 +1,8 @@
+<style>
+    .container-fluid {
+    margin-top: 30px;
+}
+</style>
 @extends('layouts.master')
 
 @section('content')
@@ -14,21 +19,19 @@ $var1 = $ordno;
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="position: relative">
         <!-- Main content -->
-        <div class="menu-action" style="bottom: 0; padding: 10px 5px;">
-            <button type="submit" class="btn btn-primary">Request</button>
-        </div>
+
         <div class="content">
             <div class="container-fluid">
                 <!-- @foreach ($formnames as $formname)
                 @include("form.$formname->formname",["ordno" => $var1])
                 @endforeach -->
-
+        
                 <form action="#" id="f-request">
 
                     <div class="group_data">
                         <div class="col-md-12">
                             <div class="title-form">
-                                เพิ่มรายการข้อมูลการจัดส่งสินค้า
+                                ข้อมูลการจัดส่งสินค้า
                             </div>
                         </div>
 
@@ -176,6 +179,12 @@ $var1 = $ordno;
                         </div>
                     </div>
                 </form>
+
+                <div class="menu-action col-md-12">
+                    <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                    <button class="btn btn-danger">ยกเลิก</button>
+                </div>
+
 
             </div>
             <!-- /.container-fluid -->

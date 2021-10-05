@@ -14,7 +14,7 @@
             </div>
             <div class="collapse" id="collapse">
 
-                <form action="#" id="f-employee">
+                <form action="#" id="f-customer">
                     <div class="group_data">
 
                         <div class="col-md-12">
@@ -68,7 +68,7 @@
                             <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
                             <button class="btn btn-danger">ยกเลิก</button>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>
