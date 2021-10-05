@@ -19,157 +19,164 @@ $var1 = $ordno;
         </div>
         <div class="content">
             <div class="container-fluid">
-                @foreach ($formnames as $formname)
-                    @include("form.$formname->formname",["ordno" => $var1])
-                @endforeach
+                <!-- @foreach ($formnames as $formname)
+                @include("form.$formname->formname",["ordno" => $var1])
+                @endforeach -->
 
-                <div class="group_data">
-                    <div class="col-md-12">
-                        <div class="title-form">
-                            เพิ่มรายการข้อมูลการจัดส่งสินค้า
-                        </div>
-                    </div>
+                <form action="#" id="f-request">
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            เลขที่ Tracking Number :
+                    <div class="group_data">
+                        <div class="col-md-12">
+                            <div class="title-form">
+                                เพิ่มรายการข้อมูลการจัดส่งสินค้า
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            เลขที่ PO :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                เลขที่ Tracking Number :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="order_id" id="order_id" class="form-control" type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            รหัสลูกค้า :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                เลขที่ PO :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="po" id="po" class="form-control" type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            ชื่อลูกค้า :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                รหัสลูกค้า :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="cust_code" id="cust_code" class="form-control" type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            ที่อยู่ลูกค้า :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ชื่อลูกค้า :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="cust_name" id="cust_name" class="form-control" type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            เลขที่นิติบุคคล :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ที่อยู่ลูกค้า :
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="cust_address" id="cust_address" class="form-control"
+                                    rows="4"></textarea>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            หมายเหตุจากลูกค้า :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                เลขที่นิติบุคคล :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="cust_presonalcode" id="cust_presonalcode" class="form-control"
+                                    type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <textarea rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="group_data">
-
-                    <div class="col-md-12">
-                        <div class="title-form">
-                            ข้อมูลผู้รับสินค้า
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                หมายเหตุจากลูกค้า :
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="order_remark" id="order_remark" class="form-control"
+                                    rows="4"></textarea>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            ชื่อ-นามสกุล :
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
+                    <div class="group_data">
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            ที่อยู่ :
+                        <div class="col-md-12">
+                            <div class="title-form">
+                                ข้อมูลผู้รับสินค้า
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <textarea rows="4"></textarea>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            โทรศัพท์ :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ชื่อ-นามสกุล :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="to_name" id="to_name" class="form-control" type="text"></input>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
-                </div>
-                <div class="group_data">
-                    <div class="col-md-12">
-                        <div class="title-form">
-                            รายละเอียดสินค้า
-                        </div>
-                    </div>
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            รายละเอียดสินค้า :
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            จำนวน :
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ที่อยู่ :
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="to_address" id="to_address" class="form-control" rows="4"></textarea>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
 
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            น้ำหนัก :
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text"></input>
-                        </div>
-                    </div>
-                    <div class="row col-md-12">
-                        <div class="col-md-3">
-                            Remark :
-                        </div>
-                        <div class="col-md-8">
-                            <textarea rows="4"></textarea>
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                โทรศัพท์ :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="to_phone" id="to_phone" class="form-control" type="text"></input>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="group_data">
+                        <div class="col-md-12">
+                            <div class="title-form">
+                                รายละเอียดสินค้า
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                รายละเอียดสินค้า :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="product_type" id="product_type" class="form-control" type="text"></input>
+                            </div>
+                        </div>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                จำนวน :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="unit" id="unit" class="form-control" type="text"></input>
+                            </div>
+                        </div>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                น้ำหนัก :
+                            </div>
+                            <div class="col-md-8">
+                                <input name="weight" id="weight" class="form-control" type="text"></input>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                Remark :
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="remark" id="remark" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -296,12 +303,12 @@ $("#form1").submit(function($this) {
             url: "/api/flow",
             type: "POST",
             data: jsonData,
-            success:function(response,status){
-                if(status == "success"){
-                    window.location.href = "{{ url("/workinprogress") }}";
+            success: function(response, status) {
+                if (status == "success") {
+                    window.location.href = "{{ url(" / workinprogress ") }}";
                 }
             },
-       });
+        });
     });
 });
 </script>
