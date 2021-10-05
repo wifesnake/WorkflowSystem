@@ -54,8 +54,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="employee_code">Employee code</label>
-                                            <input type="text" name="employee_code" id="employee_code" class="form-control" required>
+                                            <label for="employee_id">Employee Id</label>
+                                            <input type="text" name="employee_id" id="employee_id" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -113,6 +113,7 @@
                     {!! $dataTable->scripts() !!}
                 </div>
                 <!-- /.row -->
+                <div class="btn btn-primary" onclick="test();">Click</div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
@@ -120,7 +121,30 @@
 <!-- /.content-wrapper -->
 
 <script>
-    $('#f-employee').submit(function($this){
+
+    function onDelete(id,name){
+        var result = confirm("Are you want to delete "+ name +" ?");
+        if (result) {
+            var settings = {
+                "url": "{{url('api/employee')}}/"+id,
+                "method": "DELETE",
+                "timeout": 0,
+                "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {}
+            };
+
+            $.ajax(settings).done(function (response) {
+                if(status=="success"){
+                    window.location.href = "{{url('/employee')}}"
+                }
+            });
+        }
+    }
+
+    // $('#f-employee').submit(function($this){
+    function test(){
         var settings = {
             "url": "{{url('api/employee')}}",
             "method": "POST",
@@ -134,7 +158,7 @@
                 "lastname": $("input[name~='lastname']").val(),
                 "address": $("input[name~='address']").val(),
                 "id_card": $("input[name~='id_card']").val(),
-                "employee_code": $("input[name~='employee_code']").val(),
+                "employee_id": $("input[name~='employee_id']").val(),
                 "employee_type": $("input[name~='employee_type']").val(),
                 "email": $("input[name~='email']").val(),
                 "phone": $("input[name~='phone']").val(),
@@ -142,29 +166,16 @@
                 "department": $("input[name~='department']").val(),
                 "created_by": '{{ Auth::user()->name }}',
                 "updated_by": '{{ Auth::user()->name }}'
-
-                // "titlename": "a",
-                // "name": "a",
-                // "lastname": "a",
-                // "address": "a",
-                // "id_card": "a",
-                // "employee_code": "a",
-                // "employee_type": "a",
-                // "email": "a",
-                // "phone": "a",
-                // "salary": "10",
-                // "department": "a",
-                // "created_by": "admin",
-                // "updated_by": "admin"
             }
         };
 
-        console.log(settings);
-
-        $.ajax(settings).done(function (response) {
-            console.log(response);
+        $.ajax(settings).done(function (response,status) {
+            if(status=="success"){
+                window.location.href = "{{url('/employee')}}"
+            }
         });
-    });
+    // });
+    }
 </script>
 
 @endsection

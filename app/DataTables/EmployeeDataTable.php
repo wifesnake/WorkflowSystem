@@ -21,7 +21,10 @@ class EmployeeDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'employee.action');
+            // ->addColumn('action', 'employee.action');
+            ->addColumn('action',function($row){
+                 return '<div onClick="onDelete('.$row->id.',\''.$row->name.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+            });
     }
 
     /**
@@ -63,7 +66,8 @@ class EmployeeDataTable extends DataTable
             'email',
             'phone',
             'salary',
-            'department'
+            'department',
+            'action'
         ];
     }
 

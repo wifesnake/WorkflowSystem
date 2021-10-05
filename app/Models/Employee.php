@@ -17,7 +17,7 @@ class Employee extends Model
         "lastname",
         "address",
         "id_card",
-        "employee_code",
+        "employee_id",
         "employee_type",
         "email",
         "phone",

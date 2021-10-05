@@ -43,7 +43,7 @@ class PostEmployeeController extends Controller
         $post->lastname = $request->lastname;
         $post->address = $request->address;
         $post->id_card = $request->id_card;
-        $post->employee_code = $request->employee_code;
+        $post->employee_id = $request->employee_id;
         $post->employee_type = $request->employee_type;
         $post->email = $request->email;
         $post->phone = $request->phone;
@@ -99,6 +99,10 @@ class PostEmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        if($employee->delete())
+        {
+            return new PostEmployeeResource($employee);
+        }
     }
 }
