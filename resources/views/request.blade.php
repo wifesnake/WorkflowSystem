@@ -309,7 +309,7 @@ $("#form1").submit(function($this) {
                 }
             },
         });
-    });
+    };
 });
 </script>
 

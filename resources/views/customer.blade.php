@@ -17,10 +17,6 @@
                 <form action="#" id="f-employee">
                     <div class="group_data">
 
-                        <div class="menu-action col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-
                         <div class="col-md-12">
                             <div class="title-form">
                                 ข้อมูลลูกค้า
@@ -68,6 +64,11 @@
 
                         </div>
 
+                        <div class="menu-action col-md-12">
+                            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                            <button class="btn btn-danger">ยกเลิก</button>
+                        </div>
+                        
                     </div>
                 </form>
             </div>

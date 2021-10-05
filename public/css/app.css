@@ -68207,3 +68207,20 @@ th {
 .content-wrapper {
   height: auto;
 }
+
+.menu-action.col-md-12 {
+  text-align: center;
+}
+
+button.btn.btn-danger {
+  background: #df5c53;
+  border: #df5c53;
+  color: white;
+  font-size: 20px;
+}
+
+.btn-danger {
+  background: #df5c53;
+  border: #df5c53;
+  color: white;
+}

@@ -17,10 +17,6 @@
 
                 <form action="#" id="f-vehicle">
 
-                    <div class="menu-action col-md-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
                     <div class="group_data">
                         <div class="col-md-12">
                             <div class="title-form">
@@ -86,6 +82,11 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="menu-action col-md-12">
+                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                        <button class="btn btn-danger">ยกเลิก</button>
                     </div>
 
                 </form>

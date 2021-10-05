@@ -22,10 +22,7 @@
                 <form action="#" id="f-employee">
                     <div class="group_data">
 
-                        <div class="menu-action col-md-12">
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
 
                         <div class="col-md-12">
                             <div class="title-form">
@@ -36,7 +33,7 @@
                             <div class="col-md-3">
                                 คำนำหน้า / ชื่อ - สกุล :
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <select name="titlename" id="titlename" class="form-control" required>
                                     <option value="">-- Please Select --</option>
                                     @foreach ($titlenames as $item)
@@ -44,7 +41,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <input type="text" name="name" id="name" class="form-control" required>
                             </div>
                             <div class="col-md-4">
@@ -122,6 +119,10 @@
                             </div>
                         </div>
 
+                        <div class="menu-action col-md-12">
+                            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                            <button class="btn btn-danger">ยกเลิก</button>
+                        </div>
 
                     </div>
                 </form>
