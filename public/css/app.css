@@ -68131,7 +68131,12 @@ input[type="text"] {
   width: 100%;
   border-radius: 5px;
   border: 1px solid;
-  color: #0000004d;
+  color: black;
+  border-color: #0000004d;
+}
+
+.col-md-3 {
+  color: black;
 }
 
 textarea {
