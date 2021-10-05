@@ -12,6 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>AdminLTE 3 | Starter</title>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&amp;display=swap" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {{-- Script --}}
