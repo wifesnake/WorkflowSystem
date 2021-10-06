@@ -33,7 +33,7 @@
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                คำนำหน้า / ชื่อ - สกุล :
+                                คำนำหน้า <b class="request-data">**</b> / ชื่อ - สกุล <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-2">
                                 <select name="titlename" id="titlename" class="form-control" required>
@@ -53,7 +53,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ที่อยู่ :
+                                ที่อยู่ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <textarea name="address" id="address" class="form-control" rows="4"></textarea>
@@ -62,7 +62,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                เลขที่บัตรประชาชน :
+                                เลขที่บัตรประชาชน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="id_card" id="id_card" class="form-control" required>
@@ -71,7 +71,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ประเภทพนักงาน / รหัสพนักงาน :
+                                ประเภทพนักงาน <b class="request-data">**</b> / รหัสพนักงาน :
                             </div>
                             <div class="col-md-2">
                                 <select name="employee_type" id="employee_type" class="form-control" required>
@@ -87,7 +87,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                E-mail :
+                                E-mail <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="email" id="email" class="form-control" required>
@@ -96,7 +96,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                หมายเลขโทรศัพท์ :
+                                หมายเลขโทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="phone" id="phone" class="form-control" required>
@@ -105,7 +105,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                เงินเดือน :
+                                เงินเดือน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="salary" id="salary" class="form-control" required>
@@ -114,7 +114,7 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                Department :
+                                Department <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="department" id="department" class="form-control" required>
