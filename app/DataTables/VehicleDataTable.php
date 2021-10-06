@@ -68,7 +68,7 @@ class VehicleDataTable extends DataTable
             "car_id",
             "regis_id",
             "car_brand",
-            "car_plate",
+            "car_location",
             "isTrucktype",
             "cartype"
         ];

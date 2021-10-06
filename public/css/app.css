@@ -68273,3 +68273,11 @@ a#navbarDropdown {
 b.request-data {
   color: red;
 }
+
+input#save-data {
+    font-size: 20px;
+}
+
+input#cancel-data {
+  font-size: 20px;
+}
