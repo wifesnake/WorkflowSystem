@@ -34,3 +34,5 @@ Route::post('/state',[FlowController::class, 'updateStates']);
 
 Route::post('/employee',[PostEmployeeController::class, 'store']);
 Route::delete('/employee/{id}',[PostEmployeeController::class, 'destroy']);
+Route::get('/employee/{id}',[PostEmployeeController::class, 'show']);
+Route::PUT('/employee/{id}',[PostEmployeeController::class, 'update']);

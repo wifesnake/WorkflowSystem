@@ -23,7 +23,8 @@ class EmployeeDataTable extends DataTable
             ->eloquent($query)
             // ->addColumn('action', 'employee.action');
             ->addColumn('action',function($row){
-                 return '<div onClick="onDelete('.$row->id.',\''.$row->name.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+                 return '<div onClick="onEdit(\''.$row->id.'\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
+                 <div onClick="onDelete('.$row->id.',\''.$row->name.' '.$row->lastname.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
             });
     }
 
