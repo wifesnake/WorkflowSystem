@@ -68131,7 +68131,12 @@ input[type="text"] {
   width: 100%;
   border-radius: 5px;
   border: 1px solid;
-  color: #0000004d;
+  color: black;
+  border-color: #0000004d;
+}
+
+.col-md-3 {
+  color: black;
 }
 
 textarea {
@@ -68148,6 +68153,94 @@ input[type="text"] {
   padding-left: 8px;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #156140;
+    border-color: #156140;
+}
+
 .col-md-3 {
   text-align: right;
+}
+
+.btn-collapse {
+    text-align: right;
+}
+
+i.fa.fa-plus-square {
+  margin-right: 10px;
+}
+
+button.btn.btn-primary {
+  font-size: 20px;
+}
+
+.btn-collapse {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #156140;
+  border-color: #156140;
+}
+
+th {
+  background: #156140;
+  color: white;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #156140;
+  border-color: #156140;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #156140;
+  border-color: #156140;
+}
+
+.content-wrapper {
+  height: auto;
+}
+
+.menu-action.col-md-12 {
+  text-align: center;
+}
+
+button.btn.btn-danger {
+  background: #df5c53;
+  border: #df5c53;
+  color: white;
+  font-size: 20px;
+}
+
+.btn-danger {
+  background: #df5c53;
+  border: #df5c53;
+  color: white;
+}
+
+.container-fluid {
+  margin-top: 30px;
+}
+
+.title-header {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.card.mt-2 {
+  padding: 15px;
+}
+
+.title-header-2 {
+  font-size: 22px;
+  margin-left: 35px;
+  margin-bottom: 15px;
 }

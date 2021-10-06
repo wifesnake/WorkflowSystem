@@ -6,16 +6,21 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
+
+                <div class="title-header">รายการจัดส่งสินค้า</div>
+
                 <div class="card mt-2">
                     <section class="m-2">
                         <div class="com-md-12 table-responsive">
                             <table id="table_id" class="table dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Order No.</th>
-                                        <th>State Name</th>
-                                        <th>Update By</th>
-                                        <th>Request Time</th>
+                                        <th>Tracking No.</th>
+                                        <th>PO Number.</th>
+                                        <th>Customer</th>
+                                        <th>Recipient</th>
+                                        <th>Status</th>
+                                        <th>Create</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -53,8 +58,10 @@
                     "order": [[ 2, "desc" ]],
                     "columns": [
                         { "data": "ord_vehicle" },
-                        { "data": "state_name" },
+                        { "data": "ord_vehicle" },
                         { "data": "updated_by" },
+                        { "data": "updated_by" },
+                        { "data": "state_name" },
                         { "data": "datetime_th" },
                         {
                             data: null,

@@ -7,9 +7,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-
-                </div>
+                <img src="{{ asset('storage/images/homepage.png') }}" alt="Home Page">
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
