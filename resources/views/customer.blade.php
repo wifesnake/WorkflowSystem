@@ -26,20 +26,20 @@
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                รหัสลูกค้า / ชื่อบริษัท :
+                                รหัสลูกค้า / ชื่อบริษัท <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-2">
-                                <input type="text" name="customer_id" id="customer_id" class="form-control" required>
+                                <input type="text" disabled name="customer_id" id="customer_id" class="form-control" >
                             </div>
                             <div class="col-md-7">
                                 <input type="text" name="customer_name" id="customer_name" class="form-control"
-                                    required>
+                                    >
                             </div>
                         </div>
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ที่อยู่ :
+                                ที่อยู่ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <textarea name="address" id="address" class="form-control" rows="4"></textarea>
@@ -48,27 +48,27 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                หมายเลขโทรศัพท์ :
+                                หมายเลขโทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="phone" id="phone" class="form-control" required>
+                                <input type="text" name="phone" id="phone" class="form-control" >
                             </div>
                         </div>
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                เลขที่นิติบุคคล :
+                                เลขที่นิติบุคคล <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <input type="text" name="customer_person_number" id="customer_person_number"
-                                    class="form-control" required>
+                                    class="form-control" >
                             </div>
 
                         </div>
 
                         <div class="menu-action col-md-12">
-                            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-                            <button class="btn btn-danger">ยกเลิก</button>
+                            <input id="save-data" type="button" class="btn btn-primary" value="บันทึกข้อมูล"/>
+                            <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
                         </div>
 
                     </div>

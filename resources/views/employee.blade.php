@@ -36,7 +36,7 @@
                                 คำนำหน้า <b class="request-data">**</b> / ชื่อ - สกุล <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-2">
-                                <select name="titlename" id="titlename" class="form-control" required>
+                                <select name="titlename" id="titlename" class="form-control" >
                                     <option value="">-- Please Select --</option>
                                     @foreach ($titlenames as $item)
                                     <option value="{{ $item->code_lookup }}">{{ $item->value_lookup }}</option>
@@ -44,10 +44,10 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="name" id="name" class="form-control" required>
+                                <input type="text" name="name" id="name" class="form-control" >
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="lastname" id="lastname" class="form-control" required>
+                                <input type="text" name="lastname" id="lastname" class="form-control" >
                             </div>
                         </div>
 
@@ -65,7 +65,7 @@
                                 เลขที่บัตรประชาชน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="id_card" id="id_card" class="form-control" required>
+                                <input type="text" name="id_card" id="id_card" class="form-control" >
                             </div>
                         </div>
 
@@ -74,13 +74,12 @@
                                 ประเภทพนักงาน <b class="request-data">**</b> / รหัสพนักงาน :
                             </div>
                             <div class="col-md-2">
-                                <select name="employee_type" id="employee_type" class="form-control" required>
+                                <select name="employee_type" id="employee_type" class="form-control" >
                                     <option value="">-- Please Select --</option>
                                 </select>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="employee_code" id="employee_code" class="form-control"
-                                    required>
+                                <input type="text" name="employee_code" disabled id="employee_code" class="form-control">
                             </div>
 
                         </div>
@@ -90,7 +89,7 @@
                                 E-mail <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="email" id="email" class="form-control" required>
+                                <input type="text" name="email" id="email" class="form-control" >
                             </div>
                         </div>
 
@@ -99,7 +98,7 @@
                                 หมายเลขโทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="phone" id="phone" class="form-control" required>
+                                <input type="text" name="phone" id="phone" class="form-control" >
                             </div>
                         </div>
 
@@ -108,7 +107,7 @@
                                 เงินเดือน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="salary" id="salary" class="form-control" required>
+                                <input type="text" name="salary" id="salary" class="form-control" >
                             </div>
                         </div>
 
@@ -117,13 +116,15 @@
                                 Department <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="department" id="department" class="form-control" required>
+                                <select name="department" id="department" class="form-control" >
+                                    <option value="">-- Please Select --</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="menu-action col-md-12">
-                            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-                            <button class="btn btn-danger">ยกเลิก</button>
+                            <input id="save-data" type="button" class="btn btn-primary" value="บันทึกข้อมูล"/>
+                            <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
                         </div>
 
                     </div>

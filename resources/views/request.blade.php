@@ -58,7 +58,8 @@ $var1 = $ordno;
                                 รหัสลูกค้า :
                             </div>
                             <div class="col-md-8">
-                                <input name="cust_code" disabled id="cust_code" class="form-control" type="text"></input>
+                                <input name="cust_code" disabled id="cust_code" class="form-control"
+                                    type="text"></input>
                             </div>
                         </div>
 
@@ -67,7 +68,7 @@ $var1 = $ordno;
                                 ชื่อลูกค้า <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <select name="cust_name" id="cust_name" class="form-control" >
+                                <select name="cust_name" id="cust_name" class="form-control">
                                     <option value="">-- Please Select --</option>
                                 </select>
                             </div>
@@ -183,10 +184,9 @@ $var1 = $ordno;
                 </form>
 
                 <div class="menu-action col-md-12">
-                    <button id="save-data" class="btn btn-primary">บันทึกข้อมูล</button>
-                    <button id="cancel-data" class="btn btn-danger">ยกเลิก</button>
+                    <input id="save-data" type="button" class="btn btn-primary" value="บันทึกข้อมูล" />
+                    <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
                 </div>
-
 
             </div>
             <!-- /.container-fluid -->
@@ -211,7 +211,7 @@ $("#save-data").click(function($this) {
         infoMode: true,
     }).then(function(isConfirm) {
         if (isConfirm) {
-console.log("sdas")
+            
             let ordno = $("input[name=orderno]").val();
             let prevstate = $("input[name=prevstate]").val() == "" ? null : $("input[name=prevstate]")
                 .val();

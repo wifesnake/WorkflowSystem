@@ -30,21 +30,21 @@
                                 รหัสรถ :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="car_id" id="car_id" class="form-control" required>
+                                <input type="text" disabled name="car_id" id="car_id" class="form-control" >
                             </div>
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ทะเบียน :
+                                ทะเบียน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="regis_id" id="regis_id" class="form-control" required>
+                                <input type="text" name="regis_id" id="regis_id" class="form-control" >
                             </div>
                         </div>
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                รุ่นรถ :
+                                รุ่นรถ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
                                 <textarea name="car_brand" id="car_brand" class="form-control" rows="3"></textarea>
@@ -53,10 +53,10 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ประเภทของรถ :
+                                ประเภทของรถ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="isTrucktype" id="isTrucktype" class="form-control" required>
+                                <select name="isTrucktype" id="isTrucktype" class="form-control" >
                                     <option value="">-- Please Select --</option>
                                 </select>
                             </div>
@@ -64,10 +64,10 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                ประเภทการใช้งาน :
+                                ประเภทการใช้งาน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="cartype" id="cartype" class="form-control" required>
+                                <select name="cartype" id="cartype" class="form-control" >
                                     <option value="">-- Please Select --</option>
                                 </select>
                             </div>
@@ -75,10 +75,10 @@
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) :
+                                สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="car_plate" id="car_plate" class="form-control" required>
+                                <select name="car_plate" id="car_plate" class="form-control" >
                                     <option value="">-- Please Select --</option>
                                 </select>
                             </div>
@@ -87,9 +87,9 @@
                     </div>
 
                     <div class="menu-action col-md-12">
-                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-                        <button class="btn btn-danger">ยกเลิก</button>
-                    </div>
+                            <input id="save-data" type="button" class="btn btn-primary" value="บันทึกข้อมูล"/>
+                            <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
+                        </div>
 
                 </form>
 
