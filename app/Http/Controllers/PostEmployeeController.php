@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostEmployeeResource;
 use App\Models\Employee;
-use App\Models\Runorderno;
 use Illuminate\Http\Request;
 
 class PostEmployeeController extends Controller
@@ -54,13 +53,6 @@ class PostEmployeeController extends Controller
         $post->updated_by = $request->updated_by;
         if($post->save())
         {
-
-            $t = $request->ord_vehicle;
-            $t = (int)$t +1;
-            $runordno = Runorderno::findOrFail(3);
-            $runordno->runno = $t;
-            $runordno->save();
-
             return new PostEmployeeResource($post);
         }
     }
