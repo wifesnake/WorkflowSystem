@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostEmployeeResource;
-use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostVehicleResource;
+use App\Models\Vehicle;
 
-class PostEmployeeController extends Controller
+class PostVehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,7 +37,8 @@ class PostEmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Employee();
+        //
+        $post = new Vehicle();
         $post->titlename = $request->titlename;
         $post->name = $request->name;
         $post->lastname = $request->lastname;
@@ -65,8 +66,7 @@ class PostEmployeeController extends Controller
      */
     public function show($id)
     {
-        $post = Employee::findOrFail($id);
-        return new PostEmployeeResource($post);
+        //
     }
 
     /**
@@ -89,24 +89,7 @@ class PostEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Employee::findOrFail($id);
-        $post->titlename = $request->titlename;
-        $post->name = $request->name;
-        $post->lastname = $request->lastname;
-        $post->address = $request->address;
-        $post->id_card = $request->id_card;
-        $post->employee_id = $request->employee_id;
-        $post->employee_type = $request->employee_type;
-        $post->email = $request->email;
-        $post->phone = $request->phone;
-        $post->salary = $request->salary;
-        $post->department = $request->department;
-        $post->created_by = $request->created_by;
-        $post->updated_by = $request->updated_by;
-        if($post->save())
-        {
-            return new PostEmployeeResource($post);
-        }
+        //
     }
 
     /**
@@ -117,10 +100,6 @@ class PostEmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id);
-        if($employee->delete())
-        {
-            return new PostEmployeeResource($employee);
-        }
+        //
     }
 }
