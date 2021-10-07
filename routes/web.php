@@ -33,13 +33,20 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('admin/home',[HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
 Route::get('/employee',[EmployeeController::class, 'index']);
+
 Route::get('/request',[EmployeeController::class, 'index']);
 Route::get('/request',[RequestController::class, 'index']);
+
 Route::get('/form/{id}',[FormController::class, 'detail']);
+
 Route::get('/workinprogress',[ListdataController::class, 'workinprogress']);
+
 Route::get('/vehicle',[VehicleController::class, 'index']);
+
 Route::get('/customer',[CustomerController::class, 'index']);
+
 Route::get('/order',[OrderController::class, 'index']);
 
 });

@@ -36,7 +36,9 @@ class EmployeeDataTable extends DataTable
      */
     public function query(Employee $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                       ->join('tb_lookup', 'employees.department', '=', 'tb_lookup.code_lookup')
+                       ->where('tb_lookup.name_lookup', '=', 'department');
     }
 
     /**
@@ -67,7 +69,7 @@ class EmployeeDataTable extends DataTable
             'email',
             'phone',
             'salary',
-            'department',
+            'value_lookup' => ['title' => 'Department'],
             'action'
         ];
     }
