@@ -20,12 +20,13 @@ class DataModel extends Model
         $titlename = DB::select("select * from tb_lookup where name_lookup = 'titlename'");
         $employeetype = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'employeetype'");
         $ordvehicle = DB::select("select CONCAT(lpad(CONCAT(substring(lpad(now(),4),3,4),lpad(runno,6,'0')),10,'VC'),'TH') as runno FROM tb_runorderno WHERE status = ? and istype = 'ordervehicle'",['1']);
-        $employeeno = DB::select("select lpad(COUNT(id)+1,5,'0') as runno FROM `employees`");
+        $employeeno = DB::select("select lpad(runno,5,'0') as runno FROM tb_runorderno WHERE status = ? and istype = 'employeeno'",[1]);
         $vehicleno = DB::select("select lpad( lpad(runno,6,'0'),7,'V') as runno FROM tb_runorderno where istype = 'vehicle'");
         $department = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'department'");
         $usevehicle = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'usevehicle'");
         $vehicletype = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'vehicletype'");
         $tb_customer = DB::select("select customer_id, customer_name from tb_customer ");
+        $customerno = DB::select("select CONCAT('CM',lpad(runno,5,'0')) as runno FROM tb_runorderno WHERE status = ? and istype = 'customer';",[1]);
         // $isRunno = "";
         // foreach ($runno as $key => $value) {
         //     foreach($value as $key2 => $value2){
@@ -48,6 +49,7 @@ class DataModel extends Model
                 'tb_customer' => $tb_customer,
                 'vehicletype' => $vehicletype,
                 'vehicleno' => $vehicleno,
+                'customerno' => $customerno
             ];
     }
 }

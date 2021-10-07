@@ -30,7 +30,10 @@
                                 รหัสรถ :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" disabled name="car_id" id="car_id" class="form-control">
+                                <!-- <input type="text" disabled name="car_id" id="car_id" class="form-control"> -->
+                                @foreach ($vehicleno as $item)
+                                    <input type="text" name="car_id" disabled id="car_id" class="form-control" value="{{ $item->runno }}">
+                                @endforeach
                             </div>
                         </div>
                         <div class="row col-md-12">
@@ -84,7 +87,7 @@
                                 สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="car_plate" id="car_plate" class="form-control">
+                                <select name="car_location" id="car_location" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($tb_customer as $item)
                                     <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
@@ -96,7 +99,7 @@
                     </div>
 
                     <div class="menu-action col-md-12">
-                        <input id="save-data" type="button" class="btn btn-primary" value="บันทึกข้อมูล" />
+                        <input id="save-data" type="button" class="btn btn-primary" onclick="BtnSave(); false" value="บันทึกข้อมูล"/>
                         <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
                     </div>
 
@@ -130,6 +133,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="m-id" id="m-id" value="">
                 <form action="#" id="m-f-vehicle">
                     <div class="group_data">
                         <div class="col-md-12">
@@ -142,7 +146,7 @@
                                 รหัสรถ :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" disabled name="car_id" id="car_id" class="form-control">
+                                <input type="text" disabled name="m-car_id" id="m-car_id" class="form-control">
                             </div>
                         </div>
                         <div class="row col-md-12">
@@ -150,7 +154,7 @@
                                 ทะเบียน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="regis_id" id="regis_id" class="form-control">
+                                <input type="text" name="m-regis_id" id="m-regis_id" class="form-control">
                             </div>
                         </div>
 
@@ -159,7 +163,7 @@
                                 รุ่นรถ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <textarea name="car_brand" id="car_brand" class="form-control" rows="3"></textarea>
+                                <textarea name="m-car_brand" id="m-car_brand" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
 
@@ -168,7 +172,7 @@
                                 ประเภทของรถ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="isTrucktype" id="isTrucktype" class="form-control">
+                                <select name="m-isTrucktype" id="m-isTrucktype" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($vehicletype as $item)
                                     <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
@@ -182,7 +186,7 @@
                                 ประเภทการใช้งาน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="cartype" id="cartype" class="form-control">
+                                <select name="m-cartype" id="m-cartype" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($usevehicle as $item)
                                     <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
@@ -196,7 +200,7 @@
                                 สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="car_plate" id="car_plate" class="form-control">
+                                <select name="m-car_location" id="m-car_location" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($tb_customer as $item)
                                     <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
@@ -228,14 +232,14 @@ const jsonFormat = {
     "car_brand": "",
     "isTrucktype": "",
     "cartype": "",
-    "car_plate": "",
+    "car_location": "",
     "created_by": '{{ Auth::user()->name }}',
     "updated_by": '{{ Auth::user()->name }}'
 }
 
 function onEdit(id, name) {
     $.ajax({
-        url: "{{url('api/employee')}}/" + id,
+        url: "{{url('api/vehicle')}}/" + id,
         type: "GET",
         data: {},
         success: function(response, status) {
@@ -251,15 +255,15 @@ function onEdit(id, name) {
 }
 
 function onDelete(id, name) {
-    const isPost = confirm("ต้องการลบข้อมูลพนักงานชื่อ " + name);
+    const isPost = confirm("ต้องการลบข้อมูลรถทะเบียน : " + name);
     if (isPost) {
         $.ajax({
-            url: "{{url('api/employee')}}/" + id,
+            url: "{{url('api/vehicle')}}/" + id,
             type: "DELETE",
             data: {},
             success: function(response, status) {
                 if (status == "success") {
-                    window.location.href = "{{ url('/employee') }}";
+                    window.location.href = "{{ url('/vehicle') }}";
                 }
             },
         });
@@ -268,7 +272,7 @@ function onDelete(id, name) {
 
 function BtnSave() {
     let isPost = true;
-    $('#f-employee').find('select,input,textarea').each(function(i, box) {
+    $('#f-vehicle').find('select,input,textarea').each(function(i, box) {
         const name = $(box).attr('name');
         if (name) {
             if ($('[name=' + name + ']').val().trim() == "") {
@@ -281,12 +285,12 @@ function BtnSave() {
 
     if (isPost) {
         $.ajax({
-            url: "{{url('api/employee')}}",
+            url: "{{url('api/vehicle')}}",
             type: "POST",
             data: jsonFormat,
             success: function(response, status) {
                 if (status == "success") {
-                    window.location.href = "{{ url('/employee') }}";
+                    window.location.href = "{{ url('/vehicle') }}";
                 }
             },
         });
@@ -295,7 +299,7 @@ function BtnSave() {
 
 function BtnEdit() {
     let isPost = true;
-    $('#m-f-employee').find('select,input,textarea').each(function(i, box) {
+    $('#m-f-vehicle').find('select,input,textarea').each(function(i, box) {
         const name = $(box).attr('name');
         if (name) {
             console.log(name);
@@ -311,12 +315,12 @@ function BtnEdit() {
     const id = $('[name=m-id]').val();
     if (isPost) {
         $.ajax({
-            url: "{{url('api/employee')}}/" + id,
+            url: "{{url('api/vehicle')}}/" + id,
             type: "PUT",
             data: jsonFormat,
             success: function(response, status) {
                 if (status == "success") {
-                    window.location.href = "{{ url('/employee') }}";
+                    window.location.href = "{{ url('/vehicle') }}";
                 }
             },
         });

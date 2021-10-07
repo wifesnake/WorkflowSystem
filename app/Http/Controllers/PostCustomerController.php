@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostEmployeeResource;
-use App\Models\Employee;
+use App\Http\Resources\CustomerResource;
+use App\Models\Customer;
 use App\Models\Runorderno;
 use Illuminate\Http\Request;
 
-class PostEmployeeController extends Controller
+class PostCustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,30 +38,24 @@ class PostEmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Employee();
-        $post->titlename = $request->titlename;
-        $post->name = $request->name;
-        $post->lastname = $request->lastname;
+        $post = new Customer();
+        $post->customer_id = $request->customer_id;
+        $post->customer_name = $request->customer_name;
         $post->address = $request->address;
-        $post->id_card = $request->id_card;
-        $post->employee_id = $request->employee_id;
-        $post->employee_type = $request->employee_type;
-        $post->email = $request->email;
         $post->phone = $request->phone;
-        $post->salary = $request->salary;
-        $post->department = $request->department;
+        $post->customer_person_number = $request->customer_person_number;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
-        if($post->save())
-        {
+        if($post->save()){
 
             $t = $request->employee_id;
+            $t = str_replace("CM","",$t);
             $t = (int)$t +1;
-            $runordno = Runorderno::findOrFail(3);
+            $runordno = Runorderno::findOrFail(4);
             $runordno->runno = $t;
             $runordno->save();
 
-            return new PostEmployeeResource($post);
+            return new CustomerResource($post);
         }
     }
 
@@ -73,8 +67,8 @@ class PostEmployeeController extends Controller
      */
     public function show($id)
     {
-        $post = Employee::findOrFail($id);
-        return new PostEmployeeResource($post);
+        $post = Customer::findOrFail($id);
+        return new CustomerResource($post);
     }
 
     /**
@@ -97,23 +91,16 @@ class PostEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Employee::findOrFail($id);
-        $post->titlename = $request->titlename;
-        $post->name = $request->name;
-        $post->lastname = $request->lastname;
+        $post = Customer::findOrFail($id);
+        $post->customer_id = $request->customer_id;
+        $post->customer_name = $request->customer_name;
         $post->address = $request->address;
-        $post->id_card = $request->id_card;
-        $post->employee_id = $request->employee_id;
-        $post->employee_type = $request->employee_type;
-        $post->email = $request->email;
         $post->phone = $request->phone;
-        $post->salary = $request->salary;
-        $post->department = $request->department;
+        $post->customer_person_number = $request->customer_person_number;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
-        if($post->save())
-        {
-            return new PostEmployeeResource($post);
+        if($post->save()){
+            return new CustomerResource($post);
         }
     }
 
@@ -125,10 +112,10 @@ class PostEmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id);
-        if($employee->delete())
+        $delete = Customer::findOrFail($id);
+        if($delete->delete())
         {
-            return new PostEmployeeResource($employee);
+            return new CustomerResource($delete);
         }
     }
 }
