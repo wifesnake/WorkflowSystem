@@ -21,7 +21,10 @@ class VehicleDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'vehicle.action');
+            ->addColumn('action',function($row){
+                 return '<div onClick="onEdit(\''.$row->id.'\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
+                 <div onClick="onDelete('.$row->id.',\''.$row->name.' '.$row->lastname.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+            });
     }
 
     /**
@@ -70,7 +73,8 @@ class VehicleDataTable extends DataTable
             "car_brand",
             "car_location",
             "isTrucktype",
-            "cartype"
+            "cartype",
+            "action"
         ];
     }
 

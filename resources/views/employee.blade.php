@@ -24,8 +24,6 @@
                 <form action="#" id="f-employee">
                     <div class="group_data">
 
-
-
                         <div class="col-md-12">
                             <div class="title-form">
                                 ข้อมูลพนักงาน
