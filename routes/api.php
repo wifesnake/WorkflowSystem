@@ -38,3 +38,6 @@ Route::get('/employee/{id}',[PostEmployeeController::class, 'show']);
 Route::PUT('/employee/{id}',[PostEmployeeController::class, 'update']);
 
 Route::post('/vehicle',[PostVehicleController::class, 'store']);
+Route::delete('/vehicle/{id}',[PostVehicleController::class, 'destroy']);
+Route::get('/vehicle/{id}',[PostVehicleController::class, 'show']);
+Route::PUT('/vehicle/{id}',[PostVehicleController::class, 'update']);
