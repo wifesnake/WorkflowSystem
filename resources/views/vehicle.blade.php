@@ -84,7 +84,7 @@
                                 สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="car_plate" id="car_plate" class="form-control">
+                                <select name="car_location" id="car_location" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($tb_customer as $item)
                                     <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
@@ -196,7 +196,7 @@
                                 สถานที่ใช้งานรถ (ตามข้อมูลลูกค้า) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <select name="car_plate" id="car_plate" class="form-control">
+                                <select name="car_location" id="car_location" class="form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach ($tb_customer as $item)
                                     <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
@@ -228,7 +228,7 @@ const jsonFormat = {
     "car_brand": "",
     "isTrucktype": "",
     "cartype": "",
-    "car_plate": "",
+    "car_location": "",
     "created_by": '{{ Auth::user()->name }}',
     "updated_by": '{{ Auth::user()->name }}'
 }
@@ -268,7 +268,7 @@ function onDelete(id, name) {
 
 function BtnSave() {
     let isPost = true;
-    $('#f-employee').find('select,input,textarea').each(function(i, box) {
+    $('#f-vehicle').find('select,input,textarea').each(function(i, box) {
         const name = $(box).attr('name');
         if (name) {
             if ($('[name=' + name + ']').val().trim() == "") {
