@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostVehicleResource;
 use App\Models\Vehicle;
+use App\Models\Runorderno;
 
 class PostVehicleController extends Controller
 {
@@ -39,22 +40,25 @@ class PostVehicleController extends Controller
     {
         //
         $post = new Vehicle();
-        $post->titlename = $request->titlename;
-        $post->name = $request->name;
-        $post->lastname = $request->lastname;
-        $post->address = $request->address;
-        $post->id_card = $request->id_card;
-        $post->employee_id = $request->employee_id;
-        $post->employee_type = $request->employee_type;
-        $post->email = $request->email;
-        $post->phone = $request->phone;
-        $post->salary = $request->salary;
-        $post->department = $request->department;
+        $post->car_id = $request->car_id;
+        $post->regis_id = $request->regis_id;
+        $post->car_brand = $request->car_brand;
+        $post->isTrucktype = $request->isTrucktype;
+        $post->cartype = $request->cartype;
+        $post->car_location = $request->car_location;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
         if($post->save())
         {
-            return new PostEmployeeResource($post);
+
+            $t = $request->car_id;
+            $t = str_replace("V","",$t);
+            $t = (int)$t +1;
+            $runordno = Runorderno::findOrFail(5);
+            $runordno->runno = $t;
+            $runordno->save();
+            return new PostVehicleResource($post);
+
         }
     }
 
@@ -67,6 +71,8 @@ class PostVehicleController extends Controller
     public function show($id)
     {
         //
+        $post = Vehicle::findOrFail($id);
+        return new PostVehicleResource($post);
     }
 
     /**
@@ -89,7 +95,22 @@ class PostVehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         //
+        $post = Vehicle::findOrFail($id);
+        $post->car_id = $request->car_id;
+        $post->regis_id = $request->regis_id;
+        $post->car_brand = $request->car_brand;
+        $post->isTrucktype = $request->isTrucktype;
+        $post->cartype = $request->cartype;
+        $post->car_location = $request->car_location;
+        $post->created_by = $request->created_by;
+        $post->updated_by = $request->updated_by;
+        if($post->save())
+        {
+            return new PostVehicleResource($post);
+        }
     }
 
     /**
@@ -101,5 +122,10 @@ class PostVehicleController extends Controller
     public function destroy($id)
     {
         //
+        $vehicle = Vehicle::findOrFail($id);
+        if($vehicle->delete())
+        {
+            return new PostVehicleResource($vehicle);
+        }
     }
 }

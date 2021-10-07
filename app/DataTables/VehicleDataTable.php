@@ -22,8 +22,8 @@ class VehicleDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action',function($row){
-                 return '<div onClick="onEdit(\''.$row->id.'\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
-                 <div onClick="onDelete('.$row->id.',\''.$row->name.' '.$row->lastname.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+                 return '<div onClick="onEdit('.$row->id.');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
+                 <div onClick="onDelete('.$row->id.',\''.$row->regis_id.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
             });
     }
 
@@ -47,7 +47,7 @@ class VehicleDataTable extends DataTable
                             $q->where('t3.name_lookup', '=', "usevehicle");
                             $q->select('t3.value_lookup');
                         })
-                        ->select('car_id','regis_id','car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype');
+                        ->select('tb_vehicle.id','car_id','regis_id','car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype');
     }
 
     /**

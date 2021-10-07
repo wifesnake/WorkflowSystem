@@ -3,6 +3,7 @@
 use App\Http\Controllers\FlowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostEmployeeController;
+use App\Http\Controllers\PostVehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

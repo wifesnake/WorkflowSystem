@@ -12,6 +12,7 @@ class Vehicle extends Model
     protected $table = "tb_vehicle";
 
     protected $fillable = [
+        "id",
         "car_id",
         "regis_id",
         "car_brand",
