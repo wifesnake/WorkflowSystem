@@ -35,7 +35,19 @@ class VehicleDataTable extends DataTable
      */
     public function query(Vehicle $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                        //Vehicle::table('employees')
+                        ->join('tb_lookup as t2', function($q){
+                            $q->on('tb_vehicle.isTrucktype', '=', 't2.code_lookup');
+                            $q->where('t2.name_lookup', '=', "vehicletype");
+                            $q->select('t2.value_lookup');
+                        })
+                        ->join('tb_lookup as t3', function($q){
+                            $q->on('tb_vehicle.cartype', '=', 't3.code_lookup');
+                            $q->where('t3.name_lookup', '=', "usevehicle");
+                            $q->select('t3.value_lookup');
+                        })
+                        ->select('car_id','regis_id','car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype');
     }
 
     /**
@@ -72,8 +84,8 @@ class VehicleDataTable extends DataTable
             "regis_id",
             "car_brand",
             "car_location",
-            "isTrucktype",
-            "cartype",
+            "trucktype" => ['title' => 'Department'],
+            "cartypename",
             "action"
         ];
     }
