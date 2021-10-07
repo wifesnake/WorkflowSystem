@@ -26,6 +26,7 @@ class DataModel extends Model
         $usevehicle = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'usevehicle'");
         $vehicletype = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'vehicletype'");
         $tb_customer = DB::select("select customer_id, customer_name from tb_customer ");
+        $customerno = DB::select("select CONCAT('CM',lpad(runno,5,'0')) as runno FROM tb_runorderno WHERE status = ? and istype = 'customer';",[1]);
         // $isRunno = "";
         // foreach ($runno as $key => $value) {
         //     foreach($value as $key2 => $value2){
@@ -48,6 +49,7 @@ class DataModel extends Model
                 'tb_customer' => $tb_customer,
                 'vehicletype' => $vehicletype,
                 'vehicleno' => $vehicleno,
+                'customerno' => $customerno
             ];
     }
 }
