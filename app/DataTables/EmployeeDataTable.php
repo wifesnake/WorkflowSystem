@@ -26,8 +26,8 @@ class EmployeeDataTable extends DataTable
                 return $row->name." ".$row->lastname;
             })
             ->addColumn('action',function($row){
-                 return '<div onClick="onEdit(\''.$row->employee_id.'\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
-                 <div onClick="onDelete(\''.$row->employee_id.'\',\''.$row->name.' '.$row->lastname.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+                 return '<div onClick="onEdit('.$row->id.');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
+                 <div onClick="onDelete('.$row->id.',\''.$row->name.' '.$row->lastname.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
             });
     }
 
@@ -39,28 +39,41 @@ class EmployeeDataTable extends DataTable
      */
     public function query(Employee $model)
     {
-        return $model->newQuery()
+        // return $model->newQuery()
+                            return Employee::select(
+                                'employees.id',
+                                'employees.employee_id',
+                                'employees.name',
+                                'employees.lastname',
+                                'employees.phone',
+                                'employees.email',
+                                'employees.phone',
+                                'employees.salary',
+                                't2.value_lookup as employeetype',
+                                't3.value_lookup as departmenttype'
+                            )
                             ->join('tb_lookup as t2', function($q){
                                 $q->on('employees.employee_type', '=', 't2.code_lookup');
                                 $q->where('t2.name_lookup', '=', "employeetype");
-                                $q->select('t2.value_lookup');
+                                $q->select('t2.value_lookup', 't2.id as t2id');
                             })
                             ->join('tb_lookup as t3', function($q){
                                 $q->on('employees.department', '=', 't3.code_lookup');
                                 $q->where('t3.name_lookup', '=', "department");
-                                $q->select('t3.value_lookup');
+                                $q->select('t3.value_lookup','t3.id as t3id');
                             })
-                            ->select(
-                                'employee_id',
-                                'name',
-                                'lastname',
-                                'phone',
-                                'email',
-                                'phone',
-                                'salary',
-                                't2.value_lookup as employeetype',
-                                't3.value_lookup as departmenttype'
-                            )
+                            // ->select(
+                            //     'id',
+                            //     'employee_id',
+                            //     'name',
+                            //     'lastname',
+                            //     'phone',
+                            //     'email',
+                            //     'phone',
+                            //     'salary',
+                            //     't2.value_lookup as employeetype',
+                            //     't3.value_lookup as departmenttype'
+                            // )
                             ;
     }
 
@@ -87,6 +100,7 @@ class EmployeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id',
             'fullname',
             'email',
             'phone',

@@ -55,7 +55,7 @@ class PostEmployeeController extends Controller
         if($post->save())
         {
 
-            $t = $request->ord_vehicle;
+            $t = $request->employee_id;
             $t = (int)$t +1;
             $runordno = Runorderno::findOrFail(3);
             $runordno->runno = $t;
