@@ -68281,3 +68281,81 @@ input#save-data {
 input#cancel-data {
   font-size: 20px;
 }
+
+button.btn.btn-warning {
+  background: #00bcd4;
+  border: #00bcd4;
+  color: white;
+  font-size: 20px;
+}
+
+.btn-warning {
+  color: white;
+  background-color: #00bcd4 ;
+  border-color: #00bcd4 ;
+}
+
+
+.btn-warning:hover {
+  color: white;
+  background-color: #0fa7bb;
+  border-color: #0fa7bb;
+}
+
+.btn-warning:not(:disabled):not(.disabled):active {
+  color: white;
+  background-color: #0fa7bb;
+  border-color: #0fa7bb;
+}
+
+button.swal-button.swal-button--confirm {
+    background: #156140;
+    border: #156140;
+}
+
+button.swal-button.swal-button--confirm:not([disabled]):hover {
+  background-color: #156140;
+}
+
+button.swal-button.swal-button--cancel {
+  background: #f44336a6;
+  color: white;
+}
+
+button.swal-button.swal-button--cancel:not([disabled]):hover {
+  background-color: #f44336a6;
+}
+
+
+
+
+
+@media only screen and (max-width: 425px) {
+  .group_data{
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .col-md-3 {
+      text-align: left;
+  }
+
+  input#save-data {
+    font-size: 16px;
+  }
+
+  button.btn.btn-primary {
+      width: 100%;
+  }
+
+  .col-md-3 {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+  input#cancel-data {
+    font-size: 16px;
+  }
+
+}

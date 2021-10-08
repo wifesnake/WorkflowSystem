@@ -69,12 +69,12 @@ class CustomerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            "customer_id",
-            "customer_name",
-            "address",
-            "phone",
-            "customer_person_number",
-            "action"
+            "customer_id" => ['title' => 'รหัสลูกค้า'],
+            "customer_name" => ['title' => 'ชื่อบริษัท'],
+            "address" => ['title' => 'ที่อยู่'],
+            "phone" => ['title' => 'หมายเลขโทรศัพท์'],
+            "customer_person_number" => ['title' => 'เลขที่นิติบุคคล'],
+            "action" => ['title' => 'Action']
         ];
     }
 

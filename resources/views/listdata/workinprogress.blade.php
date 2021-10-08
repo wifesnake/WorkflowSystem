@@ -17,9 +17,9 @@
                                     <tr>
                                         <th>Tracking No.</th>
                                         <th>PO Number.</th>
-                                        <th>Customer</th>
-                                        <th>Recipient</th>
-                                        <th>Status</th>
+                                        <th>Customer Name</th>
+                                        <th>ผู้รับ</th>
+                                        <th>สถานะ</th>
                                         <th>Create</th>
                                         <th></th>
                                     </tr>

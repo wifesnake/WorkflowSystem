@@ -48,7 +48,7 @@ class PostCustomerController extends Controller
         $post->updated_by = $request->updated_by;
         if($post->save()){
 
-            $t = $request->employee_id;
+            $t = $request->customer_id;
             $t = str_replace("CM","",$t);
             $t = (int)$t +1;
             $runordno = Runorderno::findOrFail(4);
