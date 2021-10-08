@@ -30,7 +30,10 @@
                                 รหัสรถ :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" disabled name="car_id" id="car_id" class="form-control">
+                                <!-- <input type="text" disabled name="car_id" id="car_id" class="form-control"> -->
+                                @foreach ($vehicleno as $item)
+                                    <input type="text" name="car_id" disabled id="car_id" class="form-control" value="{{ $item->runno }}">
+                                @endforeach
                             </div>
                         </div>
                         <div class="row col-md-12">
@@ -130,6 +133,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="m-id" id="m-id" value="">
                 <form action="#" id="m-f-vehicle">
                     <div class="group_data">
                         <div class="col-md-12">
@@ -251,7 +255,7 @@ function onEdit(id, name) {
 }
 
 function onDelete(id, name) {
-    const isPost = confirm("ต้องการลบข้อมูลพนักงานชื่อ " + name);
+    const isPost = confirm("ต้องการลบข้อมูลรถทะเบียน : " + name);
     if (isPost) {
         $.ajax({
             url: "{{url('api/vehicle')}}/" + id,
