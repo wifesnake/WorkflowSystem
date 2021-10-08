@@ -34,7 +34,7 @@ class RequestController extends Controller
         return view('request',$leftmenu);
     }
 
-    public function GetLastOrder(){
+    protected function GetLastOrder(){
         $runno = DB::select("select lpad(lpad(runno,6,'0'),8,'VE') as runno FROM tb_runorderno WHERE status = ? and istype='ordervehicle' limit 1",['1']);
 
         $isRunno = "";

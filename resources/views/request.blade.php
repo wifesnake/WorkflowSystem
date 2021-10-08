@@ -4,6 +4,7 @@
 @php
 $var1 = $ordno;
 @endphp
+
 <input type="hidden" name="orderno" id="orderno" value="{{ __($ordno) }}">
 <input type="hidden" name="prevstate" id="prevstate" value="">
 <input type="hidden" name="currentstate" id="currentstate" value="00">
@@ -22,13 +23,13 @@ $var1 = $ordno;
 
                 <div class="title-header">เพิ่มข้อมูลการจัดส่งสินค้า</div>
 
-                <!-- @foreach ($formnames as $formname)
+                 {{-- @foreach ($formnames as $formname)
                 @include("form.$formname->formname",["ordno" => $var1])
-                @endforeach -->
+                @endforeach  --}}
 
                 <form action="#" id="f-request">
 
-                    <div class="group_data">
+                    <div id="f-field1" class="group_data">
                         <div class="col-md-12">
                             <div class="title-form">
                                 ข้อมูลการจัดส่งสินค้า
@@ -40,7 +41,10 @@ $var1 = $ordno;
                                 เลขที่ Tracking Number :
                             </div>
                             <div class="col-md-8">
-                                <input name="order_id" disabled id="order_id" class="form-control" type="text"></input>
+                                @foreach ($ordvehicle as $item)
+                                    <input name="order_id" disabled id="order_id" class="form-control" type="text" value="{{ $item->runno }}">
+                                @endforeach
+
                             </div>
                         </div>
 
@@ -49,7 +53,7 @@ $var1 = $ordno;
                                 เลขที่ PO :
                             </div>
                             <div class="col-md-8">
-                                <input name="po" id="po" class="form-control" type="text"></input>
+                                <input name="po" id="po" class="form-control" type="text">
                             </div>
                         </div>
 
@@ -59,7 +63,7 @@ $var1 = $ordno;
                             </div>
                             <div class="col-md-8">
                                 <input name="cust_code" disabled id="cust_code" class="form-control"
-                                    type="text"></input>
+                                    type="text">
                             </div>
                         </div>
 
@@ -70,6 +74,9 @@ $var1 = $ordno;
                             <div class="col-md-8">
                                 <select name="cust_name" id="cust_name" class="form-control">
                                     <option value="">-- Please Select --</option>
+                                    @foreach ($tb_customer as $item)
+                                    <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -105,7 +112,7 @@ $var1 = $ordno;
                         </div>
                     </div>
 
-                    <div class="group_data">
+                    <div id="f-field2" class="group_data">
 
                         <div class="col-md-12">
                             <div class="title-form">
@@ -140,7 +147,8 @@ $var1 = $ordno;
                             </div>
                         </div>
                     </div>
-                    <div class="group_data">
+
+                    <div id="f-field3" class="group_data">
                         <div class="col-md-12">
                             <div class="title-form">
                                 รายละเอียดสินค้า
@@ -198,6 +206,61 @@ $var1 = $ordno;
 </form>
 
 <script>
+
+    let FormatJSon1 = {
+        "order_id":"",
+        "po":"",
+        "cust_code":"",
+        "cust_name":"",
+        "cust_address":"",
+        "cust_presonalcode":"",
+        "order_remark":""
+    }
+
+    let FormatJSon2 = {
+        "to_name":"",
+        "to_address":"",
+        "to_phone":""
+    }
+
+    let FormatJSon3 = {
+        "product_type":"",
+        "unit":"",
+        "weight":"",
+        "remark":""
+    }
+
+    let FormatJSonGet1 = {
+        "order_id":"",
+        "po":"",
+        "cust_code":"customer_id",
+        "cust_name":"",
+        "cust_address":"address",
+        "cust_presonalcode":"customer_person_number",
+        "order_remark":""
+    }
+
+    let isResult1 =false,isResult2 =false,isResult3 =false;
+
+$('[name~=cust_name]').on('change',async function(){
+    const doc = $(this);
+    await $.ajax({
+        url: "{{url('api/request')}}/"+doc.val(),
+        type: "GET",
+        data: {},
+        success: function(response, status) {
+            if(status == "success"){
+                const data = response.data[0];
+                $.each(FormatJSonGet1,function(key,value){
+                    if(value != ""){
+                        $("[name="+key+"]").val(data[value]);
+                    }
+                });
+            }
+        },
+    });
+});
+
 $("#save-data").click(function($this) {
 
     swal({
@@ -209,138 +272,96 @@ $("#save-data").click(function($this) {
             cancel: true,
         },
         infoMode: true,
-    }).then(function(isConfirm) {
+    }).then(async function(isConfirm) {
         if (isConfirm) {
-            
-            let ordno = $("input[name=orderno]").val();
-            let prevstate = $("input[name=prevstate]").val() == "" ? null : $("input[name=prevstate]")
-                .val();
-            let currentstate = $("input[name=currentstate]").val();
-            let nextstate = $("input[name=nextstate]").val();
-            let updatedby = $("input[name=updatedby]").val();
 
-            var Base64 = {
-                _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-                encode: function(e) {
-                    var t = "";
-                    var n, r, i, s, o, u, a;
-                    var f = 0;
-                    e = Base64._utf8_encode(e);
-                    while (f < e.length) {
-                        n = e.charCodeAt(f++);
-                        r = e.charCodeAt(f++);
-                        i = e.charCodeAt(f++);
-                        s = n >> 2;
-                        o = (n & 3) << 4 | r >> 4;
-                        u = (r & 15) << 2 | i >> 6;
-                        a = i & 63;
-                        if (isNaN(r)) {
-                            u = a = 64
-                        } else if (isNaN(i)) {
-                            a = 64
-                        }
-                        t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr
-                            .charAt(u) + this
-                            ._keyStr.charAt(a)
-                    }
-                    return t
-                },
-                decode: function(e) {
-                    var t = "";
-                    var n, r, i;
-                    var s, o, u, a;
-                    var f = 0;
-                    e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-                    while (f < e.length) {
-                        s = this._keyStr.indexOf(e.charAt(f++));
-                        o = this._keyStr.indexOf(e.charAt(f++));
-                        u = this._keyStr.indexOf(e.charAt(f++));
-                        a = this._keyStr.indexOf(e.charAt(f++));
-                        n = s << 2 | o >> 4;
-                        r = (o & 15) << 4 | u >> 2;
-                        i = (u & 3) << 6 | a;
-                        t = t + String.fromCharCode(n);
-                        if (u != 64) {
-                            t = t + String.fromCharCode(r)
-                        }
-                        if (a != 64) {
-                            t = t + String.fromCharCode(i)
-                        }
-                    }
-                    t = Base64._utf8_decode(t);
-                    return t
-                },
-                _utf8_encode: function(e) {
-                    e = e.replace(/\r\n/g, "\n");
-                    var t = "";
-                    for (var n = 0; n < e.length; n++) {
-                        var r = e.charCodeAt(n);
-                        if (r < 128) {
-                            t += String.fromCharCode(r)
-                        } else if (r > 127 && r < 2048) {
-                            t += String.fromCharCode(r >> 6 | 192);
-                            t += String.fromCharCode(r & 63 | 128)
-                        } else {
-                            t += String.fromCharCode(r >> 12 | 224);
-                            t += String.fromCharCode(r >> 6 & 63 | 128);
-                            t += String.fromCharCode(r & 63 | 128)
-                        }
-                    }
-                    return t
-                },
-                _utf8_decode: function(e) {
-                    var t = "";
-                    var n = 0;
-                    var r = c1 = c2 = 0;
-                    while (n < e.length) {
-                        r = e.charCodeAt(n);
-                        if (r < 128) {
-                            t += String.fromCharCode(r);
-                            n++
-                        } else if (r > 191 && r < 224) {
-                            c2 = e.charCodeAt(n + 1);
-                            t += String.fromCharCode((r & 31) << 6 | c2 & 63);
-                            n += 2
-                        } else {
-                            c2 = e.charCodeAt(n + 1);
-                            c3 = e.charCodeAt(n + 2);
-                            t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-                            n += 3
-                        }
-                    }
-                    return t
-                }
-            }
-
-            let formdata = {};
-
-            for (var i = 0; i < $("#form1")[0].length; i++) {
-                let subformdata = {};
-                let type = $("#form1")[0][i].type;
-                switch (type) {
-                    case "text":
-                        subformdata["type"] = type;
-                        subformdata["name"] = $("#form1")[0][i].name;
-                        subformdata["value"] = $("#form1")[0][i].value;
-                        formdata[i] = subformdata;
-                }
-
-                $.ajax({
-                    url: "/api/flow",
-                    type: "POST",
-                    data: jsonData,
-                    success: function(response, status) {
-                        if (status == "success") {
-                            window.location.href = "{{ url(" / workinprogress ") }}";
-                        }
-                    },
-                });
-            };
+           await Field1();
+           await Field2();
+           await Field3();
 
         } else {
             return false;
         }
     });
+
+    async function Field1(){
+        await $('#f-field1').find('select,input,textarea').each(function(i, box) {
+            const name = $(box).attr("name");
+            if(name){
+                FormatJSon1[name] = $("[name~="+name+"]").val();
+            }
+        });
+        isResult1 = true;
+        if(isResult1 && isResult2 && isResult3){
+            onPost();
+        }
+    }
+
+    async function Field2(){
+        await $('#f-field2').find('select,input,textarea').each(function(i, box) {
+            const name = $(box).attr("name");
+            if(name){
+                FormatJSon2[name] = $("[name~="+name+"]").val();
+            }
+        });
+        isResult2 = true;
+        if(isResult1 && isResult2 && isResult3){
+            onPost();
+        }
+    }
+
+    async function Field3(){
+        await $('#f-field3').find('select,input,textarea').each(function(i, box) {
+            const name = $(box).attr("name");
+            if(name){
+                FormatJSon3[name] = $("[name~="+name+"]").val();
+            }
+        });
+        isResult3 = true;
+        if(isResult1 && isResult2 && isResult3){
+            onPost();
+        }
+    }
+
+    async function onPost(){
+        console.log("Start Post");
+        console.log(FormatJSon1)
+        console.log(FormatJSon2)
+        console.log(FormatJSon3)
+
+        await $.ajax({
+            url: "{{url('api/employee')}}",
+            type: "POST",
+            data: FormatJSon1,
+            success: function(response, status) {
+                // if (status == "success") {
+                //     window.location.href = "{{ url('/employee') }}";
+                // }
+            },
+        });
+
+        await $.ajax({
+            url: "{{url('api/employee')}}",
+            type: "POST",
+            data: FormatJSon2,
+            success: function(response, status) {
+                // if (status == "success") {
+                //     window.location.href = "{{ url('/employee') }}";
+                // }
+            },
+        });
+
+        await $.ajax({
+            url: "{{url('api/employee')}}",
+            type: "POST",
+            data: FormatJSon3,
+            success: function(response, status) {
+                // if (status == "success") {
+                //     window.location.href = "{{ url('/employee') }}";
+                // }
+            },
+        });
+    }
 });
 </script>
 
