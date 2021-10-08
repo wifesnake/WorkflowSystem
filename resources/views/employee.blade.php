@@ -63,7 +63,7 @@
                                 เลขที่บัตรประชาชน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="id_card" id="id_card" class="form-control">
+                                <input type="number" name="id_card" id="id_card" class="form-control">
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                                 หมายเลขโทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="phone" id="phone" class="form-control">
+                                <input type="number" name="phone" id="phone" class="form-control">
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@
                                 เงินเดือน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="salary" id="salary" class="form-control">
+                                <input type="number" step="0.01" name="salary" id="salary" class="form-control">
                             </div>
                         </div>
 
@@ -202,7 +202,7 @@
                             เลขที่บัตรประชาชน <b class="request-data">**</b> :
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="m-id_card" id="m-id_card" class="form-control">
+                            <input type="number" name="m-id_card" id="m-id_card" class="form-control">
                         </div>
                     </div>
 
@@ -241,7 +241,7 @@
                             หมายเลขโทรศัพท์ <b class="request-data">**</b> :
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="m-phone" id="m-phone" class="form-control">
+                            <input type="number" name="m-phone" id="m-phone" class="form-control">
                         </div>
                     </div>
 
@@ -250,7 +250,7 @@
                             เงินเดือน <b class="request-data">**</b> :
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="m-salary" id="m-salary" class="form-control">
+                            <input type="number" step="0.01" name="m-salary" id="m-salary" class="form-control">
                         </div>
                     </div>
 
@@ -284,6 +284,7 @@
 <!-- End Modal -->
 
 <script>
+    
 const jsonFormat = {
     "titlename": "",
     "name": "",

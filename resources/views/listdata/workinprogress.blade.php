@@ -19,6 +19,9 @@
                                         <th>PO Number.</th>
                                         <th>Customer Name</th>
                                         <th>ผู้รับ</th>
+                                        <th>รายละเอียด</th>
+                                        <th>จำนวน</th>
+                                        <th>น้ำหนัก</th>
                                         <th>สถานะ</th>
                                         <th>Create</th>
                                         <th></th>
