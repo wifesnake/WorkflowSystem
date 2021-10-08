@@ -242,24 +242,26 @@ $var1 = $ordno;
 
     let isResult1 =false,isResult2 =false,isResult3 =false;
 
-$('[name~=cust_name]').on('change',async function(){
-    const doc = $(this);
-    await $.ajax({
-        url: "{{url('api/request')}}/"+doc.val(),
-        type: "GET",
-        data: {},
-        success: function(response, status) {
-            if(status == "success"){
-                const data = response.data[0];
-                $.each(FormatJSonGet1,function(key,value){
-                    if(value != ""){
-                        $("[name="+key+"]").val(data[value]);
+    $('[name~=cust_name]').on('change',async function(){
+        const doc = $(this);
+        if(doc.val() != ""){
+            await $.ajax({
+                url: "{{url('api/request')}}/"+doc.val(),
+                type: "GET",
+                data: {},
+                success: function(response, status) {
+                    if(status == "success"){
+                        const data = response.data[0];
+                        $.each(FormatJSonGet1,function(key,value){
+                            if(value != ""){
+                                $("[name="+key+"]").val(data[value]);
+                            }
+                        });
                     }
-                });
-            }
-        },
+                },
+            });
+        }
     });
-});
 
 $("#save-data").click(function($this) {
 
