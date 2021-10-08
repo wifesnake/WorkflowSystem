@@ -25,7 +25,7 @@
                                 ข้อมูลรถ
                             </div>
                         </div>
-                        <div class="row col-md-12">
+                        <div style="display:none;" class="row col-md-12">
                             <div class="col-md-3">
                                 รหัสรถ :
                             </div>
