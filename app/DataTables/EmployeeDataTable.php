@@ -100,14 +100,14 @@ class EmployeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'fullname',
-            'email',
-            'phone',
-            'salary',
-            'employeetype',
-            'departmenttype' => ['title' => 'Department'],
-            'action'
+            'id' ,
+            'fullname' => ['title' => 'ชื่อ-สกุล'],
+            'email' => ['title' => 'E-mail'],
+            'phone' => ['title' => 'หมายเลขโทรศัพท์'] ,
+            'salary' => ['title' => 'เงินเดือน'] ,
+            'employeetype' => ['title' => 'ประเภทพนักงาน'] ,
+            'departmenttype' => ['title' => 'หน่วยงาน'],
+            'action' => ['title' => 'Action']
         ];
     }
 

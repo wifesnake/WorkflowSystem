@@ -32,7 +32,8 @@
                             <div class="col-md-9">
                                 <!-- <input type="text" disabled name="car_id" id="car_id" class="form-control"> -->
                                 @foreach ($vehicleno as $item)
-                                    <input type="text" name="car_id" disabled id="car_id" class="form-control" value="{{ $item->runno }}">
+                                <input type="text" name="car_id" disabled id="car_id" class="form-control"
+                                    value="{{ $item->runno }}">
                                 @endforeach
                             </div>
                         </div>
@@ -99,7 +100,8 @@
                     </div>
 
                     <div class="menu-action col-md-12">
-                        <input id="save-data" type="button" class="btn btn-primary" onclick="BtnSave(); false" value="บันทึกข้อมูล"/>
+                        <input id="save-data" type="button" class="btn btn-primary" onclick="BtnSave(); false"
+                            value="บันทึกข้อมูล" />
                         <input id="cancel-data" type="button" class="btn btn-danger" value="ยกเลิก" />
                     </div>
 
@@ -127,7 +129,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -255,76 +257,133 @@ function onEdit(id, name) {
 }
 
 function onDelete(id, name) {
-    const isPost = confirm("ต้องการลบข้อมูลรถทะเบียน : " + name);
-    if (isPost) {
-        $.ajax({
-            url: "{{url('api/vehicle')}}/" + id,
-            type: "DELETE",
-            data: {},
-            success: function(response, status) {
-                if (status == "success") {
-                    window.location.href = "{{ url('/vehicle') }}";
-                }
-            },
-        });
-    }
+
+    swal({
+        title: "",
+        text: "คุณแน่ใจว่าต้องการลบข้อมูลรถทะเบียน " + name,
+        icon: "warning",
+        buttons: {
+            confirm: true,
+            cancel: true,
+        },
+        infoMode: true,
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+
+            $.ajax({
+                url: "{{url('api/vehicle')}}/" + id,
+                type: "DELETE",
+                data: {},
+                success: function(response, status) {
+                    if (status == "success") {
+                        window.location.href = "{{ url('/vehicle') }}";
+                    }
+                },
+            });
+
+        } else {
+            return false;
+        }
+    });
+
 }
 
 function BtnSave() {
-    let isPost = true;
-    $('#f-vehicle').find('select,input,textarea').each(function(i, box) {
-        const name = $(box).attr('name');
-        if (name) {
-            if ($('[name=' + name + ']').val().trim() == "") {
-                isPost = false;
-                $('[name=' + name + ']').focus();
-            };
-            jsonFormat[name] = $('[name=' + name + ']').val();
+
+    swal({
+        title: "",
+        text: "คุณแน่ใจว่าต้องการบันทึกข้อมูลรถคันนี้ ?",
+        icon: "warning",
+        buttons: {
+            confirm: true,
+            cancel: true,
+        },
+        infoMode: true,
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+
+
+            let isPost = true;
+            $('#f-vehicle').find('select,input,textarea').each(function(i, box) {
+                const name = $(box).attr('name');
+                if (name) {
+                    if ($('[name=' + name + ']').val().trim() == "") {
+                        isPost = false;
+                        $('[name=' + name + ']').focus();
+                    };
+                    jsonFormat[name] = $('[name=' + name + ']').val();
+                }
+            });
+
+            if (isPost) {
+                $.ajax({
+                    url: "{{url('api/vehicle')}}",
+                    type: "POST",
+                    data: jsonFormat,
+                    success: function(response, status) {
+                        if (status == "success") {
+                            window.location.href = "{{ url('/vehicle') }}";
+                        }
+                    },
+                });
+            }
+        } else {
+            return false;
         }
     });
 
-    if (isPost) {
-        $.ajax({
-            url: "{{url('api/vehicle')}}",
-            type: "POST",
-            data: jsonFormat,
-            success: function(response, status) {
-                if (status == "success") {
-                    window.location.href = "{{ url('/vehicle') }}";
-                }
-            },
-        });
-    }
+
 }
 
 function BtnEdit() {
-    let isPost = true;
-    $('#m-f-vehicle').find('select,input,textarea').each(function(i, box) {
-        const name = $(box).attr('name');
-        if (name) {
-            console.log(name);
-            if ($('[name=' + name + ']').val().trim() == "") {
-                isPost = false;
-                $('[name=' + name + ']').focus();
-            };
-            const nameFormat = name.replace('m-', '')
-            jsonFormat[nameFormat] = $('[name=' + name + ']').val();
+
+    swal({
+        title: "",
+        text: "คุณแน่ใจว่าต้องการแก้ไขข้อมูลนี้ ?",
+        icon: "warning",
+        buttons: {
+            confirm: true,
+            cancel: true,
+        },
+        infoMode: true,
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+
+            let isPost = true;
+            $('#m-f-vehicle').find('select,input,textarea').each(function(i, box) {
+                const name = $(box).attr('name');
+                if (name) {
+                    console.log(name);
+                    if ($('[name=' + name + ']').val().trim() == "") {
+                        isPost = false;
+                        $('[name=' + name + ']').focus();
+                    };
+                    const nameFormat = name.replace('m-', '')
+                    jsonFormat[nameFormat] = $('[name=' + name + ']').val();
+                }
+            });
+
+            const id = $('[name=m-id]').val();
+            if (isPost) {
+                $.ajax({
+                    url: "{{url('api/vehicle')}}/" + id,
+                    type: "PUT",
+                    data: jsonFormat,
+                    success: function(response, status) {
+                        if (status == "success") {
+                            window.location.href = "{{ url('/vehicle') }}";
+                        }
+                    },
+                });
+            }
+
+        } else {
+            return false;
         }
     });
 
-    const id = $('[name=m-id]').val();
-    if (isPost) {
-        $.ajax({
-            url: "{{url('api/vehicle')}}/" + id,
-            type: "PUT",
-            data: jsonFormat,
-            success: function(response, status) {
-                if (status == "success") {
-                    window.location.href = "{{ url('/vehicle') }}";
-                }
-            },
-        });
-    }
+
+
 }
 </script>
 
