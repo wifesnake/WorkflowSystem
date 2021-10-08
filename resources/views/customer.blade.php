@@ -26,7 +26,7 @@
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                รหัสลูกค้า / ชื่อบริษัท <b class="request-data">**</b> :
+                                ชื่อบริษัท <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-2" style="display:none;">
                                 @foreach ($customerno as $item)
