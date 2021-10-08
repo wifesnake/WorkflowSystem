@@ -47,7 +47,10 @@ class VehicleDataTable extends DataTable
                             $q->where('t3.name_lookup', '=', "usevehicle");
                             $q->select('t3.value_lookup');
                         })
-                        ->select('tb_vehicle.id','car_id','regis_id','car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype');
+                        ->join('tb_customer as t4', function($q){
+                            $q->on('tb_vehicle.car_location', '=', 't4.customer_id');
+                        })
+                        ->select('tb_vehicle.id','car_id','regis_id', 't4.customer_name' , 'car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype');
     }
 
     /**
@@ -80,13 +83,13 @@ class VehicleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            "car_id",
-            "regis_id",
-            "car_brand",
-            "car_location",
-            "trucktype" => ['title' => 'Department'],
-            "cartypename",
-            "action"
+            "car_id" => ['title' => 'รหัสรถ'],
+            "regis_id" => ['title' => 'หมายเลขทะเบียน'],
+            "car_brand" => ['title' => 'รายละเอียดรถ'],
+            "customer_name" => ['title' => 'สถานที่ใช้งาน'],
+            "trucktype" => ['title' => 'ประเภทรถ'],
+            "cartypename" => ['title' => 'สถานะของรถ'],
+            "action" => ['title' => 'Action']
         ];
     }
 

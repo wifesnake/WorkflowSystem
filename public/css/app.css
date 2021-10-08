@@ -68281,3 +68281,29 @@ input#save-data {
 input#cancel-data {
   font-size: 20px;
 }
+
+button.btn.btn-warning {
+  background: #00bcd4;
+  border: #00bcd4;
+  color: white;
+  font-size: 20px;
+}
+
+.btn-warning {
+  color: white;
+  background-color: #00bcd4 ;
+  border-color: #00bcd4 ;
+}
+
+
+.btn-warning:hover {
+  color: white;
+  background-color: #0fa7bb;
+  border-color: #0fa7bb;
+}
+
+.btn-warning:not(:disabled):not(.disabled):active {
+  color: white;
+  background-color: #0fa7bb;
+  border-color: #0fa7bb;
+}
