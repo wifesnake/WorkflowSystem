@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FlowController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostCustomerController;
 use App\Http\Controllers\PostEmployeeController;
 use App\Http\Controllers\PostVehicleController;
 use Illuminate\Http\Request;
@@ -42,3 +43,8 @@ Route::post('/vehicle',[PostVehicleController::class, 'store']);
 Route::delete('/vehicle/{id}',[PostVehicleController::class, 'destroy']);
 Route::get('/vehicle/{id}',[PostVehicleController::class, 'show']);
 Route::PUT('/vehicle/{id}',[PostVehicleController::class, 'update']);
+
+Route::post('/customer',[PostCustomerController::class, 'store']);
+Route::delete('/customer/{id}',[PostCustomerController::class, 'destroy']);
+Route::get('/customer/{id}',[PostCustomerController::class, 'show']);
+Route::PUT('/customer/{id}',[PostCustomerController::class, 'update']);
