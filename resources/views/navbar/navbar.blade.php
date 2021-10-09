@@ -27,7 +27,7 @@
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     @foreach ($fullname as $item)
                         @if ($item->Isfullname == 1)
-                            {{ $item->name }}
+                            {{ Auth::user()->name }}
                         @else
                             {{ $item->fullname }}
                         @endif
