@@ -97,7 +97,7 @@ $var1 = $ordno;
                             </div>
                             <div class="col-md-8">
                                 <input name="cust_presonalcode" disabled id="cust_presonalcode" class="form-control"
-                                    type="text"></input>
+                                    type="text">
                             </div>
                         </div>
 
@@ -125,7 +125,7 @@ $var1 = $ordno;
                                 ชื่อ-นามสกุล <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="to_name" id="to_name" class="form-control" type="text"></input>
+                                <input name="to_name" id="to_name" class="form-control" type="text">
                             </div>
                         </div>
 
@@ -143,7 +143,7 @@ $var1 = $ordno;
                                 โทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="to_phone" id="to_phone" class="form-control" type="text"></input>
+                                <input name="to_phone" id="to_phone" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,21 @@ $var1 = $ordno;
                                 รายละเอียดสินค้า <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="product_type" id="product_type" class="form-control" type="text"></input>
+                                <input name="product_type" id="product_type" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ประรถที่ต้องการ <b class="request-data">**</b> :
+                            </div>
+                            <div class="col-md-8">
+                                <select name="car_type" id="car_type" class="form-control">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach ($usevehicle as $item)
+                                    <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -168,7 +182,7 @@ $var1 = $ordno;
                                 จำนวน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="unit" id="unit" class="form-control" type="text"></input>
+                                <input name="unit" id="unit" class="form-control" type="text">
                             </div>
                         </div>
 
@@ -177,7 +191,7 @@ $var1 = $ordno;
                                 น้ำหนัก <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="weight" id="weight" class="form-control" type="text"></input>
+                                <input name="weight" id="weight" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row col-md-12">
@@ -207,40 +221,49 @@ $var1 = $ordno;
 
 <script>
 
-    let FormatJSon1 = {
+    let Jsonformat = {
         "order_id":"",
         "po":"",
         "cust_code":"",
         "cust_name":"",
         "cust_address":"",
         "cust_presonalcode":"",
-        "order_remark":""
-    }
-
-    let FormatJSon2 = {
+        "order_remark":"",
         "to_name":"",
         "to_address":"",
-        "to_phone":""
-    }
-
-    let FormatJSon3 = {
+        "to_phone":"",
         "product_type":"",
+        "car_type":"",
         "unit":"",
         "weight":"",
-        "remark":""
+        "remark":"",
+        "base64":"",
+        "created_by": '{{ Auth::user()->name }}',
+        "updated_by": '{{ Auth::user()->name }}'
     }
 
-    let FormatJSonGet1 = {
+    let JsonformatGet = {
         "order_id":"",
         "po":"",
         "cust_code":"customer_id",
         "cust_name":"",
         "cust_address":"address",
         "cust_presonalcode":"customer_person_number",
-        "order_remark":""
+        "order_remark":"",
+        "to_name":"",
+        "to_address":"",
+        "to_phone":"",
+        "product_type":"",
+        "car_type":"",
+        "unit":"",
+        "weight":"",
+        "remark":""
     }
 
-    let isResult1 =false,isResult2 =false,isResult3 =false;
+    let formdata = {};
+
+    // Create Base64 Object
+    var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
 
     $('[name~=cust_name]').on('change',async function(){
         const doc = $(this);
@@ -252,7 +275,7 @@ $var1 = $ordno;
                 success: function(response, status) {
                     if(status == "success"){
                         const data = response.data[0];
-                        $.each(FormatJSonGet1,function(key,value){
+                        $.each(JsonformatGet,function(key,value){
                             if(value != ""){
                                 $("[name="+key+"]").val(data[value]);
                             }
@@ -277,93 +300,58 @@ $("#save-data").click(function($this) {
     }).then(async function(isConfirm) {
         if (isConfirm) {
 
-           await Field1();
-           await Field2();
-           await Field3();
+            await $('#f-field1').find('select,input,textarea').each(function(i, box) {
+                const name = $(box).attr("name");
+                if(name){
+                    Jsonformat[name] = $("[name~="+name+"]").val();
+                }
+            });
+
+            await $('#form1').find('select,input,textarea').each(function(i,doc){
+                const name = $(doc).attr("name");
+                if(name){
+                    Jsonformat[name] = $("[name~="+name+"]").val();
+                }
+            });
+
+            Jsonformat["base64"] = Base64.encode(JSON.stringify(Jsonformat));
+
+            await $.ajax({
+                url: "{{url('api/request')}}",
+                type: "POST",
+                data: Jsonformat,
+                success: function(response, status) {
+                    if(response.data.length > 0){
+                        window.location.href = "{{ url('/workinprogress') }}";
+                    }
+                },
+            });
 
         } else {
+
+            Jsonformat = {
+                "order_id":"",
+                "po":"",
+                "cust_code":"customer_id",
+                "cust_name":"",
+                "cust_address":"address",
+                "cust_presonalcode":"customer_person_number",
+                "order_remark":"",
+                "order_remark":"",
+                "to_name":"",
+                "to_address":"",
+                "to_phone":"",
+                "product_type":"",
+                "unit":"",
+                "weight":"",
+                "remark":"",
+                "created_by": '{{ Auth::user()->name }}',
+                "updated_by": '{{ Auth::user()->name }}'
+            }
+
             return false;
         }
     });
-
-    async function Field1(){
-        await $('#f-field1').find('select,input,textarea').each(function(i, box) {
-            const name = $(box).attr("name");
-            if(name){
-                FormatJSon1[name] = $("[name~="+name+"]").val();
-            }
-        });
-        isResult1 = true;
-        if(isResult1 && isResult2 && isResult3){
-            onPost();
-        }
-    }
-
-    async function Field2(){
-        await $('#f-field2').find('select,input,textarea').each(function(i, box) {
-            const name = $(box).attr("name");
-            if(name){
-                FormatJSon2[name] = $("[name~="+name+"]").val();
-            }
-        });
-        isResult2 = true;
-        if(isResult1 && isResult2 && isResult3){
-            onPost();
-        }
-    }
-
-    async function Field3(){
-        await $('#f-field3').find('select,input,textarea').each(function(i, box) {
-            const name = $(box).attr("name");
-            if(name){
-                FormatJSon3[name] = $("[name~="+name+"]").val();
-            }
-        });
-        isResult3 = true;
-        if(isResult1 && isResult2 && isResult3){
-            onPost();
-        }
-    }
-
-    async function onPost(){
-        console.log("Start Post");
-        console.log(FormatJSon1)
-        console.log(FormatJSon2)
-        console.log(FormatJSon3)
-
-        await $.ajax({
-            url: "{{url('api/employee')}}",
-            type: "POST",
-            data: FormatJSon1,
-            success: function(response, status) {
-                // if (status == "success") {
-                //     window.location.href = "{{ url('/employee') }}";
-                // }
-            },
-        });
-
-        await $.ajax({
-            url: "{{url('api/employee')}}",
-            type: "POST",
-            data: FormatJSon2,
-            success: function(response, status) {
-                // if (status == "success") {
-                //     window.location.href = "{{ url('/employee') }}";
-                // }
-            },
-        });
-
-        await $.ajax({
-            url: "{{url('api/employee')}}",
-            type: "POST",
-            data: FormatJSon3,
-            success: function(response, status) {
-                // if (status == "success") {
-                //     window.location.href = "{{ url('/employee') }}";
-                // }
-            },
-        });
-    }
 });
 </script>
 
