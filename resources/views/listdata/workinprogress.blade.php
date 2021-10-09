@@ -58,7 +58,7 @@
                         type: "get"
                     },
                     "processing": true,
-                    "order": [[ 2, "desc" ]],
+                    "order": [[ 8, "desc" ]],
                     "columns": [
                         { "data": "ord_vehicle" },
                         { "data": "po" },

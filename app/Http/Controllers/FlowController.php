@@ -50,7 +50,7 @@ class FlowController extends Controller
      */
     public function updateStates(Request $request)
     {
-        $tmp_prevstate = $request->current_state == "00" ? null : $request->prev_state;
+        $tmp_prevstate = $request->current_state == "00" || $request->current_state == "" ? null : $request->prev_state;
         $state = new States();
         $state->systemcode = null;
         $state->ord_vehicle = $request->ord_vehicle;
@@ -65,6 +65,9 @@ class FlowController extends Controller
             $flow->prev_state = $tmp_prevstate;
             $flow->current_state = $request->current_state;
             $flow->updated_by = $request->updated_by;
+            if($tmp_prevstate == null){
+                $flow->status = 0;
+            }
             $flow->save();
 
             return new StatesResource($state);
