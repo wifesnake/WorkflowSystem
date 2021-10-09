@@ -321,7 +321,7 @@ $("#save-data").click(function($this) {
                 type: "POST",
                 data: Jsonformat,
                 success: function(response, status) {
-                    if(response.data.length > 0){
+                    if(status == "success"){
                         window.location.href = "{{ url('/workinprogress') }}";
                     }
                 },
