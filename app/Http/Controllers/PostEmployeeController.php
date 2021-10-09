@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostEmployeeResource;
 use App\Models\Employee;
 use App\Models\Runorderno;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PostEmployeeController extends Controller
 {
@@ -60,6 +62,13 @@ class PostEmployeeController extends Controller
             $runordno = Runorderno::findOrFail(3);
             $runordno->runno = $t;
             $runordno->save();
+
+            User::create([
+                'name' => $request->employee_id,
+                'email' => $request->email,
+                'password' => Hash::make($request->id_card),
+                'is_admin' => '0'
+            ]);
 
             return new PostEmployeeResource($post);
         }
