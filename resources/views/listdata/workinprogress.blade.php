@@ -61,11 +61,14 @@
                     "order": [[ 2, "desc" ]],
                     "columns": [
                         { "data": "ord_vehicle" },
-                        { "data": "ord_vehicle" },
-                        { "data": "updated_by" },
-                        { "data": "updated_by" },
+                        { "data": "po" },
+                        { "data": "customer_name" },
+                        { "data": "to_name" },
+                        { "data": "product_type" },
+                        { "data": "unit" },
+                        { "data": "weight" },
                         { "data": "state_name" },
-                        { "data": "datetime_th" },
+                        { "data": "datetime_th"},
                         {
                             data: null,
                             render:function(data,type,row){
