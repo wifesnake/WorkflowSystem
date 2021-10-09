@@ -34,6 +34,7 @@ Route::get('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
 
 Route::get('/request/{id}',[PostRequestController::class, 'show']);
+Route::post('/request',[PostRequestController::class, 'store']);
 
 Route::post('/state',[FlowController::class, 'updateStates']);
 

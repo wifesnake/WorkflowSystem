@@ -22,6 +22,8 @@ class Order extends Model
         "unit",
         "weight",
         "remark",
-        "requesr_car_type"
+        "requesr_car_type",
+        "created_by",
+        "updated_by"
     ];
 }
