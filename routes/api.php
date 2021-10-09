@@ -4,6 +4,7 @@ use App\Http\Controllers\FlowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCustomerController;
 use App\Http\Controllers\PostEmployeeController;
+use App\Http\Controllers\PostRequestController;
 use App\Http\Controllers\PostVehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::delete('/posts/{id}',[PostController::class, 'destroy']);
 
 Route::get('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
+
+Route::get('/request/{id}',[PostRequestController::class, 'show']);
+Route::post('/request',[PostRequestController::class, 'store']);
 
 Route::post('/state',[FlowController::class, 'updateStates']);
 
