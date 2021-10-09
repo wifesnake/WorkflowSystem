@@ -68283,29 +68283,29 @@ input#cancel-data {
 }
 
 button.btn.btn-warning {
-  background: #00bcd4;
-  border: #00bcd4;
+  background: #ff9800e0;
+  border: #ff9800e0;
   color: white;
   font-size: 20px;
 }
 
 .btn-warning {
   color: white;
-  background-color: #00bcd4 ;
-  border-color: #00bcd4 ;
+  background-color: #ff9800e0 ;
+  border-color: #ff9800e0 ;
 }
 
 
 .btn-warning:hover {
   color: white;
-  background-color: #0fa7bb;
-  border-color: #0fa7bb;
+  background-color: #ff9800b3;
+  border-color: #ff9800b3;
 }
 
 .btn-warning:not(:disabled):not(.disabled):active {
   color: white;
-  background-color: #0fa7bb;
-  border-color: #0fa7bb;
+  background-color: #ff9800b3;
+  border-color: #ff9800b3;
 }
 
 button.swal-button.swal-button--confirm {
@@ -68359,3 +68359,4 @@ button.swal-button.swal-button--cancel:not([disabled]):hover {
   }
 
 }
+
