@@ -23,7 +23,8 @@ class CustomerDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', 'customer.action')
             ->addColumn('action',function($row){
-                return '<div style="display:flex"><div onClick="onEdit('.$row->id.');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
+                return '<div style="display:flex"><div onClick="onEdit(\''.$row->customer_id.'\',\'view\');" class="btn btn-sm btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">View</div>
+                &nbsp;<div style="display:flex"><div onClick="onEdit(\''.$row->customer_id.'\',\'edit\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>
                 &nbsp;<div onClick="onDelete('.$row->id.',\''.$row->customer_name.'\');" class="btn btn-sm btn-danger btn-sm">Delete</div></div>';
             });
     }
