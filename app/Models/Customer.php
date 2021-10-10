@@ -16,6 +16,7 @@ class Customer extends Model
         "customer_name",
         "address",
         "phone",
-        "customer_person_number"
+        "customer_person_number",
+        "status"
     ];
 }

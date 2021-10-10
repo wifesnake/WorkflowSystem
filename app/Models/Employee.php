@@ -23,6 +23,7 @@ class Employee extends Model
         "phone",
         "salary",
         "department",
+        "status",
         "created_by",
         "updated_by"
     ];
