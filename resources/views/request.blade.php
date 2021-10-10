@@ -36,7 +36,7 @@ $var1 = $ordno;
                             </div>
                         </div>
 
-                        <div class="row col-md-12">
+                        <div class="row col-md-12" style="display: none;" >
                             <div class="col-md-3">
                                 เลขที่ Tracking Number :
                             </div>
@@ -143,7 +143,7 @@ $var1 = $ordno;
                                 โทรศัพท์ <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="to_phone" id="to_phone" class="form-control" type="text">
+                                <input type="number" name="to_phone" id="to_phone" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -182,16 +182,16 @@ $var1 = $ordno;
                                 จำนวน <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="unit" id="unit" class="form-control" type="text">
+                                <input type="number"name="unit" id="unit" class="form-control" type="text">
                             </div>
                         </div>
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                น้ำหนัก <b class="request-data">**</b> :
+                                น้ำหนัก (kg) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="weight" id="weight" class="form-control" type="text">
+                                <input type="number" step="0.01" name="weight" id="weight" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row col-md-12">
