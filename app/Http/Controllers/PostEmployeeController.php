@@ -135,7 +135,8 @@ class PostEmployeeController extends Controller
     public function destroy($id)
     {
         $employee = Employee::findOrFail($id);
-        if($employee->delete())
+        $employee->status = 0;
+        if($employee->save())
         {
             return new PostEmployeeResource($employee);
         }

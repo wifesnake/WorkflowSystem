@@ -36,7 +36,8 @@ class CustomerDataTable extends DataTable
      */
     public function query(Customer $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                    ->where("status",1);
     }
 
     /**

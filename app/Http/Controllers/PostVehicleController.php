@@ -123,7 +123,8 @@ class PostVehicleController extends Controller
     {
         //
         $vehicle = Vehicle::findOrFail($id);
-        if($vehicle->delete())
+        $vehicle->status = 0;
+        if($vehicle->save())
         {
             return new PostVehicleResource($vehicle);
         }

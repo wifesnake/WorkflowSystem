@@ -113,7 +113,8 @@ class PostCustomerController extends Controller
     public function destroy($id)
     {
         $delete = Customer::findOrFail($id);
-        if($delete->delete())
+        $delete->status = 0;
+        if($delete->save())
         {
             return new CustomerResource($delete);
         }

@@ -52,6 +52,7 @@ class EmployeeDataTable extends DataTable
                                 't2.value_lookup as employeetype',
                                 't3.value_lookup as departmenttype'
                             )
+                            ->where('status','1')
                             ->join('tb_lookup as t2', function($q){
                                 $q->on('employees.employee_type', '=', 't2.code_lookup');
                                 $q->where('t2.name_lookup', '=', "employeetype");

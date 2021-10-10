@@ -18,6 +18,7 @@ class Vehicle extends Model
         "car_brand",
         "car_plate",
         "isTrucktype",
-        "cartype"
+        "cartype",
+        "status"
     ];
 }
