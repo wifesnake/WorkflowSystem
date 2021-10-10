@@ -51,7 +51,7 @@ class VehicleDataTable extends DataTable
                             $q->on('tb_vehicle.car_location', '=', 't4.customer_id');
                         })
                         ->select('tb_vehicle.id','car_id','regis_id', 't4.customer_name' , 'car_brand','car_location','t3.value_lookup as cartypename','t2.value_lookup as trucktype')
-                        ->where('status',1);
+                        ->where('tb_vehicle.status',1);
     }
 
     /**
