@@ -33,11 +33,11 @@ $var1 = $flowdata->ord_vehicle
                 @endforeach
 
                 @foreach ($btnactions as $item)
-                    <div style="margin: 5px 0">
+                    <div style="margin: 5px 0 ; text-align: center;">
                         @if ($item->isPrevstate == 0)
                             <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->prev_state }}')" class="btn btn-primary">{{ $item->action_name }}</div>
                         @else
-                            <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->prev_state }}')" class="btn btn-primary">Cancel</div>
+                            <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->prev_state }}')" class="btn btn-danger">ยกเลิกรายการ</div>
                         @endif
 
                         {{-- @if($item->isCurrentstate == 0)
