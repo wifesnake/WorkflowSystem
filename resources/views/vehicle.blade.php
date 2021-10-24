@@ -137,7 +137,7 @@
             <div class="modal-body">
                 <input type="hidden" name="m-id" id="m-id" value="">
                 <form action="#" id="m-f-vehicle">
-                    <div class="group_data">
+                    {{-- <div class="group_data"> --}}
                         <div class="col-md-12">
                             <div class="title-form">
                                 ข้อมูลรถ
@@ -211,7 +211,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    {{-- </div> --}}
                 </form>
             </div>
             <div class="modal-footer">
@@ -239,7 +239,14 @@ const jsonFormat = {
     "updated_by": '{{ Auth::user()->name }}'
 }
 
-function onEdit(id, name) {
+function onEdit(id,isView) {
+
+    if(isView == "view"){
+        $('.modal-footer').prop("class","modal-footer d-none");
+    }else{
+        $('.modal-footer').prop("class","modal-footer");
+    }
+
     $.ajax({
         url: "{{url('api/vehicle')}}/" + id,
         type: "GET",
@@ -250,6 +257,11 @@ function onEdit(id, name) {
                 const data = response.data;
                 $.each(jsonFormat, function(key, value) {
                     $('[name=m-' + key + ']').val(data[key]);
+                    if(isView == "view"){
+                        $('[name=m-' + key + ']').prop("disabled",true);
+                    }else{
+                        $('[name=m-' + key + ']').prop("disabled",false);
+                    }
                 });
             }
         },

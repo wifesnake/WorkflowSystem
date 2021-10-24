@@ -230,6 +230,8 @@ function onEdit(id,isView) {
                     }
                     if(isView == "view"){
                         $('[name=m-' + key + ']').prop("disabled",true);
+                    }else{
+                        $('[name=m-' + key + ']').prop("disabled",false);
                     }
                 });
             }
