@@ -26,6 +26,7 @@ class DataModel extends Model
         $department = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'department'");
         $usevehicle = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'usevehicle'");
         $vehicletype = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'vehicletype'");
+        $producttype = DB::select("select code_lookup, value_lookup from tb_lookup where name_lookup = 'product_type'");
         $tb_customer = DB::select("select customer_id, customer_name from tb_customer ");
         $customerno = DB::select("select CONCAT('CM',lpad(runno,5,'0')) as runno FROM tb_runorderno WHERE status = ? and istype = 'customer';",[1]);
         // $isRunno = "";
@@ -51,7 +52,8 @@ class DataModel extends Model
                 'tb_customer' => $tb_customer,
                 'vehicletype' => $vehicletype,
                 'vehicleno' => $vehicleno,
-                'customerno' => $customerno
+                'customerno' => $customerno,
+                'producttype' => $producttype
             ];
     }
 }

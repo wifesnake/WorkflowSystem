@@ -67,7 +67,8 @@ class PostCustomerController extends Controller
      */
     public function show($id)
     {
-        $post = Customer::findOrFail($id);
+        // $post = Customer::findOrFail($id);
+        $post = Customer::where("customer_id",$id)->firstOrFail();
         return new CustomerResource($post);
     }
 
@@ -114,6 +115,7 @@ class PostCustomerController extends Controller
     {
         $delete = Customer::findOrFail($id);
         $delete->status = 0;
+        if($delete->save())
         if($delete->save())
         {
             return new CustomerResource($delete);

@@ -284,7 +284,7 @@
 <!-- End Modal -->
 
 <script>
-    
+
 const jsonFormat = {
     "titlename": "",
     "name": "",
@@ -301,7 +301,14 @@ const jsonFormat = {
     "updated_by": '{{ Auth::user()->name }}'
 }
 
-function onEdit(id, name) {
+function onEdit(id,isView) {
+
+    if(isView == "view"){
+        $('.modal-footer').prop("class","modal-footer d-none");
+    }else{
+        $('.modal-footer').prop("class","modal-footer");
+    }
+
     $.ajax({
         url: "{{url('api/employee')}}/" + id,
         type: "GET",
@@ -312,6 +319,11 @@ function onEdit(id, name) {
                 const data = response.data;
                 $.each(jsonFormat, function(key, value) {
                     $('[name=m-' + key + ']').val(data[key]);
+                    if(isView == "view"){
+                        $('[name=m-' + key + ']').prop("disabled",true);
+                    }else{
+                        $('[name=m-' + key + ']').prop("disabled",false);
+                    }
                 });
             }
         },

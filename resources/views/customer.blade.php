@@ -168,6 +168,12 @@
 </div>
 <!-- End Modal -->
 
+<style>
+    .d-none{
+        display: none;
+    }
+</style>
+
 <script>
 const jsonFormat = {
     "customer_id": "",
@@ -179,7 +185,36 @@ const jsonFormat = {
     "updated_by": '{{ Auth::user()->name }}'
 }
 
-function onEdit(id) {
+$(document).ready(function(){
+    // $('#customer-table tbody').on('click', 'tr', function () {
+    //     var customer_id = $(this)[0].cells[0].innerText;
+    //     $.ajax({
+    //         url: "{{url('api/customer')}}/" + customer_id,
+    //         type: "GET",
+    //         data: {},
+    //         success: function(response, status) {
+    //             if (response) {
+    //                 $('[name=m-id]').val(customer_id);
+    //                 const data = response.data;
+    //                 $.each(jsonFormat, function(key, value) {
+    //                     $('[name=m-' + key + ']').val(data[key]).prop("disabled",true);
+    //                 });
+    //                 $('.modal-footer').prop("class","modal-footer d-none");
+    //                 $("#exampleModal").modal("show");
+    //             }
+    //         },
+    //     });
+    // });
+});
+
+function onEdit(id,isView) {
+
+    if(isView == "view"){
+        $('.modal-footer').prop("class","modal-footer d-none");
+    }else{
+        $('.modal-footer').prop("class","modal-footer");
+    }
+
     $.ajax({
         url: "{{url('api/customer')}}/" + id,
         type: "GET",
@@ -190,6 +225,14 @@ function onEdit(id) {
                 const data = response.data;
                 $.each(jsonFormat, function(key, value) {
                     $('[name=m-' + key + ']').val(data[key]);
+                    if(key != "customer_id"){
+                        $('[name=m-' + key + ']').prop("disabled",false)
+                    }
+                    if(isView == "view"){
+                        $('[name=m-' + key + ']').prop("disabled",true);
+                    }else{
+                        $('[name=m-' + key + ']').prop("disabled",false);
+                    }
                 });
             }
         },

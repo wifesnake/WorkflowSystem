@@ -159,7 +159,7 @@ $var1 = $ordno;
                                 รายละเอียดสินค้า <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
-                                <input name="product_type" id="product_type" class="form-control" type="text">
+                                <input name="product_desc" id="product_desc" class="form-control" type="text">
                             </div>
                         </div>
 
@@ -179,13 +179,42 @@ $var1 = $ordno;
 
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                จำนวน <b class="request-data">**</b> :
+                                {{-- จำนวน <b class="request-data">**</b> : --}}
                             </div>
                             <div class="col-md-8">
-                                <input type="number"name="unit" id="unit" class="form-control" type="text">
+                                <div class="row">
+                                    <div class="row col-md-6">
+                                        <div class="col-md-4">
+                                            จำนวนรถเล็ก:
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number"name="m_unit" id="m_unit" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-6">
+                                        <div class="col-md-4">
+                                            จำนวนรถใหญ่:
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number"name="L_unit" id="L_unit" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
+                                ชนิดสินค้า <b class="request-data">**</b> :
+                            </div>
+                            <div class="col-md-8">
+                                <select name="product_type" id="product_type" class="form-control">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach ($producttype as $item)
+                                    <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
                                 น้ำหนัก (kg) <b class="request-data">**</b> :
@@ -233,8 +262,10 @@ $var1 = $ordno;
         "to_address":"",
         "to_phone":"",
         "product_type":"",
+        "product_desc":"",
         "car_type":"",
-        "unit":"",
+        "m_unit":"",
+        "L_unit":"",
         "weight":"",
         "remark":"",
         "base64":"",
@@ -254,8 +285,10 @@ $var1 = $ordno;
         "to_address":"",
         "to_phone":"",
         "product_type":"",
+        "product_desc":"",
         "car_type":"",
-        "unit":"",
+        "m_unit":"",
+        "L_unit":"",
         "weight":"",
         "remark":""
     }
@@ -342,7 +375,9 @@ $("#save-data").click(function($this) {
                 "to_address":"",
                 "to_phone":"",
                 "product_type":"",
-                "unit":"",
+                "product_desc":"",
+                "m_unit":"",
+                "L_unit":"",
                 "weight":"",
                 "remark":"",
                 "created_by": '{{ Auth::user()->name }}',
