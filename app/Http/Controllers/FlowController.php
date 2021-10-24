@@ -29,7 +29,7 @@ class FlowController extends Controller
         //$flows = Flow::where('status','=',1)->paginate(10);
         //return FlowResource::collection($flows);
 
-        $flows = DB::select('select distinct t2.id,t1.ord_vehicle,t5.po,t6.customer_name,t5.to_name,t5.product_type,t5.unit,t5.weight,t1.status,t2.prev_state,t3.from_state as current_state, t3.to_state as next_state,t4.name as state_name,t1.updated_by,t2.created_at, CONVERT_TZ(t2.created_at,"+00:00","+07:00") as datetime_th from flows t1 inner join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle inner join tb_state_action t3 on t3.from_state = t2.current_state inner join tb_states t4 on t4.id_state = t3.to_state inner join tb_order t5 ON t5.order_id = t1.ord_vehicle inner join tb_customer t6 ON t6.customer_id = t5.cust_code where t1.status = ? ORDER BY t2.created_at desc',[1]);
+        $flows = DB::select('select distinct t2.id,t1.ord_vehicle,t5.po,t6.customer_name,t5.to_name,t5.product_type,t5.product_desc,t5.m_unit,t5.L_unit,t5.weight,t1.status,t2.prev_state,t3.from_state as current_state, t3.to_state as next_state,t4.name as state_name,t1.updated_by,t2.created_at, CONVERT_TZ(t2.created_at,"+00:00","+07:00") as datetime_th from flows t1 inner join (select * from states where id in (select max(id) from states group by ord_vehicle)) t2 on t2.ord_vehicle = t1.ord_vehicle inner join tb_state_action t3 on t3.from_state = t2.current_state inner join tb_states t4 on t4.id_state = t3.to_state inner join tb_order t5 ON t5.order_id = t1.ord_vehicle inner join tb_customer t6 ON t6.customer_id = t5.cust_code where t1.status = ? ORDER BY t2.created_at desc',[1]);
         return ["data" => $flows];
     }
 
