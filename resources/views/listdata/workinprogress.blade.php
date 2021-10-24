@@ -19,8 +19,8 @@
                                         <th>PO Number.</th>
                                         <th>Customer Name</th>
                                         <th>ผู้รับ</th>
-                                        <th>รายละเอียด</th>
-                                        <th>จำนวน</th>
+                                        {{-- <th>รายละเอียด</th> --}}
+                                        {{-- <th>จำนวน</th> --}}
                                         <th>น้ำหนัก</th>
                                         <th>สถานะ</th>
                                         <th>Create</th>
@@ -58,14 +58,14 @@
                         type: "get"
                     },
                     "processing": true,
-                    "order": [[ 8, "desc" ]],
+                    "order": [[ 6, "desc" ]],
                     "columns": [
                         { "data": "ord_vehicle" },
                         { "data": "po" },
                         { "data": "customer_name" },
                         { "data": "to_name" },
-                        { "data": "product_type" },
-                        { "data": "unit" },
+                        // { "data": "product_desc" },
+                        // { "data": "m_unit" },
                         { "data": "weight" },
                         { "data": "state_name" },
                         { "data": "datetime_th"},

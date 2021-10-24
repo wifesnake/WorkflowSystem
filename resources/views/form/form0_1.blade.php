@@ -7,12 +7,15 @@
             </div>
         </div>
 
-        <div class="row col-md-12">
+        <div class="row col-md-12" style="display: none;" >
             <div class="col-md-3">
                 เลขที่ Tracking Number :
             </div>
             <div class="col-md-8">
-                <input name="order_id" disabled id="order_id" class="form-control" type="text" value="">
+                @foreach ($ordvehicle as $item)
+                    <input name="order_id" disabled id="order_id" class="form-control" type="text" value="{{ $item->runno }}">
+                @endforeach
+
             </div>
         </div>
 
@@ -111,7 +114,7 @@
                 โทรศัพท์ <b class="request-data">**</b> :
             </div>
             <div class="col-md-8">
-                <input name="to_phone" id="to_phone" class="form-control" type="text">
+                <input type="number" name="to_phone" id="to_phone" class="form-control" type="text">
             </div>
         </div>
     </div>
@@ -127,7 +130,7 @@
                 รายละเอียดสินค้า <b class="request-data">**</b> :
             </div>
             <div class="col-md-8">
-                <input name="product_type" id="product_type" class="form-control" type="text">
+                <input name="product_desc" id="product_desc" class="form-control" type="text">
             </div>
         </div>
 
@@ -147,19 +150,48 @@
 
         <div class="row col-md-12">
             <div class="col-md-3">
-                จำนวน <b class="request-data">**</b> :
+                {{-- จำนวน <b class="request-data">**</b> : --}}
             </div>
             <div class="col-md-8">
-                <input name="unit" id="unit" class="form-control" type="text">
+                <div class="row">
+                    <div class="row col-md-6">
+                        <div class="col-md-4">
+                            จำนวนรถเล็ก:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number"name="m_unit" id="m_unit" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="row col-md-6">
+                        <div class="col-md-4">
+                            จำนวนรถใหญ่:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number"name="L_unit" id="L_unit" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <div class="row col-md-12">
             <div class="col-md-3">
-                น้ำหนัก <b class="request-data">**</b> :
+                ชนิดสินค้า <b class="request-data">**</b> :
             </div>
             <div class="col-md-8">
-                <input name="weight" id="weight" class="form-control" type="text">
+                <select name="product_type" id="product_type" class="form-control">
+                    <option value="">-- Please Select --</option>
+                    @foreach ($producttype as $item)
+                    <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="col-md-3">
+                น้ำหนัก (kg) <b class="request-data">**</b> :
+            </div>
+            <div class="col-md-8">
+                <input type="number" step="0.01" name="weight" id="weight" class="form-control" type="text">
             </div>
         </div>
         <div class="row col-md-12">
