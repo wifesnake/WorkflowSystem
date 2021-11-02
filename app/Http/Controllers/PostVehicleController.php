@@ -46,6 +46,7 @@ class PostVehicleController extends Controller
         $post->isTrucktype = $request->isTrucktype;
         $post->cartype = $request->cartype;
         $post->car_location = $request->car_location;
+        $post->status = 1;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
         if($post->save())
