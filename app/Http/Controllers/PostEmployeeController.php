@@ -52,6 +52,7 @@ class PostEmployeeController extends Controller
         $post->phone = $request->phone;
         $post->salary = $request->salary;
         $post->department = $request->department;
+        $post->status = 1;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
         if($post->save())
