@@ -44,6 +44,7 @@ class PostCustomerController extends Controller
         $post->address = $request->address;
         $post->phone = $request->phone;
         $post->customer_person_number = $request->customer_person_number;
+        $post->status = 1;
         $post->created_by = $request->created_by;
         $post->updated_by = $request->updated_by;
         if($post->save()){
@@ -115,7 +116,6 @@ class PostCustomerController extends Controller
     {
         $delete = Customer::findOrFail($id);
         $delete->status = 0;
-        if($delete->save())
         if($delete->save())
         {
             return new CustomerResource($delete);
