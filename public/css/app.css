@@ -1,6 +1,6 @@
 /* thai */
 @font-face {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit';
     font-style: normal;
     font-weight: 300;
     src: url(https://fonts.gstatic.com/s/kanit/v7/nKKU-Go6G5tXcr4-ORWzVaF5NQ.woff2) format('woff2');
@@ -8,7 +8,7 @@
   }
   /* vietnamese */
   @font-face {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit';
     font-style: normal;
     font-weight: 300;
     src: url(https://fonts.gstatic.com/s/kanit/v7/nKKU-Go6G5tXcr4-ORWoVaF5NQ.woff2) format('woff2');
@@ -16,7 +16,7 @@
   }
   /* latin-ext */
   @font-face {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit';
     font-style: normal;
     font-weight: 300;
     src: url(https://fonts.gstatic.com/s/kanit/v7/nKKU-Go6G5tXcr4-ORWpVaF5NQ.woff2) format('woff2');
@@ -24,7 +24,7 @@
   }
   /* latin */
   @font-face {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit';
     font-style: normal;
     font-weight: 300;
     src: url(https://fonts.gstatic.com/s/kanit/v7/nKKU-Go6G5tXcr4-ORWnVaE.woff2) format('woff2');
@@ -80,21 +80,8 @@
   box-sizing: border-box;
 }
 
-input {
-  font-family: 'Kanit', sans-serif !important ;
-}
-a.navbar-brand {
-  color: white !important;
-  font-size: 30px;
-}
-nav.navbar {
-  background: #156140 !important;
-  color: white !important;
-}
-
-
 html {
-  font-family: 'Kanit', sans-serif !important ;
+  font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -106,13 +93,13 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: 'Kanit', sans-serif !important ;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background: white !;
+  background-color: #fff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -51980,10 +51967,8 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: white;
+  background-color: #f8fafc;
 }
-
-
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
@@ -68046,317 +68031,3 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Brands";
   font-weight: 400;
 }
-
-
-.card-header {
-  background: #156140;
-  color: white;
-  font-size: 20px;
-}
-
-.card-header {
-  background: #156140;
-  color: white;
-  font-size: 20px;
-}
-
-button.btn.btn-primary {
-  background: #156140;
-  border: #156140;
-  color: white;
-  font-size: 16px;
-}
-
-label.col-md-4.col-form-label.text-md-right {
-  font-size: 18px;
-}
-
-aside.main-sidebar.sidebar-dark-primary.elevation-4 {
-  background: #156140;
-}
-
-[class*="sidebar-dark"] .brand-link {
-  border-bottom: 1px solid #f4f6f9;
-}
-
-[class*="sidebar-dark-"] .sidebar a {
-  color: #ffffff;
-}
-
-[class*="sidebar-dark-"] .nav-treeview > .nav-item > .nav-link {
-  color: #ffffff;
-}
-
-a.nav-link {
-  color: white !important;
-}
-
-.content-wrapper {
-  background: white;
-}
-
-footer.main-footer {
-  background: white;
-  color: black;
-  font-size: 18px;
-}
-
-.menu-action {
-  bottom: 0; padding: 10px 5px;
-  text-align: right;
-  margin-right: 20px;
-}
-
-.group_data {
-  border: 1px solid;
-  margin-bottom: 20px;
-  padding: 30px;
-  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
-}
-
-.row {
-  margin-bottom: 10px;
-}
-
-.title-form {
-  margin-bottom: 30px;
-  font-size: 20px;
-  font-weight: bolder;
-}
-
-input[type="text"] {
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid;
-  color: black;
-  border-color: #0000004d;
-}
-
-.col-md-3 {
-  color: black;
-}
-
-textarea {
-  width: 100%;
-  padding: 4px;
-  padding-left: 8px;
-  border-radius: 5px;
-  border: 1px solid;
-  color: #0000004d;
-}
-
-input[type="text"] {
-  padding: 4px;
-  padding-left: 8px;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #156140;
-    border-color: #156140;
-}
-
-.col-md-3 {
-  text-align: right;
-}
-
-.btn-collapse {
-    text-align: right;
-}
-
-i.fa.fa-plus-square {
-  margin-right: 10px;
-}
-
-button.btn.btn-primary {
-  font-size: 20px;
-}
-
-.btn-collapse {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.page-item.active .page-link {
-  z-index: 3;
-  color: #fff;
-  background-color: #156140;
-  border-color: #156140;
-}
-
-th {
-  background: #156140;
-  color: white;
-}
-
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #156140;
-  border-color: #156140;
-}
-
-.btn-primary:hover {
-  color: #fff;
-  background-color: #156140;
-  border-color: #156140;
-}
-
-.content-wrapper {
-  height: auto;
-}
-
-.menu-action.col-md-12 {
-  text-align: center;
-}
-
-button.btn.btn-danger {
-  background: #df5c53;
-  border: #df5c53;
-  color: white;
-  font-size: 20px;
-}
-
-.btn-danger {
-  background: #df5c53;
-  border: #df5c53;
-  color: white;
-}
-
-.container-fluid {
-  margin-top: 30px;
-}
-
-.title-header {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.card.mt-2 {
-  padding: 15px;
-}
-
-
-
-
-.title-header-2 {
-  font-size: 22px;
-  margin-left: 35px;
-  margin-bottom: 15px;
-}
-
-.data-text {
-  font-size: 18px;
-}
-
-.swal-text {
-  color: black;
-  font-size: 20px;
-}
-
-a.dropdown-item {
-  font-size: 16px;
-}
-
-a#navbarDropdown {
-  font-size: 16px;
-}
-
-.form-control:disabled, .form-control[readonly] {
-  background-color: #9e9e9e26;
-  opacity: 1;
-}
-
-b.request-data {
-  color: red;
-}
-
-input#save-data {
-    font-size: 20px;
-}
-
-input#cancel-data {
-  font-size: 20px;
-}
-
-button.btn.btn-warning {
-  background: #ff9800e0;
-  border: #ff9800e0;
-  color: white;
-  font-size: 20px;
-}
-
-.btn-warning {
-  color: white;
-  background-color: #ff9800e0 ;
-  border-color: #ff9800e0 ;
-}
-
-
-.btn-warning:hover {
-  color: white;
-  background-color: #ff9800b3;
-  border-color: #ff9800b3;
-}
-
-.btn-warning:not(:disabled):not(.disabled):active {
-  color: white;
-  background-color: #ff9800b3;
-  border-color: #ff9800b3;
-}
-
-button.swal-button.swal-button--confirm {
-    background: #156140;
-    border: #156140;
-}
-
-button.swal-button.swal-button--confirm:not([disabled]):hover {
-  background-color: #156140;
-}
-
-button.swal-button.swal-button--cancel {
-  background: #f44336a6;
-  color: white;
-}
-
-button.swal-button.swal-button--cancel:not([disabled]):hover {
-  background-color: #f44336a6;
-}
-
-
-
-
-
-@media only screen and (max-width: 425px) {
-  .group_data{
-    padding: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
-  .col-md-3 {
-      text-align: left;
-  }
-
-  input#save-data {
-    font-size: 16px;
-  }
-
-  button.btn.btn-primary {
-      width: 100%;
-  }
-
-  .col-md-3 {
-    margin-bottom: 3px;
-    margin-top: 3px;
-}
-
-  input#cancel-data {
-    font-size: 16px;
-  }
-
-}
-

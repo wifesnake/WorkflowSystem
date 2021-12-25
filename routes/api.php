@@ -6,6 +6,7 @@ use App\Http\Controllers\PostCustomerController;
 use App\Http\Controllers\PostEmployeeController;
 use App\Http\Controllers\PostRequestController;
 use App\Http\Controllers\PostVehicleController;
+use App\Http\Controllers\PostImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,6 @@ Route::post('/customer',[PostCustomerController::class, 'store']);
 Route::delete('/customer/{id}',[PostCustomerController::class, 'destroy']);
 Route::get('/customer/{id}',[PostCustomerController::class, 'show']);
 Route::PUT('/customer/{id}',[PostCustomerController::class, 'update']);
+
+Route::post('/upload',[PostImageController::class, 'store'])->name('upload.uploadFile');
+Route::post('/signature',[PostImageController::class, 'signature'])->name('upload.signature');

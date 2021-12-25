@@ -5,9 +5,7 @@
 $var1 = ""
 @endphp
 @foreach ($flowdatas as $flowdata)
-@php
-$var1 = $flowdata->ord_vehicle
-@endphp
+
 @endforeach
 
 <input type="hidden" name="orderno" id="orderno" value="{{ $flowdata->ord_vehicle }}">
@@ -29,7 +27,7 @@ $var1 = $flowdata->ord_vehicle
                 {{-- <h1>State {{ __($flowdata->next_state) }} - {{ __($flowdata->state_name) }}</h1>
                 <br> --}}
                 @foreach ($formnames as $formname)
-                    @include("form.$formname->formname", ["ordno" => $var1])
+                    @include("form.$formname->formname")
                 @endforeach
 
                 @foreach ($btnactions as $item)
