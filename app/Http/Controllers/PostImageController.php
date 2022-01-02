@@ -44,6 +44,7 @@ class PostImageController extends Controller
 
         // Variable
         $order = $request->order_file;
+        $username = $request->form4_username;
         $ext = $request->file->extension();
         $fileName = time().'_'.$request->file->getClientOriginalName();
         $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
@@ -56,6 +57,8 @@ class PostImageController extends Controller
         $imageModel->image = $fileName;
         $imageModel->base64 = $base64;
         $imageModel->path = $filePath;
+        $imageModel->created_by = $username;
+        $imageModel->updated_by = $username;
         $imageModel->status = 1;
         if($imageModel->save())
         {
@@ -67,12 +70,13 @@ class PostImageController extends Controller
         
         //Build image
         $base64 = $request->signed;
+        $uniq_id = uniqid();
         $folderPath = storage_path('app/public/signature/');
 	    $image_parts = explode(";base64,", $base64);
 	    $image_type_aux = explode("image/", $image_parts[0]);
 	    $image_type = $image_type_aux[1];
 	    $image_base64 = base64_decode($image_parts[1]);
-        $file = $folderPath . uniqid() . '.'.$image_type;
+        $file = $folderPath . $uniq_id . '.'.$image_type;
         $data = file_put_contents($file, $image_base64);
 
         // Model
@@ -80,13 +84,16 @@ class PostImageController extends Controller
 
         //Variable
         $order = $request->order_signature;
-        $fileName = $file;
-        $filePath = $file;
+        $username = $request->form5_username;
+        $fileName = $uniq_id . '.'.$image_type;
+        $filePath = 'signature/'.$uniq_id . '.'.$image_type;
 
         $imageModel->flow_id = $order;
         $imageModel->image = $fileName;
         $imageModel->base64 = $base64;
         $imageModel->path = $filePath;
+        $imageModel->created_by = $username;
+        $imageModel->updated_by = $username;
         $imageModel->status = 1;
         if($imageModel->save())
         {

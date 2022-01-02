@@ -11,7 +11,8 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         @foreach ($flowdatas as $item)
-                            <input name="order_file" id="order_file" class="form-control" type="text" value="{{ $item->ord_vehicle }}">
+                            <input name="order_file" id="order_file" class="form-control" type="hidden" value="{{ $item->ord_vehicle }}">
+                            <input type="hidden" name="form4_username" id="form4_username" value="{{ Auth::user()->name }}">
                         @endforeach
                         <input type="file" name="file" placeholder="Choose file" id="file">
                           @error('file')

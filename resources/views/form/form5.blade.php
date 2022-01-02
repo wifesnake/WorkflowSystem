@@ -27,7 +27,8 @@
                          <div class="col-md-12">
                              <label class="" for="">Signature:</label>
                              @foreach ($flowdatas as $item)
-                                <input name="order_signature" id="order_signature" class="form-control" type="text" value="{{ $item->ord_vehicle }}">
+                                <input name="order_signature" id="order_signature" class="form-control" type="hidden" value="{{ $item->ord_vehicle }}">
+                                <input type="hidden" name="form5_username" id="form5_username" value="{{ Auth::user()->name }}">
                             @endforeach
                              <br/>
                              <div id="sig" ></div>
