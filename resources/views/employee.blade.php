@@ -426,7 +426,6 @@ function BtnEdit() {
             $('#m-f-employee').find('select,input,textarea').each(function(i, box) {
                 const name = $(box).attr('name');
                 if (name) {
-                    console.log(name);
                     if ($('[name=' + name + ']').val().trim() == "") {
                         isPost = false;
                         $('[name=' + name + ']').focus();
