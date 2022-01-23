@@ -10,6 +10,9 @@ use App\Http\Controllers\ListdataController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\ProductcarController;
+use App\Http\Controllers\ProductmasterController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,4 +52,9 @@ Route::get('/customer',[CustomerController::class, 'index']);
 
 Route::get('/order',[OrderController::class, 'index']);
 
+Route::get('/productcar',[ProductcarController::class, 'index']);
+Route::get('/productmaster',[ProductmasterController::class, 'index']);
+
 });
+
+Route::get('/tracking',[TrackingController::class, 'index']);
