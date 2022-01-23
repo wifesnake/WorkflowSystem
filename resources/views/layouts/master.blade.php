@@ -33,6 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.signature.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vichean.css') }}" rel="stylesheet">
 
     <!-- Script -->
     <script src="{{ mix('js/app.js') }}"></script>
