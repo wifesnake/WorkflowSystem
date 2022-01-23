@@ -52,7 +52,6 @@
 <script>
     $(document).ready(async function(){
         await loadTable();
-        await loadPermisison();
 
         $('#role').on('change',function(){
             loadPermisison();
@@ -60,7 +59,7 @@
     });
 
     async function loadTable(){
-        $('#table-permission').DataTable({
+        await $('#table-permission').DataTable({
             "ajax":{
                 url: "{{url('/api/menu')}}",
                 type: "get"
@@ -91,6 +90,7 @@
                 }
             ]
         });
+        await loadPermisison();
     }
 
     async function loadPermisison(){
