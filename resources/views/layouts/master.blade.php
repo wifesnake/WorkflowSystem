@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>VICHIAN TRANSPORT LIMITED PARTNERSHIP</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&amp;display=swap" rel="stylesheet">
+    <link href="{{ asset('css/Kanit200.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.signature.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
@@ -40,6 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/jquery.signature.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini">
