@@ -7,3 +7,7 @@ nav.navbar {
     background-color: #156140 !important;
     color:  white !important;
 }
+
+.nav-link {
+    color: white !important;
+}
