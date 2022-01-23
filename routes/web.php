@@ -8,6 +8,7 @@ use App\Http\Controllers\FlowController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ListdataController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TrackingController;
@@ -54,6 +55,8 @@ Route::get('/order',[OrderController::class, 'index']);
 
 Route::get('/productcar',[ProductcarController::class, 'index']);
 Route::get('/productmaster',[ProductmasterController::class, 'index']);
+Route::get('/permission',[PermissionController::class, 'index']);
+
 
 });
 
