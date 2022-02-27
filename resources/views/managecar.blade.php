@@ -35,10 +35,17 @@
                             <tr>
                                 <th>รถ</th>
                                 <th>ออเดอร์</th>
+                                <th>#</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button type="button" name="btn-submit-car-order" class="btn btn-success">ยืนยัน</button>
                 </div>
             </div>
         </div>
@@ -66,8 +73,34 @@
             const car_text = $("[name=listCar] option:selected").text();
             const order_id = $("[name=listOrder]").val();
             const order_text = $("[name=listOrder] option:selected").text();
-            arrayOrder.push({car: car_id,car_text: car_text, order: order_id,order_text: order_text});
-            await showDatatable();
+            if(car_id != "" && order_id != ""){
+                const find = arrayOrder.find(item => item.car == car_id && item.order == order_id);
+                if(!find){
+                    arrayOrder.push({car: car_id,car_text: car_text, order: order_id,order_text: order_text});
+                    await showDatatable();
+                }
+            }
+        });
+
+        $('[name="btn-submit-car-order"]').on('click',function(){
+            btnSave();
+        });
+
+        $('[name="listCar"]').on('change',async function(){
+            const selected = $(this);
+            const carId = selected.val();
+            await $.post('/api/listcarorder',{car_id: carId},async function(res,status){
+                const { data } = res;
+                arrayOrder = await data.map(item =>{
+                    return{
+                        car: item.car_id,
+                        car_text: item.regis_id+" - "+item.car_brand,
+                        order: item.order_id,
+                        order_text: item.order_id+" - "+item.to_name
+                    }
+                });
+                await showDatatable();
+            });
         });
     }
 
@@ -78,7 +111,7 @@
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกรถ --');
                 $('[name="listCar"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.car_id).text(item.car_id+" - "+item.car_brand);
+                    const opt = $("<option>").val(item.car_id).text(item.regis_id+" - "+item.car_brand);
                     $('[name="listCar"]').append(opt);
                 });
             }
@@ -100,14 +133,69 @@
     }
 
     async function showDatatable() {
-        let html = "";
-        arrayOrder.forEach(item =>{
-            html += "<tr>";
-            html += "<td>"+item.car_text+"</td>";
-            html += "<td>"+item.order_text+"</td>";
-            html += "</tr>";
+        if(arrayOrder.length > 0){
+            if ($.fn.dataTable.isDataTable('.datatable')) {
+                $('.datatable').DataTable().destroy();
+            }
+        }
+        $('.datatable').dataTable({
+            processing: true,
+            responsive: true,
+            destroy: true,
+            data: arrayOrder,
+            columns:[
+                {data: "car_text"},
+                {data: "order_text"},
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        return "<td><span class='btn btn-danger' onclick='manage_delete(\""+data.order+"\")'><i class='fas fa-minus'></i></span></td>";
+                    }
+                }
+            ]
         });
-        $('#table-car > tbody').html(html);
+    }
+
+    async function manage_delete(orderId){
+        const mapList = [];
+        await arrayOrder.forEach(item =>{
+            if(item.order != orderId){
+                mapList.push({...item});
+            }
+        });
+        arrayOrder = mapList;
+        await showDatatable();
+    }
+
+    async function btnSave(){
+        let car_str = "";
+        let order_str = "";
+        arrayOrder.forEach(item =>{
+            car_str += item.car+",";
+            order_str += item.order+",";
+        });
+        car_str = car_str+"&";
+        order_str = order_str+"&";
+        car_str = car_str.replace(/,&/g,'');
+        order_str = order_str.replace(/,&/g,'');
+
+        $.post('/api/addcarorder',{
+            car: car_str,
+            order: order_str,
+            by: '{{ Auth::user()->name }}'
+        },function(res,status){
+            const { success, message } = res;
+            if(success){
+                $(document).Toasts('create', {
+                    title: status,
+                    body: message,
+                    autohide: true,
+                    delay: 3000,
+                    fade: true,
+                    class: "bg-success"
+                });
+            }
+        });
     }
 </script>
 
