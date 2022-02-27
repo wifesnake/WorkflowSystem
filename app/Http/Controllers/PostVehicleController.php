@@ -26,6 +26,11 @@ class PostVehicleController extends Controller
         return ["data"=>$data];
     }
 
+    public function cars(){
+        $data = DB::select('SELECT id, car_id,regis_id,car_brand FROM tb_vehicle WHERE status = ?;',[1]);
+        return ["data"=>$data];
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -73,5 +73,6 @@ Route::get('/listorder',[PostOrderController::class, 'listOrder']);
 Route::post('/getDataListOrder',[PostOrderController::class, 'getListOrder']);
 Route::get('/driver',[PostEmployeeController::class, 'driver']);
 Route::get('/car',[PostVehicleController::class, 'car']);
+Route::get('/cars',[PostVehicleController::class, 'cars']);
 Route::post('/addemployeecar',[PostManageController::class , 'add']);
 Route::get('/listemployeecar',[PostManageController::class , 'index']);
