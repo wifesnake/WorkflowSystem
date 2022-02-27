@@ -65,6 +65,7 @@
                 type: "get"
             },
             "processing": true,
+            "responsive": true,
             "order": [[ 0, "desc" ]],
             "columns": [
                 { "data": "created_at"},

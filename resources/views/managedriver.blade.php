@@ -128,6 +128,7 @@
                 // }
             },
             "processing": true,
+            "responsive": true,
             "order": [[ 2, "desc" ]],
             "columns": [
                 {
