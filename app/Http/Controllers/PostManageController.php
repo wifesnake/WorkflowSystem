@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\EmployeeCarResource;
+use App\Models\CarOrder;
 use App\Models\EmployeeCar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,37 @@ class PostManageController extends Controller
         if($model->save()){
             return new EmployeeCarResource($model);
         }
+    }
+
+    public function carorder(Request $request){
+        $by = $request->by;
+        $car = explode(",",$request->car);
+        $order = explode(",",$request->order);
+        $deleted = CarOrder::where('car_id',$car[0])
+                            ->where('status',1)
+                            ->delete();
+        for($i=0;$i<count($car);$i++){
+            $model = new CarOrder();
+            $model->car_id = $car[$i];
+            $model->order_id = $order[$i];
+            $model->created_by = $by;
+            $model->updated_by = $by;
+            $model->status = 1;
+            $model->save();
+        }
+        return [
+            "success" => true,
+            "message" => "created successfully",
+            "deleted" => $deleted
+        ];
+    }
+
+    public function listcarorder(Request $request){
+        $data = DB::select('SELECT t1.*,t2.regis_id,t2.car_brand,t3.to_name FROM `tb_car_order` t1 INNER JOIN tb_vehicle t2 ON t2.car_id = t1.car_id INNER JOIN tb_order t3 ON t3.order_id = t1.order_id WHERE t1.car_id = ? AND t1.status = ?;',[$request->car_id,1]);
+        return [
+            "success" => true,
+            "data" => $data
+        ];
     }
 
     /**
