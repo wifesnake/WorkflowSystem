@@ -7,6 +7,7 @@ use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use App\Models\Runorderno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostCustomerController extends Controller
 {
@@ -18,6 +19,10 @@ class PostCustomerController extends Controller
     public function index()
     {
         //
+    }
+
+    public function driver(){
+        $data = DB::select('');
     }
 
     /**

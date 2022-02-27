@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(VehicleDataTable $dataTable){
         $menu = new DataModel();
         $leftmenu = $menu->getmenu();

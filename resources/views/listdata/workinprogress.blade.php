@@ -19,8 +19,6 @@
                                         <th>PO Number.</th>
                                         <th>Customer Name</th>
                                         <th>ผู้รับ</th>
-                                        {{-- <th>รายละเอียด</th> --}}
-                                        {{-- <th>จำนวน</th> --}}
                                         <th>น้ำหนัก</th>
                                         <th>สถานะ</th>
                                         <th>Create</th>
@@ -55,7 +53,10 @@
                 $('#table_id').DataTable({
                     "ajax":{
                         url: "/api/flows",
-                        type: "get"
+                        type: "post",
+                        data: {
+                            role: "{{Auth::user()->is_admin}}"
+                        }
                     },
                     "processing": true,
                     "order": [[ 6, "desc" ]],
@@ -72,7 +73,7 @@
                         {
                             data: null,
                             render:function(data,type,row){
-                                return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ord_vehicle +"\");' >View</div>";
+                                return "<div class='btn btn-primary' onClick='ViewData(\""+ data.ord_vehicle +"\",\""+ data.current_state +"\");' >View</div>";
                             }
                         }
                     ]

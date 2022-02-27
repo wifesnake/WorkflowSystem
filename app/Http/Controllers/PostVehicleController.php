@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostVehicleResource;
 use App\Models\Vehicle;
 use App\Models\Runorderno;
+use Illuminate\Support\Facades\DB;
 
 class PostVehicleController extends Controller
 {
@@ -18,6 +19,11 @@ class PostVehicleController extends Controller
     public function index()
     {
         //
+    }
+
+    public function car(){
+        $data = DB::select('SELECT id, car_id,regis_id,car_brand FROM tb_vehicle WHERE status = ? AND car_id NOT IN (SELECT DISTINCT car_id FROM tb_employee_car);',[1]);
+        return ["data"=>$data];
     }
 
     /**

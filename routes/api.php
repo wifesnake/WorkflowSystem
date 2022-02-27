@@ -1,14 +1,20 @@
 <?php
 
 use App\Http\Controllers\FlowController;
+use App\Http\Controllers\ManageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCustomerController;
 use App\Http\Controllers\PostEmployeeController;
 use App\Http\Controllers\PostRequestController;
 use App\Http\Controllers\PostVehicleController;
 use App\Http\Controllers\PostImageController;
+use App\Http\Controllers\PostManageController;
+use App\Http\Controllers\PostOrderController;
 use App\Http\Controllers\PostPermissionController;
+use App\Http\Resources\PostEmployeeResource;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +38,7 @@ Route::get('/posts/{id}',[PostController::class, 'show']);
 Route::put('/posts/{id}',[PostController::class, 'update']);
 Route::delete('/posts/{id}',[PostController::class, 'destroy']);
 
-Route::get('/flows',[FlowController::class, 'index']);
+Route::post('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
 
 Route::get('/request/{id}',[PostRequestController::class, 'show']);
@@ -55,9 +61,17 @@ Route::delete('/customer/{id}',[PostCustomerController::class, 'destroy']);
 Route::get('/customer/{id}',[PostCustomerController::class, 'show']);
 Route::PUT('/customer/{id}',[PostCustomerController::class, 'update']);
 
+
 Route::post('/upload',[PostImageController::class, 'store'])->name('upload.uploadFile');
 Route::post('/signature',[PostImageController::class, 'signature'])->name('upload.signature');
 
 Route::get('/menu',[PostPermissionController::class,'listMenu']);
 Route::get('/permission/{id}',[PostPermissionController::class,'permisison']);
 Route::put('/permission/{id}',[PostPermissionController::class,'update']);
+
+Route::get('/listorder',[PostOrderController::class, 'listOrder']);
+Route::post('/getDataListOrder',[PostOrderController::class, 'getListOrder']);
+Route::get('/driver',[PostEmployeeController::class, 'driver']);
+Route::get('/car',[PostVehicleController::class, 'car']);
+Route::post('/addemployeecar',[PostManageController::class , 'add']);
+Route::get('/listemployeecar',[PostManageController::class , 'index']);

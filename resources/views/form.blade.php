@@ -30,25 +30,16 @@ $var1 = ""
                     @include("form.$formname->formname")
                 @endforeach
 
+            <div style="margin: 5px 0 ; text-align: center;">
                 @foreach ($btnactions as $item)
-                    <div style="margin: 5px 0 ; text-align: center;">
-                        @if ($item->isPrevstate == 0)
-                            <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->prev_state }}')" class="btn btn-primary">{{ $item->action_name }}</div>
+
+                        @if ($item->isCurrentstate == 0)
+                            <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-primary">{{ $item->action_name }}</button>
                         @else
-                            <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->prev_state }}')" class="btn btn-danger">ยกเลิกรายการ</div>
+                            <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-danger">ยกเลิกรายการ</button>
                         @endif
-
-                        {{-- @if($item->isCurrentstate == 0)
-                            <div style="position: absolute; bottom: 0; padding: 10px 5px;">
-                                <button type="submit" class="btn btn-primary">Approve</button>
-                            </div>
-                        @endif --}}
-
-                        @if($item->isTostate == 0)
-                            <div onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-primary">{{ $item->action_name }}</div>
-                        @endif
-                    </div>
                 @endforeach
+            </div>
         </div>
         <!-- /.container-fluid -->
         {{-- </div> --}}
@@ -69,18 +60,24 @@ $var1 = ""
         const formdata = JSON.parse(Base64.decode("{{ $item->formdata }}"));
         @endforeach
         $.each(formdata,function(key,value){
-            $("[name="+key+"]").val(value);
+            if(value && value.name){
+                $("[name="+value.name+"]").val(value.value);
+                // $(".label-"+value.name).html(value.text);
+            }else{
+                $("[name="+key+"]").val(value);
+                // $(".label-"+value.name).text(value.text);
+            }
         });
     }
 
     function btnClick(id, currentState, nextState) {
 
         let ordno = $("input[name=orderno]").val();
-        let prevstate = currentState;
-        let currentstate = nextState;
+        let current_state = currentState;
+        let to_state = nextState;
         let updatedby = $("input[name=updatedby]").val();
 
-        let formdata = {};
+        let formdata = [];
 
         for (var i = 0; i < $("#form2")[0].length; i++) {
             let subformdata = {};
@@ -90,7 +87,44 @@ $var1 = ""
                     subformdata["type"] = type;
                     subformdata["name"] = $("#form2")[0][i].name;
                     subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("#form2")[0][i].value;
                     formdata[i] = subformdata;
+                break;
+                case "hidden":
+                    subformdata["type"] = type;
+                    subformdata["name"] = $("#form2")[0][i].name;
+                    subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("#form2")[0][i].value;
+                    formdata[i] = subformdata;
+                break;
+                case "number":
+                    subformdata["type"] = type;
+                    subformdata["name"] = $("#form2")[0][i].name;
+                    subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("#form2")[0][i].value;
+                    formdata[i] = subformdata;
+                break;
+                case "select":
+                    subformdata["type"] = "select";
+                    subformdata["name"] = $("#form2")[0][i].name;
+                    subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("[name='"+$("#form2")[0][i].name+"'] option:selected" ).text();
+                    formdata[i] = subformdata;
+                break;
+                case "select-one":
+                    subformdata["type"] = "select";
+                    subformdata["name"] = $("#form2")[0][i].name;
+                    subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("[name='"+$("#form2")[0][i].name+"'] option:selected" ).text();
+                    formdata[i] = subformdata;
+                break;
+                case "textarea":
+                    subformdata["type"] = "select";
+                    subformdata["name"] = $("#form2")[0][i].name;
+                    subformdata["value"] = $("#form2")[0][i].value;
+                    subformdata["text"] = $("#form2")[0][i].value;
+                    formdata[i] = subformdata;
+                break;
             }
 
         }
@@ -98,14 +132,12 @@ $var1 = ""
         var jsonData = {
             id: id,
             ord_vehicle: ordno,
-            prev_state: prevstate,
-            current_state: currentstate,
+            current_state: current_state,
+            to_state: to_state,
             formdata: Base64.encode(JSON.stringify(formdata)),
             created_by: updatedby,
             updated_by: updatedby
         }
-
-        console.log(jsonData)
 
         $.ajax({
             url: "/api/state",

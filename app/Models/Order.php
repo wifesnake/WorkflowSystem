@@ -26,6 +26,7 @@ class Order extends Model
         "remark",
         "requesr_car_type",
         "created_by",
-        "updated_by"
+        "updated_by",
+        "order_remark"
     ];
 }

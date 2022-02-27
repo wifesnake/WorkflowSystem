@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\Runorderno;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PostEmployeeController extends Controller
@@ -20,6 +21,11 @@ class PostEmployeeController extends Controller
     public function index()
     {
         //
+    }
+
+    public function driver(){
+        $data = DB::select("SELECT id, employee_id, name, lastname, concat(name,' ',lastname) as fullname FROM employees where employee_type in ('002','003') AND employee_id NOT IN (SELECT DISTINCT employee_id FROM tb_employee_car);");
+        return ["data"=>$data];
     }
 
     /**

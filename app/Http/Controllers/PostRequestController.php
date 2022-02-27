@@ -54,6 +54,7 @@ class PostRequestController extends Controller
         $post->L_unit = $request->L_unit;
         $post->weight = $request->weight;
         $post->remark = $request->remark;
+        $post->order_remark = $request->order_remark;
         $post->requesr_car_type = $request->car_type;
         $post->created_by = $request->updated_by;
         $post->updated_by = $request->updated_by;

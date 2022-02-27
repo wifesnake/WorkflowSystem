@@ -225,7 +225,7 @@ $var1 = $ordno;
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
-                                Remark :
+                                เพิ่มเติม :
                             </div>
                             <div class="col-md-8">
                                 <textarea name="remark" id="remark" class="form-control" rows="4"></textarea>
@@ -369,7 +369,6 @@ $("#save-data").click(function($this) {
                 "cust_name":"",
                 "cust_address":"address",
                 "cust_presonalcode":"customer_person_number",
-                "order_remark":"",
                 "order_remark":"",
                 "to_name":"",
                 "to_address":"",
