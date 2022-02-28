@@ -21,13 +21,18 @@
                         <select class="form-control" name="listOrder"></select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
                 <div class="col">
                     <button type="button" name="btn-add-car-order" class="btn btn-success">เพิ่ม</button>
                 </div>
+
             </div>
-            <hr>
+
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <button type="button" name="btn-submit-car-order" class="btn btn-success">บันทึกข้อมูล</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <table id="table-car" class="table datatable">
@@ -35,17 +40,130 @@
                             <tr>
                                 <th>รถ</th>
                                 <th>ออเดอร์</th>
+                                <th>สถานะออเดอร์</th>
                                 <th>#</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            <tr>
+                                <td>1กก553</td>
+                                <td>VC0000001</td>
+                                <td>หลัก</td>
+                                <td>
+                                    <button type="button" name="btn-submit-car-order" class="btn btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1กก553</td>
+                                <td>VC0000002</td>
+                                <td>หลัก</td>
+                                <td>
+                                    <button type="button" name="btn-submit-car-order" class="btn btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1กก553</td>
+                                <td>VC0000003</td>
+                                <td>รอง</td>
+                                <td>
+                                    <button type="button" name="btn-submit-car-order" class="btn btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
+
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
             <hr>
+            <div class="title-header">สถานะ Product_ID</div>
             <div class="row">
                 <div class="col">
-                    <button type="button" name="btn-submit-car-order" class="btn btn-success">ยืนยัน</button>
+                    <table id="table-car" class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>เลขที่เอกสาร</th>
+                                <th>ประเภทรถ</th>
+                                <th>ทะเบียนรถ</th>
+                                <th>คนขับ</th>
+                                <th>วันที่เข้ารับสินค้า</th>
+                                <th>ผู้สร้าง</th>
+                                <th>สถานะ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PRODUCTID_001</td>
+                                <td>รถบรรทุก 6 ล้อ</td>
+                                <td>1กก553</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>20/02/2565</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>Perpare</td>
+                                <td>
+                                    <button type="button" name="btn-add-car-order" class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>PRODUCTID_002</td>
+                                <td>รถบรรทุก 10 ล้อ</td>
+                                <td>1กก5538</td>
+                                <td>ยงยุทธ2</td>
+                                <td>20/02/2565</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>PRODUCTID_003</td>
+                                <td>รถบรรทุก 10 ล้อ</td>
+                                <td>1กก5537</td>
+                                <td>ยงยุทธ3</td>
+                                <td>20/02/2565</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>PRODUCTID_004</td>
+                                <td>รถบรรทุก 10 ล้อ</td>
+                                <td>1กก5997</td>
+                                <td>ยงยุทธ3</td>
+                                <td>20/02/2565</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>Close Job</td>
+                                <td>
+                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>PRODUCTID_005</td>
+                                <td>รถบรรทุก 10 ล้อ</td>
+                                <td>1กก5227</td>
+                                <td>ยงยุทธ3</td>
+                                <td>20/02/2565</td>
+                                <td>ยงยุทธ เลิศธิราวงศ์</td>
+                                <td>ระบุค่าใช้จ่ายแล้ว</td>
+                                <td>
+                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
