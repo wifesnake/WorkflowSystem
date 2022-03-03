@@ -34,6 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="{{ asset('css/jquery.signature.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vichean.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
 
     <!-- Script -->
     <script src="{{ mix('js/app.js') }}"></script>
@@ -41,6 +42,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/jquery.signature.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
+    <script src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -56,6 +60,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </div>
     <!-- ./wrapper -->
+
+    <script>
+        $(function(){
+            $(".datepicker").datepicker({
+                // language:'th-th',
+                format:'dd/mm/yyyy',
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker("setDate", new Date());
+        });
+    </script>
 
 </body>
 </html>

@@ -40,21 +40,23 @@ Route::delete('/posts/{id}',[PostController::class, 'destroy']);
 
 Route::post('/flows',[FlowController::class, 'index']);
 Route::post('/flow',[FlowController::class, 'store']);
+Route::post('/state',[FlowController::class, 'updateStates']);
 
 Route::get('/request/{id}',[PostRequestController::class, 'show']);
 Route::post('/request',[PostRequestController::class, 'store']);
-
-Route::post('/state',[FlowController::class, 'updateStates']);
 
 Route::post('/employee',[PostEmployeeController::class, 'store']);
 Route::delete('/employee/{id}',[PostEmployeeController::class, 'destroy']);
 Route::get('/employee/{id}',[PostEmployeeController::class, 'show']);
 Route::PUT('/employee/{id}',[PostEmployeeController::class, 'update']);
+Route::get('/driver',[PostEmployeeController::class, 'driver']);
 
 Route::post('/vehicle',[PostVehicleController::class, 'store']);
 Route::delete('/vehicle/{id}',[PostVehicleController::class, 'destroy']);
 Route::get('/vehicle/{id}',[PostVehicleController::class, 'show']);
 Route::PUT('/vehicle/{id}',[PostVehicleController::class, 'update']);
+Route::get('/car',[PostVehicleController::class, 'car']);
+Route::get('/cars',[PostVehicleController::class, 'cars']);
 
 Route::post('/customer',[PostCustomerController::class, 'store']);
 Route::delete('/customer/{id}',[PostCustomerController::class, 'destroy']);
@@ -71,10 +73,11 @@ Route::put('/permission/{id}',[PostPermissionController::class,'update']);
 
 Route::get('/listorder',[PostOrderController::class, 'listOrder']);
 Route::post('/getDataListOrder',[PostOrderController::class, 'getListOrder']);
-Route::get('/driver',[PostEmployeeController::class, 'driver']);
-Route::get('/car',[PostVehicleController::class, 'car']);
-Route::get('/cars',[PostVehicleController::class, 'cars']);
+
+
 Route::post('/addemployeecar',[PostManageController::class , 'add']);
 Route::get('/listemployeecar',[PostManageController::class , 'index']);
 Route::post('/addcarorder',[PostManageController::class , 'carorder']);
-Route::post('/listcarorder',[PostManageController::class , 'listcarorder']);
+Route::post('/getproductdetail',[PostManageController::class , 'getordproductdetail']);
+Route::get('/listorderproductdetail',[PostManageController::class , 'listordproductdetail']);
+Route::get('/listorderproduct',[PostManageController::class , 'listOrderProduct']);
