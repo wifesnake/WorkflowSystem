@@ -147,6 +147,7 @@
     </div>
 </div>
 
+
 <style>
     .text-nowrap{
         white-space: nowrap
@@ -158,6 +159,7 @@
     let arrayOrder = [];
     let listProductDetail;
     let listProduct;
+    let ref_product_id;
 
     $(document).ready(function() {
         init();
@@ -174,12 +176,11 @@
 
     async function handle() {
         $('[name="btn-add-car-order"]').on('click',async function(){
-            console.log("btn-add-car-order Click !!");
             const car_id = $("[name=listCar]").val();
             const car_text = $("[name=listCar] option:selected").text();
             const order_id = $("[name=listOrder]").val();
             const order_text = $("[name=listOrder] option:selected").text();
-            const date_selected = dateToDatabase($("[name=date_selected]").val());
+            const date_selected = $("[name=date_selected]").val();
             let array_car = car_id.split(',');
             array_car[1] = array_car[1] == "null" ? null : array_car[1];
             if(array_car[0] != "" && order_id != "" && array_car[1]){
@@ -193,9 +194,9 @@
                         order_text: order_text,
                         employee: array_car[1],
                         ismain: !find2 ? true : false,
-                        date: date_selected
+                        date: date_selected,
+                        product_id: ""
                     });
-                    console.log(arrayOrder);
                     await showDatatable();
                 }
             }
@@ -211,14 +212,19 @@
             const arr_data = carId.split(',');
             await $.post('/api/getproductdetail',{car_id: arr_data[0]},async function(res,status){
                 const { data } = res;
-                arrayOrder = await data.map(item =>{
+                const mapList = await data.map(item =>{
                     return{
                         car: item.car_id,
                         car_text: item.regis_id+" - "+item.car_brand,
                         order: item.order_id,
-                        order_text: item.order_id+" - "+item.to_name
+                        order_text: item.order_id+" - "+item.to_name,
+                        date: databaseToDate(item.date),
+                        employee: item.employee,
+                        ismain: item.ismainorder,
+                        product_id: item.product_id
                     }
                 });
+                arrayOrder = mapList;
                 await showDatatable();
             });
         });
@@ -269,13 +275,14 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        return "<td>"+ data.ismain ? "หลัก" : "รอง" +"</td>";
+                        const str = data.ismain == true || data.ismain == 'true' ? "หลัก" : "รอง";
+                        return "<td>"+ str +"</td>";
                     }
                 },
                 {
                     data: null,
                     render:function(data,type,row){
-                        return "<td><span class='btn btn-danger btn-sm' onclick='manage_delete(\""+data.order+"\")'>ลบ</span></td>";
+                        return "<td><span class='btn btn-danger btn-sm' onclick='manage_delete(\""+data.order+"\",\""+data.product_id+"\")'>ลบ</span></td>";
                     }
                 }
             ]
@@ -305,11 +312,13 @@
         });
     }
 
-    async function manage_delete(orderId){
+    async function manage_delete(orderId,product_id){
         const mapList = [];
         await arrayOrder.forEach(item =>{
             if(item.order != orderId){
-                mapList.push({...item});
+                mapList.push({
+                    ...item
+                });
             }
         });
         arrayOrder = mapList;
@@ -323,13 +332,17 @@
         let employee_str = "";
         let date_str = "";
         let by_str = "";
+        let product_id_str = "";
         arrayOrder.forEach(item =>{
             car_str += item.car.trim()+",";
             order_str += item.order.trim()+",";
             ismain_str += item.ismain ? 1+"," : 0 +",";
             employee_str += item.employee.trim()+",";
-            date_str += item.date.trim()+",";
+            date_str += dateToDatabase(item.date.trim())+",";
             by_str += "{{ Auth::user()->name }},";
+            const find = listProductDetail.find(it => it.car_id == item.car && it.employee == item.employee);
+            product_id_str += find ? find.product_id+"," : ",";
+            // product_id_str += listProductDetail.map(it => it.car_id == item.car && it.employee == item.employee /*&& it.order_id == item.order*/ ? it.product_id+"," : ",");
         });
 
         const jsonData = {
@@ -338,29 +351,45 @@
             ismain: ismain_str,
             employee: employee_str,
             date: date_str,
-            by: by_str
+            by: by_str,
+            product_id: product_id_str
         }
 
-        $.post('/api/addcarorder',jsonData,
-        function(res,status){
-            const { success, message } = res;
-            if(success){
-                $(document).Toasts('create', {
-                    title: status,
-                    body: message,
-                    autohide: true,
-                    delay: 3000,
-                    fade: true,
-                    class: "bg-success"
-                });
-            }
-        });
+        if(arrayOrder.length > 0){
+            $.post('/api/addcarorder',jsonData,
+            function(res,status){
+                const { success, message } = res;
+                if(success){
+                    $(document).Toasts('create', {
+                        title: status,
+                        body: message,
+                        autohide: true,
+                        delay: 3000,
+                        fade: true,
+                        class: "bg-success"
+                    });
+
+                    ListOrderProduct();
+                    ListOrderProductDetail()
+                }
+            });
+        }else{
+            $(document).Toasts('create', {
+                title: "false",
+                body: "กรุณาเลือกคนขับรถหรือออเดอร์",
+                autohide: true,
+                delay: 3000,
+                fade: true,
+                class: "bg-danger"
+            });
+        }
     }
 
     async function ListOrderProductDetail(){
         $.get('/api/listorderproductdetail',function(res,status){
             const { data } = res;
             listProductDetail = data;
+            ref_product_id = data.map(item => item.product_id);
         });
     }
 
@@ -378,6 +407,14 @@
         const month = date[1]
         const day = date[0];
         return year+"/"+month+"/"+day;
+    }
+
+    function databaseToDate(data){
+        const date = data.split('-');
+        const year = Number(date[0]);
+        const month = date[1]
+        const day = date[2];
+        return day+"/"+month+"/"+year;
     }
 </script>
 
