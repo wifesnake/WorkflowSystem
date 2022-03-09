@@ -15,7 +15,12 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\ProductcarController;
 use App\Http\Controllers\ProductmasterController;
+use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\HistoryStatusController;
+use App\Http\Controllers\UpdateOrderStatusController;
 use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +58,12 @@ Route::get('/vehicle',[VehicleController::class, 'index']);
 Route::get('/customer',[CustomerController::class, 'index']);
 
 Route::get('/order',[OrderController::class, 'index']);
+
+Route::get('/expenses',[ExpensesController::class, 'addexpenses']);
+Route::get('/updatestatus',[UpdateOrderStatusController::class, 'updatestatus']);
+Route::get('/updatestatusdetail',[UpdateOrderStatusController::class, 'updatestatusdetail']);
+Route::get('/historyproduct',[HistoryStatusController::class, 'producthistory']);
+Route::get('/historycar',[HistoryStatusController::class, 'carhistory']);
 
 Route::get('/productcar',[ProductcarController::class, 'index']);
 Route::get('/productmaster',[ProductmasterController::class, 'index']);
