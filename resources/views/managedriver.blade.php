@@ -61,7 +61,6 @@
                     created_by: '{{ Auth::user()->name }}',
                     updated_by: '{{ Auth::user()->name }}'
                 },function(res,status){
-                    console.log(status);
                     $(document).Toasts('create', {
                         title: status,
                         body: res.message,
@@ -70,6 +69,7 @@
                         fade: true,
                         class: "bg-success"
                     });
+                    listEmployeeCar();
                 });
             }else{
                 $(document).Toasts('create', {

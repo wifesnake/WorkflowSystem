@@ -42,17 +42,31 @@ class PostManageController extends Controller
         $ismain = explode(",",$request->ismain);
         $employee = explode(",",$request->employee);
         $date = explode(",",$request->date);
+        $product_ids = explode(",",$request->product_id);
         $q = DB::select("select CONCAT(lpad(CONCAT(substring(lpad(now(),4),3,4),lpad(runno,6,'0')),10,'PD'),'TH') as runno FROM tb_runorderno WHERE status = ? and istype = 'orderproduct' LIMIT 1;",[1]);
         $product_no = "";
         foreach ($q as $item) {
             $product_no = $item->runno;
         }
         
+        for($i3=0;$i3 < count($product_ids);$i3++){
+            if ($product_ids[$i3]) {
+                $deleted = OrderProduct::where('on_status','=', '01')
+                                       ->where('status', 1)
+                                       ->where('product_id', $product_ids[$i3]);
+                if($deleted->delete()){
+                    $deleted2 = OrderProductDetail::where('status', 1)
+                                                  ->where('product_id', $product_ids[$i3])
+                                                  ->delete();
+                }
+            }
+        }
+
         if(count($car) > 1 && count($order) > 1){
             for($i=0;$i<count($car);$i++){
                 if($car[$i] != ""){
                     $model = new OrderProduct();
-                    $model->product_id = $product_no;
+                    $model->product_id = ($product_ids[$i]) ? $product_ids[$i] : $product_no ;
                     $model->car_id = $car[$i];
                     $model->employee_code = $employee[$i];
                     $model->pickup_date = $date[$i];
@@ -65,7 +79,7 @@ class PostManageController extends Controller
             for($i2=0;$i2<count($order);$i2++){
                 if($order[$i2] != ""){
                     $model2 = new OrderProductDetail();
-                    $model2->product_id = $product_no;
+                    $model2->product_id = ($product_ids[$i2]) ? $product_ids[$i2] : $product_no;
                     $model2->order_id = $order[$i2];
                     $model2->ismainorder = $ismain[$i2];
                     $model2->created_by = $by[$i2];
@@ -82,7 +96,9 @@ class PostManageController extends Controller
             $no = (int)$runno + 1;
             $model3 = Runorderno::where('istype','orderproduct')->firstOrFail();
             $model3->runno = $no;
-            $model3->save();
+            if(!$product_ids[0]){
+                $model3->save();
+            }
 
             return [
                 "success" => true,
@@ -116,7 +132,7 @@ class PostManageController extends Controller
     }
 
     public function getordproductdetail(Request $request){
-        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car, t4.to_name FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id INNER JOIN tb_order t4 ON t4.order_id = t1.order_id WHERE t3.car_id = ? AND t1.status = ?;",[$request->car_id,1]);
+        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car, t4.employee_id as employee, t2.pickup_date as date, t5.to_name FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id INNER JOIN employees t4 ON t4.employee_id = t2.employee_code INNER JOIN tb_order t5 ON t5.order_id = t1.order_id WHERE t3.car_id = ? AND t1.status = ?;",[$request->car_id,1]);
         return [
             "success" => true,
             "data" => $data
@@ -124,7 +140,7 @@ class PostManageController extends Controller
     }
 
     public function listordproductdetail(){
-        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id WHERE t1.status = ?;",[1]);
+        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car, t4.employee_id as employee, t2.pickup_date as date, t5.to_name FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id INNER JOIN employees t4 ON t4.employee_id = t2.employee_code INNER JOIN tb_order t5 ON t5.order_id = t1.order_id WHERE t1.status = ?;",[1]);
         return [
             "success" => true,
             "data" => $data
