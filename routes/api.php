@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCustomerController;
 use App\Http\Controllers\PostEmployeeController;
+use App\Http\Controllers\PostExpensesController;
 use App\Http\Controllers\PostRequestController;
 use App\Http\Controllers\PostVehicleController;
 use App\Http\Controllers\PostImageController;
@@ -81,3 +82,10 @@ Route::post('/addcarorder',[PostManageController::class , 'carorder']);
 Route::post('/getproductdetail',[PostManageController::class , 'getordproductdetail']);
 Route::get('/listorderproductdetail',[PostManageController::class , 'listordproductdetail']);
 Route::get('/listorderproduct',[PostManageController::class , 'listOrderProduct']);
+
+Route::get('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
+Route::get('/expenses/getorder/{product_id}',[PostExpensesController::class, 'GetOrder']);
+Route::get('/expenses/getexpenses/{product_id}',[PostExpensesController::class, 'GetExpenses']);
+Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']);
+Route::get('/expenses/deleteexpense/{id}',[PostExpensesController::class, 'deleteExpense']);
+Route::post('/expenses/sendproduct',[PostExpensesController::class, 'sendProduct']);

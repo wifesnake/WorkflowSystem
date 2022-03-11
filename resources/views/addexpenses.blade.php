@@ -15,166 +15,23 @@
 
             <div class="card mt-2">
                 <section class="m-2">
-                    <div class="col-md-12 table-responsive">
-                        <div id="employee-table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="employee-table_length"><label>Show <select
-                                                name="employee-table_length" aria-controls="employee-table"
-                                                class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label></div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="employee-table_filter" class="dataTables_filter"><label>Search:<input
-                                                type="search" class="form-control form-control-sm" placeholder=""
-                                                aria-controls="employee-table"></label></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table class="table dataTable no-footer" id="employee-table" role="grid"
-                                        aria-describedby="employee-table_info" style="width: 2174px;">
-                                        <thead>
-                                            <tr role="row">
-                                                <th title="ชื่อ-สกุล" class="sorting sorting_asc" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 251px;" aria-sort="ascending"
-                                                    aria-label="ชื่อ-สกุล: activate to sort column descending">
-                                                    เลขที่เอกสาร
-                                                </th>
-                                                <th title="E-mail" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 405px;"
-                                                    aria-label="E-mail: activate to sort column ascending">คนขับ</th>
-                                                <th title="หมายเลขโทรศัพท์" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 263px;"
-                                                    aria-label="หมายเลขโทรศัพท์: activate to sort column ascending">
-                                                    หมายเลขโทรศัพท์</th>
-                                                <th title="เงินเดือน" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 153px;"
-                                                    aria-label="เงินเดือน: activate to sort column ascending">ทะเบียนรถ
-                                                </th>
-                                                <th title="ประเภทพนักงาน" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 248px;"
-                                                    aria-label="ประเภทพนักงาน: activate to sort column ascending">
-                                                    ประเภทรถ</th>
-                                                <th title="หน่วยงาน" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 266px;"
-                                                    aria-label="หน่วยงาน: activate to sort column ascending">
-                                                    วันที่เข้ารับสินค้า
-                                                </th>
-                                                <th title="หน่วยงาน" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 266px;"
-                                                    aria-label="หน่วยงาน: activate to sort column ascending">สถานะ
-                                                </th>
-                                                <th title="Action" class="sorting" tabindex="0"
-                                                    aria-controls="employee-table" rowspan="1" colspan="1"
-                                                    style="width: 293px;"
-                                                    aria-label="Action: activate to sort column ascending">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="odd">
-                                                <td class="sorting_1">PD22000001TH</td>
-                                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                                <td>028643851</td>
-                                                <td>1กก5265</td>
-                                                <td>รถกระบะ</td>
-                                                <td>04/03/2022</td>
-                                                <td>Pending</td>
-                                                <td>
-                                                    <div onclick="onEdit(26,'view');"
-                                                        class="btn btn-sm btn-success btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal">View</div>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="sorting_1">PD22000002TH</td>
-                                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                                <td>028643851</td>
-                                                <td>1กก5265</td>
-                                                <td>รถกระบะ</td>
-                                                <td>04/03/2022</td>
-                                                <td>Pending</td>
-                                                <td>
-                                                    <div onclick="onEdit(26,'view');"
-                                                        class="btn btn-sm btn-success btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal">View</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="odd">
-                                                <td class="sorting_1">PD22000003TH</td>
-                                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                                <td>028643851</td>
-                                                <td>1กก5265</td>
-                                                <td>รถกระบะ</td>
-                                                <td>04/03/2022</td>
-                                                <td>Expenses</td>
-                                                <td>
-                                                    <div onclick="onEdit(26,'view');"
-                                                        class="btn btn-sm btn-success btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal">View</div>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="odd">
-                                                <td class="sorting_1">PD22000004TH</td>
-                                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                                <td>028643851</td>
-                                                <td>1กก5265</td>
-                                                <td>รถกระบะ</td>
-                                                <td>04/03/2022</td>
-                                                <td>Expenses</td>
-                                                <td>
-                                                    <div onclick="onEdit(26,'view');"
-                                                        class="btn btn-sm btn-success btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal">View</div>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                    <div id="employee-table_processing" class="dataTables_processing card"
-                                        style="display: none;">Processing...</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="employee-table_info" role="status"
-                                        aria-live="polite">Showing 1 to 8 of 8 entries</div>
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="employee-table_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled"
-                                                id="employee-table_previous"><a href="#" aria-controls="employee-table"
-                                                    data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                            <li class="paginate_button page-item active"><a href="#"
-                                                    aria-controls="employee-table" data-dt-idx="1" tabindex="0"
-                                                    class="page-link">1</a></li>
-                                            <li class="paginate_button page-item next disabled"
-                                                id="employee-table_next"><a href="#" aria-controls="employee-table"
-                                                    data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="com-md-12 table-responsive">
+                        <table id="table-product" class="table dataTable">
+                            <thead>
+                                <th>เลขที่เอกสาร</th>
+                                <th>คนขับ</th>
+                                <th>หมายเลขโทรศัพท์</th>
+                                <th>ทะเบียนรถ</th>
+                                <th>ประเภทรถ</th>
+                                <th>วันที่เข้ารับสินค้า</th>
+                                <th>สถานะ</th>
+                                <th>#</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
+                </section>
             </div>
-
-
-
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -185,7 +42,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">รายละเอียดารขนส่ง</h5>
@@ -194,277 +51,355 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" id="m-f-employee">
-                    {{-- <div class="group_data"> --}}
-                    <input type="hidden" name="m-id" id="m-id" value="">
-
-
-                    <div class="row col-md-12">
+                <div class="row">
+                    <div class="col-12">
                         <div class="card mt-2">
-
                             <section class="m-2">
-
                                 <div class="com-md-12 table-responsive">
-                                    <div id="table_id_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_length" id="table_id_length"><label>Show <select
-                                                            name="table_id_length" aria-controls="table_id"
-                                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select> entries</label></div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div id="table_id_filter" class="dataTables_filter"><label>Search:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="table_id"></label></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table id="table_id" class="table dataTable no-footer" role="grid"
-                                                    aria-describedby="table_id_info" style="width: 2202px;">
-                                                    <thead>
-                                                        <tr role="row">
-                                                            <th class="sorting" tabindex="0" aria-controls="table_id"
-                                                                rowspan="1" colspan="1"
-                                                                aria-label="Tracking No.: activate to sort column ascending"
-                                                                style="width: 197px;">(เลขที่ออเดอร์)</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="table_id"
-                                                                rowspan="1" colspan="1"
-                                                                aria-label="PO Number.: activate to sort column ascending"
-                                                                style="width: 192px;">PO Number.</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="table_id"
-                                                                rowspan="1" colspan="1"
-                                                                aria-label="Customer Name: activate to sort column ascending"
-                                                                style="width: 448px;">Customer Name</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="table_id"
-                                                                rowspan="1" colspan="1"
-                                                                aria-label="ผู้รับ: activate to sort column ascending"
-                                                                style="width: 331px;">ผู้รับ</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="table_id"
-                                                                rowspan="1" colspan="1"
-                                                                aria-label="น้ำหนัก: activate to sort column ascending"
-                                                                style="width: 124px;">น้ำหนัก</th>
-                                                            <th class="sorting sorting_desc" tabindex="0"
-                                                                aria-controls="table_id" rowspan="1" colspan="1"
-                                                                aria-label="Create: activate to sort column ascending"
-                                                                style="width: 223px;" aria-sort="descending">
-                                                                วันที่รับออเดอร์</th>
-                                                            <th class="sorting sorting_desc" tabindex="0"
-                                                                aria-controls="table_id" rowspan="1" colspan="1"
-                                                                aria-label="Create: activate to sort column ascending"
-                                                                style="width: 223px;" aria-sort="descending">
-                                                                สถานะออเดอร์</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr class="odd">
-                                                            <td>VC21000017TH</td>
-                                                            <td>211200001</td>
-                                                            <td>บริษัท มรกต อินดัสตรี้ส์ จำกัด (มหาชน)</td>
-                                                            <td>ซีพี มหาชีย</td>
-                                                            <td>3000</td>
-                                                            <td class="sorting_1">2021-12-21</td>
-                                                            <td class="sorting_1">หลัก</td>
-                                                        </tr>
-                                                        <tr class="even">
-                                                            <td>VC21000016TH</td>
-                                                            <td>17120001</td>
-                                                            <td>บริษัท เจนเนอรัล เบฟเวอร์เรจ จำกัด</td>
-                                                            <td>เจนเนอรัลเบฟ สาขาอ้อมน้อย</td>
-                                                            <td>11000</td>
-                                                            <td class="sorting_1">2021-12-17</td>
-                                                            <td class="sorting_1">หลัก</td>
-                                                        </tr>
-                                                        <tr class="odd">
-                                                            <td>VC21000010TH</td>
-                                                            <td>1152452399</td>
-                                                            <td>บริษัท มรกต อินดัสตรี้ส์ จำกัด (มหาชน)</td>
-                                                            <td>Nicha Hair</td>
-                                                            <td>2000</td>
-                                                            <td class="sorting_1">2021-10-10</td>
-                                                            <td class="sorting_1">หลัก</td>
-                                                            <td>
-                                                        </tr>
-                                                        <tr class="even">
-                                                            <td>VC21000009TH</td>
-                                                            <td>11524523658</td>
-                                                            <td>บริษัท มรกต อินดัสตรี้ส์ จำกัด (มหาชน)</td>
-                                                            <td>Nicha Hair</td>
-                                                            <td>15</td>
-                                                            <td class="sorting_1">2021-10-10</td>
-                                                            <td class="sorting_1">รอง</td>
-                                                            <td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div id="table_id_processing" class="dataTables_processing card"
-                                                    style="display: none;">Processing...</div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="table_id_info" role="status"
-                                                    aria-live="polite">
-                                                    Showing 1 to 4 of 4 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers"
-                                                    id="table_id_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="table_id_previous"><a href="#" aria-controls="table_id"
-                                                                data-dt-idx="0" tabindex="0"
-                                                                class="page-link">Previous</a></li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                aria-controls="table_id" data-dt-idx="1" tabindex="0"
-                                                                class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled"
-                                                            id="table_id_next"><a href="#" aria-controls="table_id"
-                                                                data-dt-idx="2" tabindex="0" class="page-link">Next</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <table id="table-order" class="table dataTable">
+                                        <thead>
+                                            <th>เลขที่ออเดอร์</th>
+                                            <th>PO Number.</th>
+                                            <th>Customer Name</th>
+                                            <th>ผู้รับ</th>
+                                            <th>น้ำหนัก</th>
+                                            <th>วันที่รับออเดอร์</th>
+                                            <th>สถานะออเดอร์</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
                                 </div>
                             </section>
                         </div>
-
-                        <div class="row col-md-12">
-                            เพิ่มข้อมูลค่าใช้จ่าย
-                        </div>
-
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                ประเภทค่าใช้จ่าย <b class="request-data">**</b> :
-                            </div>
-                            <div class="col-md-9">
-                                <select select name="cust_name" id="cust_name" class="form-control">
-                                    <option value="">-- Please Select --</option>
-                                    <option value="001">รายรับ</option>
-                                    <option value="002">รายจ่าย</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                จำนวน <b class="request-data">**</b> :
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" name="m-id_card" id="m-id_card" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                หมายเหตุ <b class="request-data">**</b> :
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" name="m-id_card" id="m-id_card" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                แนบไฟล์ <b class="request-data">**</b> :
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" name="m-id_card" id="m-id_card" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <table id="table-product" class="table dataTable no-footer dtr-inline"
-                                aria-describedby="table-product_info" style="width: 2250px;">
-                                <thead>
-                                    <tr>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="table-product"
-                                            rowspan="1" colspan="1" style="width: 327px;" aria-sort="ascending"
-                                            aria-label="เลขที่เอกสาร: activate to sort column descending">ประเภทค่าใช้จ่าย
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="table-product" rowspan="1"
-                                            colspan="1" style="width: 259px;"
-                                            aria-label="ประเภทรถ: activate to sort column ascending">จำนวนเงิน</th>
-                                        <th class="sorting" tabindex="0" aria-controls="table-product" rowspan="1"
-                                            colspan="1" style="width: 260px;"
-                                            aria-label="ทะเบียนรถ: activate to sort column ascending">หมายเหตุ</th>
-                                        <th class="sorting" tabindex="0" aria-controls="table-product" rowspan="1"
-                                            colspan="1" style="width: 360px;"
-                                            aria-label="คนขับ: activate to sort column ascending">ไฟล์</th>
-                                        <th class="sorting" tabindex="0" aria-controls="table-product" rowspan="1"
-                                            colspan="1" style="width: 354px;"
-                                            aria-label="วันที่เข้ารับสินค้า: activate to sort column ascending">
-                                            </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">รายรับ</td>
-                                        <td>1700</td>
-                                        <td>ค่าน้ำมัน</td>
-                                        <td>Link</td>
-                                        <td>
-                                            <div onclick="onEdit(26,'view');"
-                                                class="btn btn-sm btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#exampleModal">ลบ</div>
-                                        </td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">รายจ่าย</td>
-                                        <td>500</td>
-                                        <td>เบิกค่าน้ำมัน</td>
-                                        <td>Link</td>
-                                        <td>
-                                            <div onclick="onEdit(26,'view');"
-                                                class="btn btn-sm btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#exampleModal">ลบ</div>
-                                        </td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">รายรับ</td>
-                                        <td>120</td>
-                                        <td>ค่าลงของพาเหรด</td>
-                                        <td>Link</td>
-                                        <td>
-                                            <div onclick="onEdit(26,'view');"
-                                                class="btn btn-sm btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#exampleModal">ลบ</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div id="table-product_processing" class="dataTables_processing card"
-                                style="display: none;">Processing...</div>
-                        </div>
-
                     </div>
+                </div>
 
+                <div class="card mt-2">
+                    <div class="m-2">
 
-                    {{-- </div> --}}
-                </form>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5><u>เพิ่มข้อมูลค่าใช้จ่าย</u></h5>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-expense_type">ประเภทค่าใช้จ่าย<b class="request-data">**</b></label>
+                                    <select select name="expense_type" id="expense_type" class="form-control">
+                                        <option value="">-- Please Select --</option>
+                                        <option value="001">รายรับ</option>
+                                        <option value="002">รายจ่าย</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-amount">จำนวน <b class="request-data">**</b></label>
+                                    <input type="number" name="amount" id="amount" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-remark">หมายเหตุ <b class="request-data">**</b></label>
+                                    <textarea name="remark" id="remark" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-upload-file">แนบไฟล์ <b class="request-data">**</b></label>
+                                    <input type="file" name="upload-file" id="upload-file">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" onclick="add_expense()" class="btn btn-success">บันทึก</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <section class="m-2">
+                        <div class="com-md-12 table-responsive">
+                            <table id="table-expenses" class="table dataTable">
+                                <thead>
+                                    <th>ประเภทค่าใช้จ่าย</th>
+                                    <th>จำนวนเงิน</th>
+                                    <th>หมายเหตุ</th>
+                                    <th>ไฟล์</th>
+                                    <th>#</th>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
             </div>
             <div class="modal-footer">
                 <button id="save-data" type="button" class="btn btn-primary btn-sm"
-                    onclick="BtnEdit(); false">บันทึกข้อมูล</button>
-                <button id="save-data" type="button" class="btn btn-primary btn-sm"
-                    onclick="BtnEdit(); false">ส่งงาน</button>
+                    onclick="sendProduct()">ส่งงาน</button>
                 <button id="cancel-data" type="button" class="btn btn-danger btn-sm"
-                    data-dismiss="modal">ยกเลิก</button>
-                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    data-dismiss="modal">ยกเลิก</button> 
             </div>
         </div>
     </div>
 </div>
 <!-- End Modal -->
+
+<style>
+    .invalid-field {
+        border-color: red !important
+    }
+</style>
+
+<script>
+
+    let global_product_id;
+
+    $(document).ready(function(){
+        init();
+        handle();
+    });
+
+    async function init(){
+        await ListProduct();
+    }
+
+    async function handle(){
+
+    }
+
+    async function ListProduct() {
+        if ($.fn.dataTable.isDataTable('#table-product')) {
+            $('#table-product').DataTable().destroy();
+        }
+        $('#table-product').dataTable({
+            ajax:{
+                url: "/api/expenses/listproduct",
+                type: "get"
+            },
+            processing: true,
+            destroy: true,
+            columns:[
+                {data: "product_id"},
+                {data: "fullname",className:"text-nowrap"},
+                {data: "phone"},
+                {data: "regis_id"},
+                {data: "value_lookup"},
+                {data: "pickup_date"},
+                {data: "on_status"},
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        return '<td><div onClick="getOrder(\''+data.product_id +'\')" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div></td>';
+                    }
+                }
+            ]
+        });
+    }
+
+    async function getOrder(product_id){
+        global_product_id = product_id;
+        if ($.fn.dataTable.isDataTable('#table-order')) {
+            $('#table-order').DataTable().destroy();
+        }
+        $('#table-order').dataTable({
+            ajax:{
+                url: "/api/expenses/getorder/"+product_id,
+                type: "get"
+            },
+            processing: true,
+            destroy: true,
+            columns:[
+                {data: "order_id"},
+                {data: "po",className:"text-nowrap"},
+                {data: "customer_name",className:"text-nowrap"},
+                {data: "to_name",className:"text-nowrap"},
+                {data: "weight"},
+                {data: "pickup_date"},
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        const str = data.ismainorder == 1 ? "หลัก" : "รอง";
+                        return '<td>'+ str +'</td>';
+                    }
+                }
+            ]
+        });
+
+        if ($.fn.dataTable.isDataTable('#table-expenses')) {
+            $('#table-expenses').DataTable().destroy();
+        }
+        $('#table-expenses').dataTable({
+            ajax:{
+                url: "/api/expenses/getexpenses/"+product_id,
+                type: "get"
+            },
+            processing: true,
+            destroy: true,
+            columns:[
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        const str = data.expent_type == "001" ? "รายรับ" : "รายจ่าย";
+                        return '<td>'+ str +'</td>';
+                    }
+                },
+                {data: "amount"},
+                {data: "remark"},
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        return '<td>Like</td>';
+                    }
+                },
+                {
+                    data:null,
+                    render:function(data,type,row){
+                        return '<td><div onClick="deleteExpense(\''+data.id+'\')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
+                    }
+                }
+            ]
+        });
+    }
+
+    async function add_expense() {
+        let post = true;
+        if($('#expense_type').val().trim()==""){
+            $('#expense_type').addClass('invalid-field').focus();
+            post = false;
+        }else{
+            $('#expense_type').removeClass('invalid-field');
+            post = true;
+        }
+        if($('#amount').val().trim()==""){
+            $('#amount').addClass('invalid-field').focus();
+            post = false;
+        }else{
+            $('#amount').removeClass('invalid-field');
+            post = true;
+        }
+
+        if(post){
+            const jsonData = {
+                product_id: global_product_id,
+                expenese_type : $('#expense_type').val().trim(),
+                amount : $('#amount').val().trim(),
+                remark : $('#remark').val().trim(),
+                by: "{{ Auth::user()->name }}"
+            }
+
+            $.post('/api/expenses/addexpense',jsonData,(response,status)=>{
+                const { success, message } = response;
+                if(success){
+                    $(document).Toasts('create', {
+                        title: status,
+                        body: message,
+                        autohide: true,
+                        delay: 3000,
+                        fade: true,
+                        class: "bg-success"
+                    });
+                    $('#expense_type').val('');
+                    $('#amount').val('');
+                    $('#remark').val('');
+                    getOrder(global_product_id);
+                }else{
+                    $(document).Toasts('create', {
+                        title: status,
+                        body: message,
+                        autohide: true,
+                        delay: 3000,
+                        fade: true,
+                        class: "bg-danger"
+                    });
+                }
+            });
+        }
+    }
+
+    async function deleteExpense(id){
+        $.get('/api/expenses/deleteexpense/'+id,(response,status)=>{
+            const { success, message } = response;
+            if(success){
+                $(document).Toasts('create', {
+                    title: status,
+                    body: message,
+                    autohide: true,
+                    delay: 3000,
+                    fade: true,
+                    class: "bg-success"
+                });
+                getOrder(global_product_id);
+            }else{
+                $(document).Toasts('create', {
+                    title: status,
+                    body: message,
+                    autohide: true,
+                    delay: 3000,
+                    fade: true,
+                    class: "bg-danger"
+                });
+            }
+        });
+    }
+
+    async function sendProduct(){
+        swal({
+            title: "",
+            text: "ยืนยันการส่งงาน",
+            icon: "warning",
+            buttons: {
+                confirm: true,
+                cancel: true,
+            },
+            infoMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                console.log("send product");
+                $.post('/api/expenses/sendproduct',{
+                    product_id: global_product_id
+                },(response,status)=>{
+                    const { success, message } = response;
+                    if(success){
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-success"
+                        });
+                        $('#exampleModal').modal('hide');
+                        ListProduct();
+                    }else{
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-danger"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+</script>
 
 @endsection
