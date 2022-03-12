@@ -66,6 +66,7 @@
             },
             "processing": true,
             "responsive": true,
+            "pageLength": 100,
             "order": [[ 0, "desc" ]],
             "columns": [
                 { "data": "created_at"},
