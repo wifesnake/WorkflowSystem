@@ -274,7 +274,7 @@
                 {
                     data:null,
                     render:function(data,type,row){
-                        return '<td><div onClick="deleteExpense(\''+data.id+'\')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
+                        return '<td><div onClick="deleteExpense(\''+data.id+'\',\''+ data.image_id +'\')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
                     }
                 }
             ]
@@ -359,8 +359,11 @@
         }
     }
 
-    async function deleteExpense(id){
-        $.get('/api/expenses/deleteexpense/'+id,(response,status)=>{
+    async function deleteExpense(id,image_id){
+        $.post('/api/expenses/deleteexpense',{
+            id: id,
+            image_id: image_id,
+        },(response,status)=>{
             const { success, message } = response;
             if(success){
                 $(document).Toasts('create', {

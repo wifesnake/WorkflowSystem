@@ -87,5 +87,5 @@ Route::get('/expenses/listproduct',[PostExpensesController::class, 'ListProduct'
 Route::get('/expenses/getorder/{product_id}',[PostExpensesController::class, 'GetOrder']);
 Route::get('/expenses/getexpenses/{product_id}',[PostExpensesController::class, 'GetExpenses']);
 Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']);
-Route::get('/expenses/deleteexpense/{id}',[PostExpensesController::class, 'deleteExpense']);
+Route::post('/expenses/deleteexpense',[PostExpensesController::class, 'deleteExpense']);
 Route::post('/expenses/sendproduct',[PostExpensesController::class, 'sendProduct']);

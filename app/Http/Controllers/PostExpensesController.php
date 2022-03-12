@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExpenseModel;
+use App\Models\Image;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class PostExpensesController extends Controller
     }
 
     public function GetExpenses($product_id){
-        $data = DB::select("SELECT t1.id,t1.product_id,t1.expent_type,t1.amount,t1.remark,t2.base64 FROM `tb_expent` t1 INNER JOIN tb_image t2 ON t2.type_image = concat('image_',t1.expent_type,'_',t1.amount,'_',t1.remark) where t1. product_id = ?;",[$product_id]);
+        $data = DB::select("SELECT t1.id,t1.product_id,t1.expent_type,t1.amount,t1.remark,t2.id as image_id,t2.base64 FROM `tb_expent` t1 INNER JOIN tb_image t2 ON t2.type_image = concat('image_',t1.expent_type,'_',t1.amount,'_',t1.remark) where t1. product_id = ? and t2.status = ?;",[$product_id,1]);
         return [
             "success" => true,
             "data" => $data
@@ -54,13 +55,19 @@ class PostExpensesController extends Controller
         }
     }
 
-    public function deleteExpense($id){
-        $model = ExpenseModel::where('id',$id)->firstOrFail();
+    public function deleteExpense(Request $request){
+        $model = ExpenseModel::where('id',$request->id)->firstOrFail();
         if($model->delete()){
+
+            $model2 = Image::where('id',$request->image_id)->firstOrFail();
+            $model2->status = 0;
+            $model2->save();
+
             return [
                 "success" => true,
                 "message" => "deleted successfully"
             ];
+
         }else{
             return [
                 "success" => false,
