@@ -268,13 +268,16 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        return '<td><image width="150px" src="'+data.base64+'"></td>';
+                        const image = data.image_id ? '<image width="150px" src="'+data.base64+'">' : 'No Image';
+
+                        return '<td>'+image+'</td>';
                     }
                 },
                 {
                     data:null,
                     render:function(data,type,row){
-                        return '<td><div onClick="deleteExpense(\''+data.id+'\',\''+ data.image_id +'\')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
+                        const image_id = data.image_id ? "'"+data.image_id+"'" : null;
+                        return '<td><div onClick="deleteExpense(\''+data.id+'\','+ image_id +')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
                     }
                 }
             ]
