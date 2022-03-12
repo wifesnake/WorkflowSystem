@@ -117,8 +117,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="label-control" for="label-upload-file">แนบไฟล์ <b class="request-data">**</b></label>
-                                    <input type="file" name="upload-file" id="upload-file">
+                                    <label class="label-control" for="label-file">แนบไฟล์ <b class="request-data">**</b></label>
+                                    <input type="file" name="file" placeholder="Choose file" id="file">
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,12 @@
     }
 
     async function handle(){
-
+        $('#file').bind('change', function() {
+            if(this.files[0].size > 1000000) {
+                alert("อัพโหลดไฟล์ขนาดต่ำกว่า 1MB");
+                $(this).val('');
+            }
+        });
     }
 
     async function ListProduct() {
@@ -263,7 +268,7 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        return '<td>Like</td>';
+                        return '<td><image width="150px" src="'+data.base64+'"></td>';
                     }
                 },
                 {
@@ -302,6 +307,28 @@
                 by: "{{ Auth::user()->name }}"
             }
 
+            if($('#file')[0].files.length > 0){
+                var file_data = $('#file').prop('files')[0];
+                var form_data = new FormData();                  
+                form_data.append('file', file_data);
+                form_data.append('product_id',global_product_id);
+                form_data.append('username',"{{ Auth::user()->name }}");
+                const type = "image_"+jsonData.expenese_type+"_"+jsonData.amount+"_"+jsonData.remark
+                form_data.append('type_image',type);
+                $.ajax({
+                    url: "{{ route('upload.uploadFile') }}", // <-- point to server-side PHP script 
+                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,                         
+                    type: 'post',
+                    success: function(php_script_response){
+                        // <-- display response from the PHP script, if any
+                    }
+                });
+            }
+
             $.post('/api/expenses/addexpense',jsonData,(response,status)=>{
                 const { success, message } = response;
                 if(success){
@@ -316,6 +343,7 @@
                     $('#expense_type').val('');
                     $('#amount').val('');
                     $('#remark').val('');
+                    $('#file').val('');
                     getOrder(global_product_id);
                 }else{
                     $(document).Toasts('create', {

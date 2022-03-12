@@ -12,7 +12,7 @@ class Image extends Model
     protected $table = 'tb_image';
 
     protected $fillable = [
-        'flow_id',
+        'product_id',
         'image',
         'base64',
         'path',

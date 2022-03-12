@@ -36,15 +36,16 @@ class PostImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
+            'file' => 'required|mimes:png,jpg,jpeg|max:1024'
         ]);
 
         // Model
         $imageModel = new Image;
 
         // Variable
-        $order = $request->order_file;
-        $username = $request->form4_username;
+        $order = $request->product_id;
+        $username = $request->username;
+        $type = $request->type_image;
         $ext = $request->file->extension();
         $fileName = time().'_'.$request->file->getClientOriginalName();
         $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
@@ -53,16 +54,26 @@ class PostImageController extends Controller
         $data = file_get_contents($request->file);
         $base64 = 'data:image/'.$ext.';base64, '.base64_encode($data);
 
-        $imageModel->flow_id = $order;
+        $imageModel->product_id = $order;
         $imageModel->image = $fileName;
         $imageModel->base64 = $base64;
         $imageModel->path = $filePath;
         $imageModel->created_by = $username;
         $imageModel->updated_by = $username;
+        $imageModel->type_image = $type;
         $imageModel->status = 1;
         if($imageModel->save())
         {
-            return back();
+            // return back();
+            return [
+                "success" => true,
+                "message" => "uploaded successfully"
+            ];
+        }else{
+            return [
+                "success" => false,
+                "message" => "uploaded unsuccessfully"
+            ];
         }
     }
 
@@ -88,16 +99,26 @@ class PostImageController extends Controller
         $fileName = $uniq_id . '.'.$image_type;
         $filePath = 'signature/'.$uniq_id . '.'.$image_type;
 
-        $imageModel->flow_id = $order;
+        $imageModel->product_id = $order;
         $imageModel->image = $fileName;
         $imageModel->base64 = $base64;
         $imageModel->path = $filePath;
+        $imageModel->type_image = "signature";
         $imageModel->created_by = $username;
-        $imageModel->updated_by = $username;
+        $imageModel->updated_by = "";
         $imageModel->status = 1;
         if($imageModel->save())
         {
-            return back();
+            // return back();
+            return [
+                "success" => true,
+                "message" => "uploaded successfully"
+            ];
+        }else{
+            return [
+                "success" => false,
+                "message" => "uploaded unsuccessfully"
+            ];
         }
     }
 
