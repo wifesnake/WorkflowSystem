@@ -92,7 +92,9 @@
                 }
             ]
         });
-        await loadPermisison();
+        await setTimeout(() => {
+            loadPermisison();
+        }, 500);
     }
 
     async function loadPermisison(){
