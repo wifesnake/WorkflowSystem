@@ -12,7 +12,7 @@ class PostExpensesController extends Controller
 {
 
     public function ListProduct(){
-        $data = DB::select("SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone,t4.regis_id,t5.value_lookup, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t1.on_status FROM `ord_product` t1 INNER JOIN tb_employee_car t2 on t2.car_id = t1.car_id INNER JOIN employees t3 ON t3.employee_id = t2.employee_id INNER JOIN tb_vehicle t4 ON t4.car_id = t1.car_id INNER JOIN tb_lookup t5 ON t5.code_lookup = t4.isTrucktype and t5.name_lookup = 'vehicletype' WHERE t1.status = ? and t1.on_status = ? GROUP BY t1.product_id,t3.name,t3.lastname,t3.phone,t4.regis_id,t5.value_lookup,t1.pickup_date,t1.on_status;",[1,"01"]);
+        $data = DB::select("SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone,t4.regis_id,t5.value_lookup, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t1.on_status as on_status_code, t6.value_lookup as on_status FROM `ord_product` t1 INNER JOIN tb_employee_car t2 on t2.car_id = t1.car_id INNER JOIN employees t3 ON t3.employee_id = t2.employee_id INNER JOIN tb_vehicle t4 ON t4.car_id = t1.car_id INNER JOIN tb_lookup t5 ON t5.code_lookup = t4.isTrucktype and t5.name_lookup = 'vehicletype' INNER JOIN tb_lookup t6 ON t6.code_lookup = t1.on_status AND t6.name_lookup = 'order_product' WHERE t1.status = ? and t1.on_status = ? GROUP BY t1.product_id,t3.name,t3.lastname,t3.phone,t4.regis_id,t5.value_lookup,t1.pickup_date,t1.on_status,t6.value_lookup;",[1,"02"]);
         return [
             "success" => true,
             "data" => $data
@@ -81,7 +81,7 @@ class PostExpensesController extends Controller
     public function sendProduct(Request $request){
         $product_id = $request->product_id;
 
-        $data = DB::update("update ord_product set on_status = '02' where product_id = '". $product_id ."' and status = 1");
+        $data = DB::update("update ord_product set on_status = '03' where product_id = '". $product_id ."' and status = 1");
 
         if($data){
             return [

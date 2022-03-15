@@ -403,7 +403,6 @@
             infoMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                console.log("send product");
                 $.post('/api/expenses/sendproduct',{
                     product_id: global_product_id
                 },(response,status)=>{

@@ -307,7 +307,19 @@
                 {data: "fullname"},
                 {data: "pickup_date"},
                 {data: "created_by"},
-                {data: "on_status"},
+                // {data: "on_status"},
+                {
+                    data:null,
+                    render:function(data,type,row){
+                        let str;
+                        if(data.on_status_code != "01"){
+                            str = '<td><button type="button" name="btn-add-car-order" class="btn btn-info" disabled>ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button></td>'
+                        }else{
+                            str = '<td><button type="button" name="btn-add-car-order" class="btn btn-info" onClick="sendToNext(\''+ data.product_id +'\')">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button></td>'
+                        }
+                        return str;
+                    }
+                }
             ]
         });
     }
@@ -416,6 +428,48 @@
         const day = date[2];
         return day+"/"+month+"/"+year;
     }
+
+    function sendToNext(product_id){
+        swal({
+            title: "",
+            text: "ยืนยันการส่งงาน",
+            icon: "warning",
+            buttons: {
+                confirm: true,
+                cancel: true,
+            },
+            infoMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                $.post('/api/manage/product/updatestatus',{
+                    product_id: product_id
+                },(response,status) => {
+                    const { success, message } = response;
+                    if(success){
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-success"
+                        });
+                        ListOrderProduct();
+                    }else{
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-danger"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
 </script>
 
 @endsection

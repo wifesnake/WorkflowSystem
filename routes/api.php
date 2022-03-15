@@ -82,6 +82,7 @@ Route::post('/addcarorder',[PostManageController::class , 'carorder']);
 Route::post('/getproductdetail',[PostManageController::class , 'getordproductdetail']);
 Route::get('/listorderproductdetail',[PostManageController::class , 'listordproductdetail']);
 Route::get('/listorderproduct',[PostManageController::class , 'listOrderProduct']);
+Route::post('/manage/product/updatestatus',[PostManageController:: class, 'updateStatusProduct']);
 
 Route::get('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
 Route::get('/expenses/getorder/{product_id}',[PostExpensesController::class, 'GetOrder']);

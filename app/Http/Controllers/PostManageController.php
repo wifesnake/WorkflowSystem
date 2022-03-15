@@ -65,14 +65,20 @@ class PostManageController extends Controller
         if(count($car) > 1 && count($order) > 1){
             for($i=0;$i<count($car);$i++){
                 if($car[$i] != ""){
-                    $model = new OrderProduct();
-                    $model->product_id = ($product_ids[$i]) ? $product_ids[$i] : $product_no ;
-                    $model->car_id = $car[$i];
-                    $model->employee_code = $employee[$i];
-                    $model->pickup_date = $date[$i];
-                    $model->created_by = $by[$i];
-                    $model->updated_by = "";
-                    $model->save();
+
+                    $isProductId = ($product_ids[$i]) ? $product_ids[$i] : $product_no;
+
+                    $exist = OrderProduct::where('product_id',$isProductId)->exists();
+                    if(!$exist){
+                        $model = new OrderProduct();
+                        $model->product_id = $isProductId ;
+                        $model->car_id = $car[$i];
+                        $model->employee_code = $employee[$i];
+                        $model->pickup_date = $date[$i];
+                        $model->created_by = $by[$i];
+                        $model->updated_by = "";
+                        $model->save();
+                    }
                 }
             }
 
@@ -148,11 +154,27 @@ class PostManageController extends Controller
     }
 
     public function listOrderProduct(){
-        $data = DB::select("SELECT t1.product_id,t3.value_lookup as car_type,t2.regis_id, concat(t5.name,' ',t5.lastname) as fullname, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,t1.created_by, t4.value_lookup as on_status FROM `ord_product` t1 INNER JOIN tb_vehicle t2 ON t2.car_id = t1.car_id INNER JOIN tb_lookup t3 ON t3.code_lookup = t2.isTrucktype AND t3.name_lookup = 'vehicletype' INNER JOIN tb_lookup t4 ON t4.code_lookup = t1.on_status AND t4.name_lookup = 'order_product' INNER JOIN employees t5 ON t5.employee_id = t1.employee_code WHERE t1.status = ?;",[1]);
+        $data = DB::select("SELECT t1.product_id,t3.value_lookup as car_type,t2.regis_id, concat(t5.name,' ',t5.lastname) as fullname, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,t1.created_by, t4.value_lookup as on_status,t1.on_status as on_status_code FROM `ord_product` t1 INNER JOIN tb_vehicle t2 ON t2.car_id = t1.car_id INNER JOIN tb_lookup t3 ON t3.code_lookup = t2.isTrucktype AND t3.name_lookup = 'vehicletype' INNER JOIN tb_lookup t4 ON t4.code_lookup = t1.on_status AND t4.name_lookup = 'order_product' INNER JOIN employees t5 ON t5.employee_id = t1.employee_code WHERE t1.status = ?;",[1]);
         return [
             "success" => true,
             "data" => $data
         ];
+    }
+
+    public function updateStatusProduct(Request $request){
+        $model = OrderProduct::where('product_id',$request->product_id)->firstOrFail();
+        $model->on_status = '02';
+        if($model->save()){
+            return [
+                'success' => true,
+                'message' => 'updated successfully'
+            ];
+        }else{
+            return [
+                'success' => false,
+                'message' => 'updated unsuccessfully'
+            ];
+        }
     }
 
     /**
