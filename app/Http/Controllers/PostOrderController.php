@@ -18,7 +18,7 @@ class PostOrderController extends Controller
     }
 
     public function listOrder(){
-        $data = DB::select('select order_id, to_name from tb_order');
+        $data = DB::select("select order_id, to_name from tb_order WHERE order_id IN (SELECT ord_vehicle FROM states WHERE id in (SELECT max(id) FROM states GROUP BY ord_vehicle) AND current_state IS NOT null AND current_state != '00');");
         return ['data' => $data];
     }
 

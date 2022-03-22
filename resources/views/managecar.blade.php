@@ -331,7 +331,9 @@
                     });
 
                     ListOrderProduct();
-                    ListOrderProductDetail()
+                    ListOrderProductDetail();
+                    ListCar();
+                    ListOrder();
                 }
             });
         }else{
