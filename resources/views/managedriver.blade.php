@@ -7,27 +7,33 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <div class="title-header">จัดการรถ</div>
+            <div class="title-header">จัดการข้อมูลคนขับรถ</div>
             <div class="row">
                 <div class="container">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="employee">พนักงาน</label>
+                                    <label for="employee">พนักงานขับรถ</label>
                                     <select name="listemployee" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="employee">รถ</label>
-                                    <select name="listcar" id="" class="form-control"></select>
+                                    <label for="employee">รถสำหรับขนส่ง</label>
+
+                                    <div class="input-group">
+                                        <select name="listcar" id="" class="form-control"></select>
+                                        <span class="input-group-append">
+                                            <button type="button" name="btn-add-employee-car" class="btn btn-success">บันทึกข้อมูล</button>
+                                        </span>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" name="btn-add-employee-car" class="btn btn-success">เพิ่ม</button>
                             </div>
                         </div>
                     </div>
@@ -35,7 +41,7 @@
                         <thead>
                             <tr>
                                 <th>พนักงาน</th>
-                                <th>รถ</th>
+                                <th>รถสำหรับขนส่ง</th>
                                 <th>วันที่สร้าง</th>
                             </tr>
                         </thead>
@@ -97,7 +103,7 @@
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกพนักงาน --');
                 $('[name="listemployee"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.employee_id).text(item.employee_id+" - "+item.fullname);
+                    const opt = $("<option>").val(item.employee_id).text(item.fullname + " (" + item.employee_id + ")");
                     $('[name="listemployee"]').append(opt);
                 });
             }
@@ -111,7 +117,7 @@
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกรถ --');
                 $('[name="listcar"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.car_id).text(item.regis_id+" - "+item.car_brand);
+                    const opt = $("<option>").val(item.car_id).text(item.regis_id+" ("+item.car_brand + ")");
                     $('[name="listcar"]').append(opt);
                 });
             }
