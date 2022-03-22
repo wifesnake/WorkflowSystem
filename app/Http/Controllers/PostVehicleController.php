@@ -27,7 +27,7 @@ class PostVehicleController extends Controller
     }
 
     public function cars(){
-        $data = DB::select("SELECT t1.id, t1.car_id,t1.regis_id,t1.car_brand,t2.employee_id,t3.name,t3.lastname,concat(t3.name,' ',t3.lastname) as fullname FROM tb_vehicle t1 LEFT JOIN tb_employee_car t2 ON t2.car_id = t1.car_id LEFT JOIN employees t3 ON t3.employee_id = t2.employee_id /*WHERE t1.car_id NOT IN (SELECT car_id FROM ord_product WHERE status = ?)*/ AND t1.status = ?;",[1,1]);
+        $data = DB::select("SELECT t1.id, t1.car_id,t1.regis_id,t1.car_brand,t2.employee_id,t3.name,t3.lastname,concat(t3.name,' ',t3.lastname) as fullname,t4.car_id as iscar FROM tb_vehicle t1 LEFT JOIN tb_employee_car t2 ON t2.car_id = t1.car_id LEFT JOIN employees t3 ON t3.employee_id = t2.employee_id LEFT JOIN (SELECT car_id FROM ord_product WHERE on_status not in ('01','02') and status = ?) t4 ON t4.car_id = t1.car_id WHERE t4.car_id is null;",[1]);
         return ["data"=>$data];
     }
 

@@ -138,7 +138,7 @@ class PostManageController extends Controller
     }
 
     public function getordproductdetail(Request $request){
-        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car, t4.employee_id as employee, t2.pickup_date as date, t5.to_name FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id INNER JOIN employees t4 ON t4.employee_id = t2.employee_code INNER JOIN tb_order t5 ON t5.order_id = t1.order_id WHERE t3.car_id = ? AND t1.status = ?;",[$request->car_id,1]);
+        $data = DB::select("SELECT t1.*,t2.car_id,t3.regis_id,t3.car_brand, concat(t3.regis_id,' - ',t3.car_brand) as car, t4.employee_id as employee, t2.pickup_date as date, t5.to_name FROM `ord_productdetail` t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id INNER JOIN tb_vehicle t3 ON t3.car_id = t2.car_id INNER JOIN employees t4 ON t4.employee_id = t2.employee_code INNER JOIN tb_order t5 ON t5.order_id = t1.order_id WHERE t3.car_id = ? AND t2.status = ?;",[$request->car_id,1]);
         return [
             "success" => true,
             "data" => $data
