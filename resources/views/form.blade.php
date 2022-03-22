@@ -32,8 +32,14 @@ $var1 = ""
 
             <div style="margin: 5px 0 ; text-align: center;">
                 @foreach ($btnactions as $item)
-                        @if ($item->isCurrentstate == 0)
-                            <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-primary">{{ $item->action_name }}</button>
+
+                        @if ($item->isCurrentstate == 0  )
+
+                            @if ($item->to_state == '01')
+                                <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-primary">{{ $item->action_name }}</button>
+                            @else
+                                <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-danger">ยกเลิกรายการ</button>
+                            @endif
                         @else
                             <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-danger">ยกเลิกรายการ</button>
                         @endif
