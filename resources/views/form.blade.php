@@ -32,7 +32,6 @@ $var1 = ""
 
             <div style="margin: 5px 0 ; text-align: center;">
                 @foreach ($btnactions as $item)
-
                         @if ($item->isCurrentstate == 0)
                             <button type="button" onclick="btnClick('{{ $item->id }}','{{ $item->current_state }}','{{ $item->to_state }}')" class="btn btn-primary">{{ $item->action_name }}</button>
                         @else
@@ -135,6 +134,19 @@ $var1 = ""
             current_state: current_state,
             to_state: to_state,
             formdata: Base64.encode(JSON.stringify(formdata)),
+            json: {
+                order_remark: $('[name=order_remark]').val(),
+                to_name: $('[name=to_name]').val(),
+                to_address: $('[name=to_address]').val(),
+                to_phone: $('[name=to_phone]').val(),
+                product_desc: $('[name=product_desc]').val(),
+                requesr_car_type: $('[name=requesr_car_type]').val(),
+                m_unit: $('[name=m_unit]').val(),
+                L_unit: $('[name=L_unit]').val(),
+                product_type: $('[name=product_type]').val(),
+                weight: $('[name=weight]').val(),
+                remark: $('[name=remark]').val()
+            },
             created_by: updatedby,
             updated_by: updatedby
         }
