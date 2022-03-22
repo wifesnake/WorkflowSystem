@@ -45,7 +45,7 @@ class FormController extends Controller
     }
 
     protected function getImage($id){
-        $image = DB::select("select base64, image from tb_image where flow_id = ? and status = ?",[$id,1]);
+        $image = DB::select("select base64, image from tb_image where product_id = ? and status = ?",[$id,1]);
         return $image;
     }
 
