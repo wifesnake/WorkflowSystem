@@ -2,6 +2,7 @@
 .btn-collapse {
     text-align: right;
 }
+
 </style>
 @extends('layouts.master')
 @section('content')
@@ -19,13 +20,13 @@
                         <table id="table-product" class="table dataTable">
                             <thead>
                                 <th>เลขที่เอกสาร</th>
-                                <th>คนขับ</th>
+                                <th>คนขับรถ</th>
                                 <th>หมายเลขโทรศัพท์</th>
                                 <th>ทะเบียนรถ</th>
                                 <th>ประเภทรถ</th>
                                 <th>วันที่เข้ารับสินค้า</th>
                                 <th>สถานะ</th>
-                                <th>#</th>
+                                <th></th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -42,10 +43,10 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">รายละเอียดารขนส่ง</h5>
+                <h5 class="modal-title" id="exampleModalLabel">รายละเอียดค่าใช้จ่ายในการขนส่ง</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,7 +126,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" onclick="add_expense()" class="btn btn-success">บันทึก</button>
+                                <button type="button" style=" width: 100%; " onclick="add_expense()" class="btn btn-success">บันทึกข้อมูล</button>
                             </div>
                         </div>
                     </div>
@@ -228,6 +229,11 @@
             },
             processing: true,
             destroy: true,
+            "searching": false,
+            "lengthChange": false,
+            "pageLength": 50,
+            "paging":   false,
+            "info":     false,
             columns:[
                 {data: "order_id"},
                 {data: "po",className:"text-nowrap"},

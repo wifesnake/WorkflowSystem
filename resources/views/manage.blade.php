@@ -10,13 +10,14 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4">
                     <div class="form-group">
-                        <label for="" class="label-control"><u>ข้อมูลออเดอร์</u></label>
+                        <div class="title-header">ข้อมูลออเดอร์</div>
                         <select class="form-control" name="listOrder"></select>
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-4"></div>
                 <div class="col-md-3 col-lg-4"></div>
             </div>
+            
             <div class="row">
                 <div class="col-md-4">
                     <label>รหัสออเดอร์:</label>&nbsp;<label class="label-order_id">-</label>

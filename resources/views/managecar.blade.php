@@ -7,37 +7,49 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <div class="title-header">จัดการรถ</div>
+            <div class="title-header">จัดรถสำหรับส่งสินค้า</div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="label-listCar">รถ</label>
+                        <label for="label-listCar">รถสำหรับส่งสินค้า</label>
                         <select class="form-control" name="listCar"></select>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="label-listCar">วันที่เข้ารับสินค้า</label>
-                        <input type="text" class="form-control datepicker" name="date_selected">
-                    </div>
-                </div>
+
                 <div class="col-md-4">
                     <label for="label-listOrder">ออเดอร์</label>
                     <div class="input-group">
                         <select class="form-control" name="listOrder"></select>
-                        <span class="input-group-append">
-                            <button type="button" name="btn-add-car-order" class="btn btn-success btn-flat">เพิ่ม</button>
-                        </span>
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="label-listCar">วันที่เข้ารับสินค้า</label>
+                        <div class="input-group">
+                        <input type="text" class="form-control datepicker" name="date_selected">
+                        <span class="input-group-append">
+                            <button type="button" name="btn-add-car-order" class="btn btn-success btn-flat">เพิ่มข้อมูล</button>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+
             </div>
+
+            <div class="row">
+                <div class="col-md-12" style="text-align: right;">
+                    <button type="button" name="btn-submit-car-order" class="btn btn-success">บันทึกข้อมูล</button>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col">
                     <table id="table-car" class="table">
                         <thead>
                             <tr>
-                                <th>รถ</th>
-                                <th>ออเดอร์</th>
+                                <th>รถสำหรับส่งสินค้า</th>
+                                <th>เลขที่ออเดอร์</th>
                                 <th>สถานะออเดอร์</th>
                                 <th>#</th>
                             </tr>
@@ -46,18 +58,14 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: left;">
-                    <button type="button" name="btn-submit-car-order" class="btn btn-success">บันทึกข้อมูล</button>
-                </div>
-            </div>
+
         </div>
     </div>
 
     <div class="content">
         <div class="container-fluid">
             <hr>
-            <div class="title-header">สถานะ Product_ID</div>
+            <div class="title-header">รายการรถที่จัดออเดอร์แล้ว</div>
             <div class="row">
                 <div class="col">
                     <table id="table-product" class="table">
@@ -74,71 +82,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                <td>PRODUCTID_001</td>
-                                <td>รถบรรทุก 6 ล้อ</td>
-                                <td>1กก553</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>20/02/2565</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>Perpare</td>
-                                <td>
-                                    <button type="button" name="btn-add-car-order" class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>PRODUCTID_002</td>
-                                <td>รถบรรทุก 10 ล้อ</td>
-                                <td>1กก5538</td>
-                                <td>ยงยุทธ2</td>
-                                <td>20/02/2565</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>Pending</td>
-                                <td>
-                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>PRODUCTID_003</td>
-                                <td>รถบรรทุก 10 ล้อ</td>
-                                <td>1กก5537</td>
-                                <td>ยงยุทธ3</td>
-                                <td>20/02/2565</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>Pending</td>
-                                <td>
-                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>PRODUCTID_004</td>
-                                <td>รถบรรทุก 10 ล้อ</td>
-                                <td>1กก5997</td>
-                                <td>ยงยุทธ3</td>
-                                <td>20/02/2565</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>Close Job</td>
-                                <td>
-                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>PRODUCTID_005</td>
-                                <td>รถบรรทุก 10 ล้อ</td>
-                                <td>1กก5227</td>
-                                <td>ยงยุทธ3</td>
-                                <td>20/02/2565</td>
-                                <td>ยงยุทธ เลิศธิราวงศ์</td>
-                                <td>ระบุค่าใช้จ่ายแล้ว</td>
-                                <td>
-                                    <button type="button" name="btn-add-car-order" disabled class="btn btn-info">ส่งข้อมูล (เพิ่มระบุค่าใช้จ่าย)</button>
-                                </td>
-                            </tr> --}}
-
                         </tbody>
                     </table>
                 </div>
@@ -151,6 +94,10 @@
 <style>
     .text-nowrap{
         white-space: nowrap
+    }
+
+    button.btn.btn-info {
+        color: white;
     }
 </style>
 
@@ -237,7 +184,7 @@
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกรถ --');
                 $('[name="listCar"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.car_id+","+item.employee_id).text(item.regis_id+" - "+item.car_brand);
+                    const opt = $("<option>").val(item.car_id+","+item.employee_id).text("" + item.regis_id+" ("+item.car_brand + ")");
                     $('[name="listCar"]').append(opt);
                 });
             }
@@ -251,7 +198,7 @@
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกออเดอร์ --');
                 $('[name="listOrder"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.order_id).text(item.order_id+" - "+item.to_name);
+                    const opt = $("<option>").val(item.order_id).text("" + item.order_id +" ( "+item.to_name + ")");
                     $('[name="listOrder"]').append(opt);
                 });
             }
@@ -268,6 +215,8 @@
             processing: true,
             responsive: true,
             destroy: true,
+            "searching": false,
+            "lengthChange": false,
             data: arrayOrder,
             columns:[
                 {data: "car_text"},

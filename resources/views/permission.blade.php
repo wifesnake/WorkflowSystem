@@ -14,9 +14,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-4" style="text-align: right; font-size: 20px;">
+                            <label for="label-role" class="form-label">กลุ่มผู้ใช้งาน</label>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="label-role" class="form-label">Role</label>
                                 <select name="role" id="role" class="form-control">
                                     @foreach ($role_permission as $item)
                                         <option value="{{$item->role_code}}">{{$item->name}}</option>
@@ -24,26 +26,24 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-success" onclick="btnSave()">บันทึกข้อมูล</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="container">
                     <table class="table table-bordered" id="table-permission">
                         <thead>
-                            <th>created at</th>
-                            <th>name</th>
-                            <th>status</th>
-                            <th>manage</th>
+                            <th>เมนู</th>
+                            <th>วันที่สร้าง</th>
+                            <th>สถานะ</th>
+                            <th>สิทธิ์การใช้งาน</th>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
 
-                <div class="card-footer bg-white">
-                    <div class="form-group">
-                        <button class="btn btn-success" onclick="btnSave()">save</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -69,8 +69,8 @@
             "pageLength": 100,
             "order": [[ 0, "desc" ]],
             "columns": [
-                { "data": "created_at"},
                 { "data": "name" },
+                { "data": "created_at"},
                 {
                     data: null,
                     render:function(data,type,row){
