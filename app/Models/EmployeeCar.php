@@ -12,6 +12,7 @@ class EmployeeCar extends Model
     protected $table = 'tb_employee_car';
 
     protected $fillable = [
+        'id',
         'car_id',
         'employee_id',
         'created_by',

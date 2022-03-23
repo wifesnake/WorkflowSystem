@@ -43,6 +43,7 @@
                                 <th>พนักงาน</th>
                                 <th>รถสำหรับขนส่ง</th>
                                 <th>วันที่สร้าง</th>
+                                <th>#</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -75,7 +76,8 @@
                         fade: true,
                         class: "bg-success"
                     });
-                    listEmployeeCar();
+                    // listEmployeeCar();
+                    window.location.reload();
                 });
             }else{
                 $(document).Toasts('create', {
@@ -124,17 +126,49 @@
         });
     }
 
+    async function deleteData(id){
+        const status = confirm("ต้องการลบข้อมูลหรือไม่");
+        if(status){
+            $.post('/api/manage/car/delete',{
+                id: id
+            },(res,status) => {
+                const { success, message } = res;
+                if(success){
+                    $(document).Toasts('create', {
+                        title: status,
+                        body: message,
+                        autohide: true,
+                        delay: 3000,
+                        fade: true,
+                        class: "bg-success"
+                    });
+                    window.location.reload();
+                }else{
+                    $(document).Toasts('create', {
+                        title: status,
+                        body: message,
+                        autohide: true,
+                        delay: 3000,
+                        fade: true,
+                        class: "bg-danger"
+                    });
+                }
+            });
+        }
+    }
+
     async function listEmployeeCar(){
+        if ($.fn.dataTable.isDataTable('#table-employeecar')) {
+            $('#table-employeecar').DataTable().destroy();
+        }
         $('#table-employeecar').DataTable({
             "ajax":{
                 url: "/api/listemployeecar",
                 type: "get"
-                // data: {
-                //     role: "{{Auth::user()->is_admin}}"
-                // }
             },
             "processing": true,
             "responsive": true,
+            "destroy": true,
             "order": [[ 2, "desc" ]],
             "columns": [
                 {
@@ -149,7 +183,13 @@
                         return data.regis_id+" - "+data.car_brand;
                     }
                 },
-                { data: "created_at" }
+                { data: "created_at" },
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        return '<div class="btn btn-danger" onClick="deleteData(\''+ data.id +'\')" >ลบ</div>';
+                    }
+                },
             ]
         });
     }

@@ -21,8 +21,23 @@ class PostManageController extends Controller
      */
     public function index()
     {
-        $data = DB::select('SELECT * FROM tb_employee_car t1 LEFT JOIN employees t2 ON t2.employee_id = t1.employee_id LEFT JOIN tb_vehicle t3 ON t3.car_id = t1.car_id;');
+        $data = DB::select('SELECT t1.*,t2.name,t2.lastname,t3.car_brand,t3.regis_id FROM tb_employee_car t1 LEFT JOIN employees t2 ON t2.employee_id = t1.employee_id LEFT JOIN tb_vehicle t3 ON t3.car_id = t1.car_id;');
         return ["data"=>$data];
+    }
+
+    public function caremployee_delete(Request $request){
+        $car = EmployeeCar::findOrFail($request->id);
+        if($car->delete()){
+            return [
+                "success" => true,
+                "message" => "deleted successfully"
+            ];
+        }else{
+            return [
+                "success" => false,
+                "message" => "deleted unsuccessfully"
+            ];
+        }
     }
 
     public function add(Request $request){
