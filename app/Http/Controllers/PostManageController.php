@@ -8,6 +8,7 @@ use App\Models\EmployeeCar;
 use App\Models\OrderProduct;
 use App\Models\OrderProductDetail;
 use App\Models\Runorderno;
+use App\Models\States;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -165,6 +166,19 @@ class PostManageController extends Controller
         $model = OrderProduct::where('product_id',$request->product_id)->firstOrFail();
         $model->on_status = '02';
         if($model->save()){
+
+            $data = DB::select("SELECT order_id FROM ord_productdetail WHERE product_id = ? GROUP BY order_id;",[$request->product_id]);
+            foreach ($data as $item) {
+                $state = new States();
+                $state->ord_vehicle = $item->order_id;
+                $state->prev_state = "01";
+                $state->current_state = "02";
+                $state->created_by = $request->by;
+                $state->formdata = "";
+                $state->updated_by = $request->by;
+                $state->save();
+            }
+
             return [
                 'success' => true,
                 'message' => 'updated successfully'

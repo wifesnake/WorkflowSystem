@@ -410,7 +410,8 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 $.post('/api/expenses/sendproduct',{
-                    product_id: global_product_id
+                    product_id: global_product_id,
+                    by: "{{ Auth::user()->name }}"
                 },(response,status)=>{
                     const { success, message } = response;
                     if(success){
@@ -423,7 +424,8 @@
                             class: "bg-success"
                         });
                         $('#exampleModal').modal('hide');
-                        ListProduct();
+                        // ListProduct();
+                        window.location.reload();
                     }else{
                         $(document).Toasts('create', {
                             title: status,

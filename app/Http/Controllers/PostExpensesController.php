@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ExpenseModel;
 use App\Models\Image;
 use App\Models\OrderProduct;
+use App\Models\States;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -80,10 +81,24 @@ class PostExpensesController extends Controller
 
     public function sendProduct(Request $request){
         $product_id = $request->product_id;
+        $by = $request->by;
 
         $data = DB::update("update ord_product set on_status = '03' where product_id = '". $product_id ."' and status = 1");
 
         if($data){
+
+            $data = DB::select("SELECT order_id FROM ord_productdetail WHERE product_id = ? GROUP BY order_id;",[$product_id]);
+            foreach ($data as $item) {
+                $state = new States();
+                $state->ord_vehicle = $item->order_id;
+                $state->prev_state = "02";
+                $state->current_state = "03";
+                $state->created_by = $by;
+                $state->formdata = "";
+                $state->updated_by = $by;
+                $state->save();
+            }
+
             return [
                 "success" => true,
                 "message" => "updated successfully"

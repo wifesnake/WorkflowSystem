@@ -393,7 +393,8 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 $.post('/api/manage/product/updatestatus',{
-                    product_id: product_id
+                    product_id: product_id,
+                    by: "{{ Auth::user()->name }}"
                 },(response,status) => {
                     const { success, message } = response;
                     if(success){
@@ -405,7 +406,7 @@
                             fade: true,
                             class: "bg-success"
                         });
-                        ListOrderProduct();
+                        window.location.reload();
                     }else{
                         $(document).Toasts('create', {
                             title: status,
