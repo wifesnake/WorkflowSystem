@@ -13,6 +13,7 @@ use App\Http\Controllers\PostImageController;
 use App\Http\Controllers\PostManageController;
 use App\Http\Controllers\PostOrderController;
 use App\Http\Controllers\PostPermissionController;
+use App\Http\Controllers\PostTrackController;
 use App\Http\Resources\PostEmployeeResource;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
@@ -91,3 +92,9 @@ Route::get('/expenses/getexpenses/{product_id}',[PostExpensesController::class, 
 Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']);
 Route::post('/expenses/deleteexpense',[PostExpensesController::class, 'deleteExpense']);
 Route::post('/expenses/sendproduct',[PostExpensesController::class, 'sendProduct']);
+
+Route::get('/progress/listexpense',[PostManageController::class, 'progressListExpense']);
+Route::get('/progress/getexpense/{product_id}',[PostManageController::class, 'progressGetExpense']);
+
+Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
+
