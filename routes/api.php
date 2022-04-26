@@ -95,6 +95,7 @@ Route::post('/expenses/sendproduct',[PostExpensesController::class, 'sendProduct
 
 Route::get('/progress/listexpense',[PostManageController::class, 'progressListExpense']);
 Route::get('/progress/getexpense/{product_id}',[PostManageController::class, 'progressGetExpense']);
+Route::get('/progress/getorder/{product_id}',[PostManageController::class, 'progressGetOrder']);
 
 Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
 

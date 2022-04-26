@@ -330,10 +330,12 @@
                         class: "bg-success"
                     });
 
-                    ListOrderProduct();
-                    ListOrderProductDetail();
-                    ListCar();
-                    ListOrder();
+                    window.location.reload();
+
+                    // ListOrderProduct();
+                    // ListOrderProductDetail();
+                    // ListCar();
+                    // ListOrder();
                 }
             });
         }else{
