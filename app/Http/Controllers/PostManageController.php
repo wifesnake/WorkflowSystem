@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\EmployeeCarResource;
 use App\Models\CarOrder;
 use App\Models\EmployeeCar;
+use App\Models\Image;
 use App\Models\OrderProduct;
 use App\Models\OrderProductDetail;
 use App\Models\Runorderno;
@@ -223,10 +224,63 @@ class PostManageController extends Controller
     }
 
     public function progressGetOrder($product_id){
-        $data = DB::select("SELECT t1.product_id,t2.order_id,t2.po,t3.customer_name,t2.to_name,t1.ismainorder,t4.current_state FROM ord_productdetail t1 LEFT JOIN tb_order t2 ON t2.order_id = t1.order_id LEFT JOIN tb_customer t3 ON t3.customer_id = t2.cust_code LEFT JOIN (SELECT ord_vehicle, current_state as current_state FROM states) t4 ON t4.ord_vehicle = t2.order_id WHERE t4.current_state >= '03' AND t1.product_id = ?;",[$product_id]);
+        $data = DB::select("SELECT t1.product_id,t2.order_id,t2.po,t3.customer_name,t2.to_name,t1.ismainorder,t4.current_state FROM ord_productdetail t1 LEFT JOIN tb_order t2 ON t2.order_id = t1.order_id LEFT JOIN tb_customer t3 ON t3.customer_id = t2.cust_code LEFT JOIN (SELECT ord_vehicle, max(current_state) as current_state FROM states GROUP BY ord_vehicle) t4 ON t4.ord_vehicle = t2.order_id WHERE t4.current_state >= '03' AND t1.product_id = ?;",[$product_id]);
         return [
             "success" => true,
             "data" => $data
+        ];
+    }
+
+    public function updateStatus(Request $request){
+
+        $track_now = $request->track_now;
+        $track_update = $request->track_update;
+        $signature = $request->signature;
+        $order_id = $request->order_id;
+        $product_id = $request->product_id;
+        $description = $request->description;
+        $image = $request->image;
+        $by = $request->by;
+
+        if($image != ""){
+            $image1 = new Image();
+            $image1->product_id = $product_id;
+            $image1->image = "";
+            $image1->base64 = $image;
+            $image1->path = "";
+            $image1->type_image = "image".$product_id.$order_id.$track_update;
+            $image1->created_by = $by;
+            $image1->updated_by = "";
+            $image1->status = 1;
+            $image1->save();
+        }
+
+        if($signature != ""){
+            $image2 = new Image();
+            $image2->product_id = $product_id;
+            $image2->image = "";
+            $image2->base64 = $signature;
+            $image2->path = "";
+            $image2->type_image = "signature".$product_id.$order_id.$track_update;
+            $image2->created_by = $by;
+            $image2->updated_by = "";
+            $image2->status = 1;
+            $image2->save();
+        }
+
+        $state = new States();
+        $state->ord_vehicle = $order_id;
+        $state->prev_state = $track_now;
+        $state->current_state = $track_update;
+        $state->created_by = $by;
+        $state->formdata = "";
+        $state->description = $description;
+        $state->updated_by = $by;
+        $state->save();
+
+        return [
+            "success" => true,
+            "message" => "updated successfully"
         ];
     }
 

@@ -17,6 +17,8 @@ class States extends Model
         'prev_state',
         'current_state',
         'formdata',
+        'description',
+        'remark',
         'created_by',
         'updated_by'
     ];
