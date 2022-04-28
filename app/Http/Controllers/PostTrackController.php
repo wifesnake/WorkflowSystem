@@ -9,7 +9,8 @@ class PostTrackController extends Controller
 {
 
     public function get($ord_vehicle){
-        $data = DB::select("SELECT ord_vehicle, prev_state, current_state, created_by,created_at FROM `states` where ord_vehicle = '?' GROUP BY prev_state, current_state;",[$ord_vehicle]);
+        $data = DB::select("SELECT st.ord_vehicle, od.po , st.prev_state, st.current_state, st.created_by,st.created_at FROM `states`  st left join `tb_order` od on ord_vehicle = od.order_id where st.ord_vehicle = ? or od.po = ? order by st.created_at;",[$ord_vehicle , $ord_vehicle]);
+
         return [
             "success" => true,
             "data" => $data
