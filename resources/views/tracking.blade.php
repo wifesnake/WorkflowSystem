@@ -702,6 +702,9 @@ $('.waybill-query-res').hide();
 $("#search_tracking").click(function($this) {
 
     var trackingNo = $("#tracking_no").val();
+
+    $('.tab-log ul li').remove();
+
     $.ajax({
         url: "{{url('api/tracking/get')}}/" + trackingNo,
         type: "GET",
