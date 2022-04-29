@@ -13,7 +13,25 @@ class PostExpensesController extends Controller
 {
 
     public function ListProduct(){
-        $data = DB::select("SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone,t4.regis_id,t5.value_lookup, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t1.on_status as on_status_code, t6.value_lookup as on_status FROM `ord_product` t1 INNER JOIN tb_employee_car t2 on t2.car_id = t1.car_id INNER JOIN employees t3 ON t3.employee_id = t2.employee_id INNER JOIN tb_vehicle t4 ON t4.car_id = t1.car_id INNER JOIN tb_lookup t5 ON t5.code_lookup = t4.isTrucktype and t5.name_lookup = 'vehicletype' INNER JOIN tb_lookup t6 ON t6.code_lookup = t1.on_status AND t6.name_lookup = 'order_product' WHERE t1.status = ? and t1.on_status = ? GROUP BY t1.product_id,t3.name,t3.lastname,t3.phone,t4.regis_id,t5.value_lookup,t1.pickup_date,t1.on_status,t6.value_lookup;",[1,"02"]);
+        //$data = DB::select("SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone,t4.regis_id,t5.value_lookup, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t1.on_status as on_status_code, t6.value_lookup as on_status FROM `ord_product` t1 INNER JOIN tb_employee_car t2 on t2.car_id = t1.car_id INNER JOIN employees t3 ON t3.employee_id = t2.employee_id INNER JOIN tb_vehicle t4 ON t4.car_id = t1.car_id INNER JOIN tb_lookup t5 ON t5.code_lookup = t4.isTrucktype and t5.name_lookup = 'vehicletype' INNER JOIN tb_lookup t6 ON t6.code_lookup = t1.on_status AND t6.name_lookup = 'order_product' WHERE t1.status = ? and t1.on_status = ? GROUP BY t1.product_id,t3.name,t3.lastname,t3.phone,t4.regis_id,t5.value_lookup,t1.pickup_date,t1.on_status,t6.value_lookup;",[1,"02"]);
+        $data = DB:: select(
+            "SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t4.to_phone,t5.regis_id,t6.value_lookup as vehicletype,".
+            "CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,".
+            "t7.current_state,t2.order_id".
+            " FROM ord_product t1".
+            " INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id".
+            " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
+            " INNER JOIN tb_order t4 on t4.order_id = t2.order_id".
+            " INNER JOIN tb_vehicle t5 on t5.car_id = t1.car_id".
+            " INNER JOIN tb_lookup t6 on t6.code_lookup = t5.isTrucktype and t6.name_lookup = 'vehicletype'".
+            " INNER JOIN (SELECT ord_vehicle,max(current_state) as current_state FROM states GROUP BY ord_vehicle ) t7 on t7.ord_vehicle = t2.order_id".
+            " WHERE (t1.product_id not in (".
+            "SELECT product_id from (".
+            "SELECT t1.product_id,t2.ord_vehicle,t2.current_state from ord_productdetail t1 ".
+            "LEFT JOIN (SELECT ord_vehicle,max(current_state) as current_state FROM states WHERE current_state = '09' GROUP BY ord_vehicle) t2 on t2.ord_vehicle = t1.order_id".
+            ") t1 where ord_vehicle is null".
+            ") or t1.on_status = '02') and t1.status = ?;",[1]
+        );
         return [
             "success" => true,
             "data" => $data

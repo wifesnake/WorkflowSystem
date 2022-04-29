@@ -93,10 +93,14 @@ Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']
 Route::post('/expenses/deleteexpense',[PostExpensesController::class, 'deleteExpense']);
 Route::post('/expenses/sendproduct',[PostExpensesController::class, 'sendProduct']);
 
-Route::get('/progress/listexpense',[PostManageController::class, 'progressListExpense']);
+Route::get('/progress/listexpense/{employee_id}',[PostManageController::class, 'progressListExpense']);
 Route::get('/progress/getexpense/{product_id}',[PostManageController::class, 'progressGetExpense']);
 Route::get('/progress/getorder/{product_id}',[PostManageController::class, 'progressGetOrder']);
 Route::post('/progress/update',[PostManageController::class, 'updateStatus']);
+Route::get('/progress/listheadproduct',[PostManageController::class, 'listheadproduct']);
+Route::get('/progress/listheadorder/{product_id}',[PostManageController::class, 'listheadorder']);
+Route::post('/progress/head/update',[PostManageController::class, 'headupdatestatus']);
+Route::post('/progress/close',[PostManageController::class, 'close']);
 
 Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
 

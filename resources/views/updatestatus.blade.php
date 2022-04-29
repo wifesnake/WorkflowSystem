@@ -450,7 +450,7 @@
         }
         $('#table-expense').dataTable({
             ajax:{
-                url: "/api/progress/listexpense",
+                url: "/api/progress/listexpense/{{ Auth::user()->name }}",
                 type: "get"
             },
             processing: true,
@@ -522,13 +522,13 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        return data.ismainorder == 1 ? "<div class='btn btn-success text-nowrap' data-toggle='modal' data-target='#exampleModal2' onClick='checkTrackList(\""+ data.current_state +"\",\""+ data.order_id +"\",\""+ data.product_id +"\")' >อัพเดทสถานะ</div>" : "";
+                        return data.ismainorder == 1 && data.current_state < "08" ? "<div class='btn btn-success text-nowrap' data-toggle='modal' data-target='#exampleModal2' onClick='checkTrackList(\""+ data.current_state +"\",\""+ data.order_id +"\",\""+ data.product_id +"\")' >อัพเดทสถานะ</div>" : "";
                     }
                 },
                 {
                     data: null,
                     render:function(data,type,row){
-                        return data.ismainorder == 1 ? "<div class='btn btn-danger text-nowrap' data-toggle='modal' data-target='#exampleModal3'>ยกเลิกการส่งสินค้า</div>" : "";
+                        return data.ismainorder == 1 && data.current_state < "08" ? "<div class='btn btn-danger text-nowrap' data-toggle='modal' data-target='#exampleModal3'>ยกเลิกการส่งสินค้า</div>" : "";
                     }
                 }
             ]
@@ -553,10 +553,14 @@
             },
             {
                 value: "06",
-                text: "จัดส่งสินค้าสำเร็จ"
+                text: "อยู่ระหว่างการจัดส่งสินค้า"
             },
             {
                 value: "07",
+                text: "จัดส่งสินค้าสำเร็จ"
+            },
+            {
+                value: "08",
                 text: "พนักงานนำส่งเอกสาร"
             }
         ]
@@ -625,7 +629,27 @@
                 }
                 console.log(query);
                 $.post('/api/progress/update', query, (response, status) => {
-                    console.log(status, response);
+                    const { success, message } = response;
+                    if(success){
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-success"
+                        });
+                        window.location.reload();
+                    }else{
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-danger"
+                        });
+                    }
                 });
             }
         });

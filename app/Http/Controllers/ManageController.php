@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataModel;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 
 class ManageController extends Controller
@@ -27,6 +28,12 @@ class ManageController extends Controller
         $menu = new DataModel();
         $leftmenu = $menu->getmenu();
         return view('managecar',$leftmenu);
+    }
+
+    public function headupdate(){
+        $menu = new DataModel();
+        $leftmenu = $menu->getmenu();
+        return view('headupdatestatus',$leftmenu);
     }
 
     public function employeecar(){

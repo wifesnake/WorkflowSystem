@@ -74,6 +74,7 @@ Route::get('/tracking',[TrackingController::class, 'index']);
 Route::get('/manage',[ManageController::class, 'index']);
 Route::get('/managecar',[ManageController::class, 'car']);
 Route::get('/manageemployeecar',[ManageController::class, 'employeecar']);
+Route::get('/headupdate',[ManageController::class, 'headupdate']);
 
 });
 

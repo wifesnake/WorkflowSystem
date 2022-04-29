@@ -152,6 +152,8 @@
             <div class="modal-footer">
                 <button id="save-data" type="button" class="btn btn-primary btn-sm"
                     onclick="sendProduct()">ส่งงาน</button>
+                    <button id="close-data" type="button" class="btn btn-primary btn-sm"
+                    onclick="CloseProduct()">ปิดงาน</button>
                 <button id="cancel-data" type="button" class="btn btn-danger btn-sm"
                     data-dismiss="modal">ยกเลิก</button> 
             </div>
@@ -169,6 +171,7 @@
 <script>
 
     let global_product_id;
+    let global_order_id;
 
     $(document).ready(function(){
         init();
@@ -202,23 +205,40 @@
             columns:[
                 {data: "product_id"},
                 {data: "fullname",className:"text-nowrap"},
-                {data: "phone"},
+                {data: "to_phone"},
                 {data: "regis_id"},
-                {data: "value_lookup"},
+                {data: "vehicletype"},
                 {data: "pickup_date"},
-                {data: "on_status"},
+                // {data: "current_state"},
                 {
                     data: null,
                     render:function(data,type,row){
-                        return '<td><div onClick="getOrder(\''+data.product_id +'\')" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div></td>';
+                        const result = data.current_state == '09' ? data.current_state : data.on_status
+                        return '<td>'+result+'</td>';
+                    }
+                },
+                {
+                    data: null,
+                    render:function(data,type,row){
+                        return '<td><div onClick="getOrder(\''+data.product_id +'\',\''+data.current_state+'\',\''+data.order_id+'\')" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div></td>';
                     }
                 }
             ]
         });
     }
 
-    async function getOrder(product_id){
+    async function getOrder(product_id,status,order_id){
         global_product_id = product_id;
+        global_order_id = order_id;
+
+        if(status == "09"){
+            $('#save-data').css('display','none');
+            $('#close-data').css('display','block');
+        }else{
+            $('#save-data').css('display','block');
+            $('#close-data').css('display','none');
+        }
+
         if ($.fn.dataTable.isDataTable('#table-order')) {
             $('#table-order').DataTable().destroy();
         }
@@ -441,6 +461,49 @@
         });
     }
 
+    async function CloseProduct(){
+        swal({
+            title: "",
+            text: "ยืนยันปิดงาน",
+            icon: "warning",
+            buttons: {
+                confirm: true,
+                cancel: true,
+            },
+            infoMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                $.post('/api/progress/close',{
+                    product_id: global_product_id,
+                    order_id: global_order_id,
+                    by: "{{ Auth::user()->name }}"
+                },(response,status)=>{
+                    const { success, message } = response;
+                    if(success){
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-success"
+                        });
+                        $('#exampleModal').modal('hide');
+                        window.location.reload();
+                    }else{
+                        $(document).Toasts('create', {
+                            title: status,
+                            body: message,
+                            autohide: true,
+                            delay: 3000,
+                            fade: true,
+                            class: "bg-danger"
+                        });
+                    }
+                });
+            }
+        });
+    }
 </script>
 
 @endsection
