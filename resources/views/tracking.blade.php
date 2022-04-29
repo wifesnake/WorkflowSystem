@@ -56,6 +56,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
         padding: 0;
     }
 
+    .icon-truck {
+    font-size: 22px;
+}
+
+span.line {
+    display: none;
+}
+
+.tab-log li {
+    margin-bottom: 12px;
+    margin-top: 10px;
+}
+
+    .main-data {
+    margin-bottom: 60px;
+}
+
 
     html,
     body {
@@ -610,7 +627,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
             <div class="input-waybill">
-                <input id="tracking_no" type="text" value="" placeholder="ติดตามพัสดุ" maxlength="500" oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');" >
+                <input id="tracking_no" type="text" value="" placeholder="ติดตามพัสดุ" maxlength="500"
+                    oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');">
                 <!-- oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');" -->
                 <i class="clear"></i>
                 <div class="form-button search-btn" id="search_tracking">ค้นหา</div>
@@ -625,8 +643,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div>เซ็นรับแล้ว</div>
                 </div> -->
                 <div class="res-info-div res-info-div-2">
-                    <div class="res-pno">TH18071NCVKY1B</div>
-                    <div class="res-sme"><span class="s">กรุงเทพ</span><span class="m"></span><span class="e">เพชรบุรี</span></div>
+                    <div class="res-pno" style="margin-bottom: 14px;">หมายเลขพัสดุ : <label id="trackingid"></label>
+                    </div>
+                    <div class="res-sme"><span class="s"><label id="sendName"></label> <br> <label
+                                id="sendAddress"></label></span><span class="m"></span><span class="e"><label
+                                id="toName"></label> <br> <label id="toAddress"></label></span></div>
                 </div>
             </div>
 
@@ -641,44 +662,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="tab-con">
                 <li class="tab-log" style="">
                     <ul>
-                        <li class="first-log"><span class="time">2021-7-27<br>10:50:48</span><span
-                                class="line"></span><span class="icon route_icon_5 "></span><span
-                                class="text">เซ็นรับแล้ว<br>นำส่งสำเร็จ เซ็นรับโดย【ร้านค้าขายดีมีโชค(เจ้าของสินค้า)】
-                                ขอบคุณที่ใช้บริการ วิเชียรทรานสปอร์ต</span></li>
-                        <li><span class="time">2021-7-27<br>10:6:29</span><span class="line"></span><span
-                                class="icon route_icon_3no "></span><span class="text">
-                                ระหว่างการจัดส่ง<br>พัสดุถึง【BKK】</span></li>
-                        </span>
+                    </ul>
                 </li>
-                <li><span class="time">2021-7-27<br>10:6:29</span><span class="line"></span><span
-                        class="icon route_icon_3no "></span><span class="text">
-                        จัดส่งไม่สำเร็จ<br>พัสดุถึง【BKK】<br>** หมายเหตุ ลูกค้าเลื่อนวันที่รับสินค้า</span></li>
-                </span></li>
-                <li><span class="time">2021-7-27<br>10:6:29</span><span class="line"></span><span
-                        class="icon route_icon_3no "></span><span class="text">
-                        ระหว่างการจัดส่ง<br>พัสดุถึง【BKK】</span></li>
-                </span></li>
-                <li><span class="time">2021-7-27<br>8:24:34</span><span class="line"></span><span
-                        class="icon route_icon_3no "></span><span
-                        class="text">ระหว่างการจัดส่ง<br>พัสดุของท่านอยู่ระหว่างการนำส่ง【BKK】</span></li>
-                <li><span class="time">2021-7-27<br>5:51:26</span><span class="line"></span><span
-                        class="icon route_icon_2no "></span><span class="text">ระหว่างการขนส่ง<br>พัสดุถึง【BKK】</span>
-                </li>
-                <li><span class="time">2021-7-27<br>0:20:40</span><span class="line"></span><span
-                        class="icon route_icon_2no "></span><span class="text">ระหว่างการขนส่ง<br>พัสดุถึง【BKK】<br>**
-                        หมายเหตุ รถเสียระหว่างทางทำให้การขนส่งล่าช้า</span></li>
-                <li><span class="time">2021-7-26<br>20:47:52</span><span class="line"></span><span
-                        class="icon route_icon_2no "></span><span class="text">ระหว่างการขนส่ง<br>พัสดุถึง【BKK】</span>
-                </li>
-                <li><span class="time">2021-7-26<br>16:29:5</span><span class="line"></span><span
-                        class="icon route_icon_2no "></span><span
-                        class="text">เข้ารับพัสดุแล้ว<br>เจ้าหน้าที่ทำการเข้ารับพัสดุแล้ว</span></li>
-                <li><span class="time">2021-7-25<br>17:41:13</span><span class="line"></span><span
-                        class="icon route_icon_1no "></span><span
-                        class="text">จัดหารถแล้ว<br>เจ้าหน้าที่ทำการจัดหารถที่จะเข้าไปรับพัสดุแล้ว</span></li>
-                <li class="end-log"><span class="time">2021-7-25<br>17:41:12</span><span class="line"></span><span
-                        class="icon route_icon_1no "></span><span
-                        class="text">รับออเดอร์แล้ว<br>เจ้าหน้าที่บันทึกเข้าสู่ข้อมูลเรียบร้อยแล้ว</span></li>
             </ul>
             </li>
             <li class="tab-sign none" style="display: none;">
@@ -712,6 +697,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
 
+$('.waybill-query-res').hide();
+
 $("#search_tracking").click(function($this) {
 
     var trackingNo = $("#tracking_no").val();
@@ -721,18 +708,109 @@ $("#search_tracking").click(function($this) {
         data: {},
         success: function(response, status) {
             console.log(response);
-            console.log(status);
-            // if(status == "success"){
-            //     const data = response.data[0];
-            //     $.each(JsonformatGet,function(key,value){
-            //         if(value != ""){
-            //             $("[name="+key+"]").val(data[value]);
-            //         }
-            //     });
-            // }
+
+            if (status == "success") {
+
+
+                if (response.data.length == 0) {
+
+                    swal("Oops", "ไม่พบหมายเลข Tracking หรือ PO นี้ในระบบ !", "error");
+
+                } else {
+
+                    $('.waybill-query-res').show();
+
+                    for (i = 0; i < response.data.length; i++) {
+
+                        var FullDateTime = response.data[i].created_at;
+                        const ArreyDateTime = FullDateTime.split(" ");
+                        var NewDate = ArreyDateTime[0].split("-");
+                        var UseDate = NewDate[2] + "-" + NewDate[1] + "-" + NewDate[0];
+                        var UseTime = ArreyDateTime[1];
+
+                        var Status = response.data[i].current_state;
+                        var StatusName = "";
+                        var TextDescription = "";
+                        var Remark = "";
+
+                        if (Status == "00") {
+
+                            $("#trackingid").text(response.data[i].ord_vehicle);
+                            $("#sendName").text(response.data[i].customer_name);
+                            $("#sendAddress").text(response.data[i].address);
+                            $("#toName").text(response.data[i].to_name);
+                            $("#toAddress").text(response.data[i].to_address);
+
+                            StatusName = "รับออเดอร์แล้ว";
+                            TextDescription = "เจ้าหน้าที่บันทึกเข้าสู่ข้อมูลเรียบร้อยแล้ว";
+                        } else if (Status == "01") {
+                            StatusName = "ดำเนินการจัดหารถ";
+                            TextDescription = "เจ้าหน้าที่ทำการจัดหารถที่จะเข้าไปรับพัสดุ";
+                        } else if (Status == "02") {
+                            StatusName = "จัดสรรค่าใช้จ่ายสำหรับเดินทาง";
+                            TextDescription =
+                                "เจ้าหน้าที่ทำการจัดการค่าใช้จ่ายสำหรับเดินทางส่งสินค้า";
+                        } else if (Status == "03") {
+                            StatusName = "พนักขนส่งเตรียมเข้ารับสินค้า";
+                            TextDescription = "เจ้าหน้ารับทราบงานและเตรียมที่จะเข้าไปรับพัสดุ";
+                        } else if (Status == "04") {
+                            StatusName = "พนักงานเข้ารับสินค้าแล้ว";
+                            TextDescription = "เจ้าหน้าที่ทำการเข้ารับพัสดุแล้ว";
+                        } else if (Status == "05") {
+                            StatusName = "อยู่ระหว่างการขนส่ง";
+                            TextDescription = "อยู่ระหว่างเดินทางขนส่งสินค้าให้ลูกค้า";
+                        } else if (Status == "06") {
+                            StatusName = "อยู่ระหว่างการจัดส่ง";
+                            TextDescription = "พนักงานทำการนำสินค้าเข้าไปจัดส่งให้ลูกค้า";
+                        } else if (Status == "07") {
+                            StatusName = "จัดส่งพัสดุสำเร็จ รับโดย 【" + response.data[i].to_name +
+                                "】 ขอบคุณที่ใช้บริการ วิเชียรทรานสปอร์ต";
+                        } else {
+                            StatusName = "";
+                        }
+
+                        if (Remark != "" && Remark != null) {
+                            Remark = "<br>" + "** หมายเหตุ : " + response.data[i].remark;
+                        }
+
+                        if (Status == "07") {
+
+                            $('.tab-log ul').append('<li class="first-log"><span class="time">' +
+                                UseDate +
+                                '<br>' + UseTime +
+                                '</span><span class="line"></span><span class="icon route_icon_5 icon-truck "></span><span class="text">' +
+                                StatusName + '<br>' + TextDescription + Remark + '</span></li>');
+
+                        } else if (Status == "00") {
+
+                            $('.tab-log ul').append('<li class="end-log"><span class="time">' +
+                                UseDate + '<br>' + UseTime +
+                                '</span><span class="line"></span><span class="icon route_icon_1no icon-truck "></span><span class="text"> ' +
+                                StatusName + '<br>' + TextDescription + Remark +
+                                '</span></li> </span></li>');
+
+                        } else {
+
+                            $('.tab-log ul').append('<li><span class="time">' + UseDate + '<br>' +
+                                UseTime +
+                                '</span><span class="line"></span><span class="icon route_icon_3no icon-truck "></span><span class="text"> ' +
+                                StatusName + '<br>' + TextDescription + Remark +
+                                '</span></li> </span></li>');
+
+                        }
+
+
+                    }
+
+                }
+
+
+            } else {
+                swal("Oops", "Something went wrong!", "error");
+            }
+
         },
     });
 
 });
-
 </script>
