@@ -170,6 +170,8 @@
 
 <script>
 
+    let glodbal_status ;
+
     let global_product_id;
     let global_order_id;
 
@@ -217,9 +219,9 @@
                         const result = data.current_state == '09' ? data.current_state : data.on_status
                         var Status = "";
                         if(result == "02"){
-                            Status = "Pending";
+                            Status = "รอดำเนินการ";
                         }else {
-                            Status = "Close Job";
+                            Status = "รอปิดงาน";
                         }
 
                         return '<td>'+Status+'</td>';
@@ -238,6 +240,8 @@
     async function getOrder(product_id,status,order_id){
         global_product_id = product_id;
         global_order_id = order_id;
+
+        glodbal_status = status;
 
         if(status == "09"){
             $('#save-data').css('display','none');
@@ -395,6 +399,15 @@
                 }
             });
         }
+
+        if(glodbal_status == "09"){
+            $('#save-data').css('display','none');
+            $('#close-data').css('display','block');
+        }else{
+            $('#save-data').css('display','block');
+            $('#close-data').css('display','none');
+        }
+
     }
 
     async function deleteExpense(id,image_id){

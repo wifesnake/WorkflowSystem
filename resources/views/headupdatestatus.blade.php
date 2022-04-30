@@ -131,7 +131,24 @@
                         return '<td>'+ result +'</td>';
                     }
                 },
-                {data: "current_state"},
+                // {data: "current_state"},
+                {
+                    data: null,
+                    render:function(data,type,row){
+                    var StatusName = "";
+
+                    if (data.current_state == "07") {
+                        StatusName = " จัดส่งพัสดุสำเร็จ";
+                    } else if (data.current_state == "08") {
+                        StatusName = "พนักงานนำส่งเอกสาร";
+                    } else if (data.current_state == "09") {
+                        StatusName = "ตรวจเอกสารแล้ว";
+                    } else {
+                        StatusName = "";
+                    }
+                    return StatusName;
+                    }
+                },
                 {
                     data: null,
                     render:function(data,type,row){

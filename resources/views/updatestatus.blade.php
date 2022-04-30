@@ -560,8 +560,19 @@ async function getOrder2(product_id) {
                 className: "text-nowrap"
             },
             {
-                data: "ismainorder"
+                data: null,
+                render: function(data, type, row) {
+
+                    var IsMainOrder = "";
+                    if (data.ismainorder == "1") {
+                        IsMainOrder = "ออเดอร์หลัก";
+                    } else  {
+                        IsMainOrder = "ออเดอร์รอง";
+                    }
+                    return IsMainOrder;
+                }
             },
+
             // {
             //     data: "current_state"
             // },
