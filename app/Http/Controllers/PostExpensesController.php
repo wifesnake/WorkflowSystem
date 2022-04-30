@@ -17,7 +17,7 @@ class PostExpensesController extends Controller
         $data = DB:: select(
             "SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t4.to_phone,t5.regis_id,t6.value_lookup as vehicletype,".
             "CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,".
-            "t7.current_state,t2.order_id,t1.ord_product".
+            "t7.current_state,t2.order_id,t1.on_status".
             " FROM ord_product t1".
             " INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id".
             " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
