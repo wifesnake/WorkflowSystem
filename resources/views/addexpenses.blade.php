@@ -213,8 +213,16 @@
                 {
                     data: null,
                     render:function(data,type,row){
+                        
                         const result = data.current_state == '09' ? data.current_state : data.on_status
-                        return '<td>'+result+'</td>';
+                        var Status = "";
+                        if(result == "02"){
+                            Status = "Pending";
+                        }else {
+                            Status = "Close Job";
+                        }
+
+                        return '<td>'+Status+'</td>';
                     }
                 },
                 {
@@ -285,6 +293,7 @@
                 {
                     data: null,
                     render:function(data,type,row){
+
                         const str = data.expent_type == "001" ? "รายรับ" : "รายจ่าย";
                         return '<td>'+ str +'</td>';
                     }
