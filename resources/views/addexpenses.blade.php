@@ -240,7 +240,6 @@
     async function getOrder(product_id,status,order_id){
         global_product_id = product_id;
         global_order_id = order_id;
-
         glodbal_status = status;
 
         if(status == "09"){
@@ -386,7 +385,7 @@
                     $('#amount').val('');
                     $('#remark').val('');
                     $('#file').val('');
-                    getOrder(global_product_id);
+                    getOrder(global_product_id,glodbal_status,global_order_id);
                 }else{
                     $(document).Toasts('create', {
                         title: status,
@@ -425,7 +424,7 @@
                     fade: true,
                     class: "bg-success"
                 });
-                getOrder(global_product_id);
+                getOrder(global_product_id,glodbal_status,global_order_id);
             }else{
                 $(document).Toasts('create', {
                     title: status,
