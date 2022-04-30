@@ -9,7 +9,7 @@ class PostTrackController extends Controller
 {
 
     public function get($ord_vehicle){
-        $data = DB::select("SELECT tc.customer_name , tc.address , od.to_name , od.to_address , st.ord_vehicle, od.po , st.prev_state, st.current_state, st.created_by,st.created_at , st.description , st.remark FROM `states`  st left join `tb_order` od on st.ord_vehicle = od.order_id left join tb_customer tc on od.cust_code = tc.customer_id where st.ord_vehicle = ? or od.po = ?  order by st.created_at DESC;",[$ord_vehicle , $ord_vehicle]);
+        $data = DB::select("SELECT tc.customer_name , tc.address , od.to_name , od.to_address , st.ord_vehicle, od.po , st.prev_state, st.current_state, st.created_by,st.created_at , st.description , st.remark FROM `states`  st left join `tb_order` od on st.ord_vehicle = od.order_id left join tb_customer tc on od.cust_code = tc.customer_id where (st.ord_vehicle = ? or od.po = ?) and st.current_state in ('00','01','02','03','04','05','06','07') order by st.created_at DESC;",[$ord_vehicle , $ord_vehicle]);
 
         return [
             "success" => true,

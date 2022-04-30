@@ -31,7 +31,7 @@ span.login-image {
 
                     <form method="POST" action="{{ route('login') }}">
                         <span class="login-image">
-                            <img src="https://svgshare.com/i/Jcf.svg">
+                            <img src="{{ asset('img/Jcf.svg') }}">
                         </span>
                         @csrf
 
