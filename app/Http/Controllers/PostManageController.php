@@ -208,7 +208,11 @@ class PostManageController extends Controller
     }
 
     public function progressListExpense($employee_id){
-        $data = DB::select("SELECT t1.product_id,concat(t2.name,' ',t2.lastname) as fullname,t2.phone,t3.regis_id,t4.value_lookup as cartype, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t5.value_lookup as status, t2.employee_id FROM `ord_product` t1 LEFT JOIN employees t2 on t2.employee_id = t1.employee_code LEFT JOIN tb_vehicle t3 on t3.car_id = t1.car_id LEFT JOIN tb_lookup t4 on t4.code_lookup = t3.cartype and t4.name_lookup = 'vehicletype' LEFT JOIN tb_lookup t5 on t5.code_lookup = t1.on_status and t5.name_lookup = 'order_product' WHERE t1.status = ? AND t1.on_status = ? AND t2.employee_id = ?;",[1,"03",$employee_id]);
+        $str = "";
+        if($employee_id != "admin"){
+            $str = "AND t2.employee_id = ?;";
+        }
+        $data = DB::select("SELECT t1.product_id,concat(t2.name,' ',t2.lastname) as fullname,t2.phone,t3.regis_id,t4.value_lookup as cartype, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t5.value_lookup as status, t2.employee_id FROM `ord_product` t1 LEFT JOIN employees t2 on t2.employee_id = t1.employee_code LEFT JOIN tb_vehicle t3 on t3.car_id = t1.car_id LEFT JOIN tb_lookup t4 on t4.code_lookup = t3.cartype and t4.name_lookup = 'vehicletype' LEFT JOIN tb_lookup t5 on t5.code_lookup = t1.on_status and t5.name_lookup = 'order_product' WHERE t1.status = ? AND t1.on_status = ? ".$str,[1,"03",$employee_id]);
         return [
             "success" => true,
             "data" => $data
