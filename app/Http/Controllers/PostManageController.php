@@ -85,7 +85,8 @@ class PostManageController extends Controller
 
                     $isProductId = ($product_ids[$i]) ? $product_ids[$i] : $product_no;
 
-                    $exist = OrderProduct::where('product_id',$isProductId)->exists();
+                    $exist = OrderProduct::where('product_id',$isProductId)
+                                         ->where('status',1)->exists();
                     if(!$exist){
                         $model = new OrderProduct();
                         $model->product_id = $isProductId ;
@@ -336,7 +337,9 @@ class PostManageController extends Controller
 
         $data = OrderProduct::where("product_id",$product_id)->firstOrFail();
         $data->status = 0;
-        if($data->save()){
+        $data2 = OrderProductDetail::where('product_id',$product_id)->firstOrFail();
+        $data2->status = 0;
+        if($data->save() && $data2->save()){
             return [
                 "success" => true,
                 "message" => "updated successfully"
