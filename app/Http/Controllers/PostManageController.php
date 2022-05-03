@@ -187,6 +187,7 @@ class PostManageController extends Controller
             $data = DB::select("SELECT order_id FROM ord_productdetail WHERE product_id = ? GROUP BY order_id;",[$request->product_id]);
             foreach ($data as $item) {
                 $state = new States();
+                $state->systemcode = $request->product_id;
                 $state->ord_vehicle = $item->order_id;
                 $state->prev_state = "01";
                 $state->current_state = "02";
@@ -274,6 +275,7 @@ class PostManageController extends Controller
         }
 
         $state = new States();
+        $state->systemcode = $product_id;
         $state->ord_vehicle = $order_id;
         $state->prev_state = $track_now;
         $state->current_state = $track_update;
@@ -296,8 +298,10 @@ class PostManageController extends Controller
 
     public function headupdatestatus(Request $request){
         $order_id = $request->order_id;
+        $product_id = $request->product_id;
         $by = $request->by;
         $state = new States();
+        $state->systemcode = $product_id;
         $state->ord_vehicle = $order_id;
         $state->prev_state = "08";
         $state->current_state = "09";
@@ -326,6 +330,7 @@ class PostManageController extends Controller
         $data = DB::select("SELECT * FROM ord_productdetail WHERE product_id = ?;",[$product_id]);
         foreach ($data as $item) {
             $state = new States();
+            $state->systemcode = $product_id;
             $state->ord_vehicle = $item->order_id;
             $state->prev_state = "09";
             $state->current_state = "10";
@@ -333,28 +338,32 @@ class PostManageController extends Controller
             $state->formdata = "";
             $state->updated_by = $by;
             $state->save();
+
+            DB::select('UPDATE tb_order SET status = 0 WHERE order_id = ?',[$item->order_id]);
         }
 
-        $data = OrderProduct::where("product_id",$product_id)->firstOrFail();
-        $data->status = 0;
-        $data2 = OrderProductDetail::where('product_id',$product_id)->firstOrFail();
-        $data2->status = 0;
-        if($data->save() && $data2->save()){
+        // $data = OrderProduct::where("product_id",$product_id)->findOrFail();
+        // $data->status = 0;
+        // $data2 = OrderProductDetail::where('product_id',$product_id)->findOrFail();
+        // $data2->status = 0;
+        $data1 = DB::select('UPDATE ord_product SET status = 0 WHERE product_id = ?',[$product_id]);
+        $data2 = DB::select('UPDATE ord_productdetail SET status = 0 WHERE product_id = ?',[$product_id]);
+        // if($data1 && $data2){
             return [
                 "success" => true,
                 "message" => "updated successfully"
             ];
-        }else{
-            return [
-                "success" => false,
-                "message" => "updated unsuccessfully"
-            ];
-        }
+        // }else{
+        //     return [
+        //         "success" => false,
+        //         "message" => "updated unsuccessfully"
+        //     ];
+        // }
     }
 
     public function listheadproduct(){
 
-        $data = DB::select("SELECT t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t4.to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM ord_productdetail t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id and t2.status = 1 INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id INNER JOIN tb_order t4 on t4.order_id = t1.order_id INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
+        $data = DB::select("SELECT DISTINCT t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t6.phone as to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM ord_productdetail t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id and t2.status = 1 INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id INNER JOIN tb_order t4 on t4.order_id = t1.order_id INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
 
         return [
             "success" => true,

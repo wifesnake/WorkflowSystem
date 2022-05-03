@@ -171,7 +171,6 @@
 <script>
 
     let glodbal_status ;
-
     let global_product_id;
     let global_order_id;
 
@@ -230,19 +229,19 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        return '<td><div onClick="getOrder(\''+data.product_id +'\',\''+data.current_state+'\',\''+data.order_id+'\')" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div></td>';
+                        return '<td><div onClick="getOrder(\''+data.product_id+'\',\''+data.on_status/*+'\',\''+data.order_id*/+'\')" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div></td>';
                     }
                 }
             ]
         });
     }
 
-    async function getOrder(product_id,status,order_id){
+    async function getOrder(product_id,status/*,order_id*/){
         global_product_id = product_id;
-        global_order_id = order_id;
+        // global_order_id = order_id;
         glodbal_status = status;
 
-        if(status == "09"){
+        if(status == "03"){
             $('#save-data').css('display','none');
             $('#close-data').css('display','block');
         }else{
@@ -354,7 +353,7 @@
                 form_data.append('file', file_data);
                 form_data.append('product_id',global_product_id);
                 form_data.append('username',"{{ Auth::user()->name }}");
-                const type = "image_"+jsonData.expenese_type+"_"+jsonData.amount+"_"+jsonData.remark
+                const type = "image_"+global_product_id+"_"+jsonData.expenese_type+"_"+jsonData.amount+"_"+jsonData.remark
                 form_data.append('type_image',type);
                 $.ajax({
                     url: "{{ route('upload.uploadFile') }}", // <-- point to server-side PHP script 
@@ -385,7 +384,7 @@
                     $('#amount').val('');
                     $('#remark').val('');
                     $('#file').val('');
-                    getOrder(global_product_id,glodbal_status,global_order_id);
+                    getOrder(global_product_id/*,glodbal_status,global_order_id*/);
                 }else{
                     $(document).Toasts('create', {
                         title: status,
@@ -399,7 +398,7 @@
             });
         }
 
-        if(glodbal_status == "09"){
+        if(glodbal_status == "03"){
             $('#save-data').css('display','none');
             $('#close-data').css('display','block');
         }else{
@@ -424,7 +423,7 @@
                     fade: true,
                     class: "bg-success"
                 });
-                getOrder(global_product_id,glodbal_status,global_order_id);
+                getOrder(global_product_id/*,glodbal_status,global_order_id*/);
             }else{
                 $(document).Toasts('create', {
                     title: status,
@@ -496,7 +495,7 @@
             if (isConfirm) {
                 $.post('/api/progress/close',{
                     product_id: global_product_id,
-                    order_id: global_order_id,
+                    // order_id: global_order_id,
                     by: "{{ Auth::user()->name }}"
                 },(response,status)=>{
                     const { success, message } = response;

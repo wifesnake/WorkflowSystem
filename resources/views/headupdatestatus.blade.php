@@ -152,7 +152,7 @@
                 {
                     data: null,
                     render:function(data,type,row){
-                        const result = data.current_state == "08" ? "<div class='btn btn-secondary' onClick='updateStatus(\""+ data.order_id +"\")'>รับเอกสาร</div>" : ""
+                        const result = data.current_state == "08" ? "<div class='btn btn-secondary' onClick='updateStatus(\""+ data.order_id +"\",\""+ product_id +"\")'>รับเอกสาร</div>" : ""
                         return '<td>' + result + '</td>';
                     }
                 }
@@ -160,7 +160,7 @@
         });
     }
 
-    async function updateStatus(order_id){
+    async function updateStatus(order_id,product_id){
         swal({
             title: "",
             text: "ยืนยันรับเอกสาร",
@@ -173,6 +173,7 @@
         }).then(function(isConfirm) {
             if(isConfirm){
                 $.post('/api/progress/head/update',{
+                    product_id: product_id,
                     order_id: order_id,
                     by: "{{ Auth::user()->name }}"
                 },(response,status)=>{

@@ -18,7 +18,7 @@ class PostOrderController extends Controller
     }
 
     public function listOrder(){
-        $data = DB::select("select DISTINCT t1.order_id, t1.to_name from tb_order t1 LEFT JOIN ord_productdetail t2 ON t2.order_id = t1.order_id WHERE t1.order_id IN ( SELECT ord_vehicle FROM states WHERE id in ( SELECT max(id) FROM states GROUP BY ord_vehicle ) AND current_state IS NOT null AND current_state != '00' ) OR (t2.status is null) AND t2.status = ?;",[1]);
+        $data = DB::select("select DISTINCT order_id, to_name from tb_order WHERE status = ?;",[1]);
         return ['data' => $data];
     }
 
