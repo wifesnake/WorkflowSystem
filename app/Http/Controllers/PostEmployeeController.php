@@ -21,6 +21,8 @@ class PostEmployeeController extends Controller
     public function index()
     {
         //
+        $data = DB::select("SELECT t1.id,concat(t1.name,' ',t1.lastname) as fullname,t1.email,t1.phone,t1.salary,t2.value_lookup as 'employee_type',t3.value_lookup as 'department' FROM employees t1 LEFT JOIN tb_lookup t2 ON t2.code_lookup = t1.employee_type and t2.name_lookup = 'employeetype' LEFT JOIN tb_lookup t3 ON t3.code_lookup = t1.department and t3.name_lookup = 'department' WHERE t1.status = ?",[1]);
+        return ["data"=>$data];
     }
 
     public function driver(){

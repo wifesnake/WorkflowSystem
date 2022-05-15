@@ -109,13 +109,31 @@
 
             </div>
 
-            <div class="card mt-2">
+            {{-- <div class="card mt-2">
                 <section class="m-2">
                     <div class="com-md-12 table-responsive">
                         {!! $dataTable->table() !!}
                     </div>
                 </section>
                 {!! $dataTable->scripts() !!}
+            </div> --}}
+            <div class="card mt-2">
+                <section class="m-2">
+                    <div class="com-md-12 table-responsive">
+                        <table id="table-vehicle" class="table dataTable">
+                            <thead>
+                                <th>รหัสรถ</th>
+                                <th>หมายเลขทะเบียน</th>
+                                <th>รายละเอียดรถ</th>
+                                <th>สถานที่ใช้งาน</th>
+                                <th>ประเภทรถ</th>
+                                <th>สถานะของรถ</th>
+                                <th>#</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -237,6 +255,45 @@ const jsonFormat = {
     "car_location": "",
     "created_by": '{{ Auth::user()->name }}',
     "updated_by": '{{ Auth::user()->name }}'
+}
+
+$(document).ready(async function(){
+    await getVehicle();
+});
+
+async function getVehicle(){
+    const { data } = await $.get('/api/vehicle/list');
+    ListVehicle(data);
+}
+
+async function ListVehicle(data) {
+    if ($.fn.dataTable.isDataTable('#table-vehicle')) {
+        $('#table-vehicle').DataTable().destroy();
+    }
+    $('#table-vehicle').dataTable({
+        // ajax:{
+        //     url: "/api/expenses/listproduct",
+        //     type: "get"
+        // },
+        data: data,
+        processing: true,
+        destroy: true,
+        columns:[
+            {data: "car_id",className:"text-nowrap"},
+            {data: "regis_id"},
+            {data: "car_brand"},
+            {data: "customer_name"},
+            {data: "vehicletype"},
+            {data: "cartype"},
+            {
+                data: null,
+                render:function(data,type,row){
+                    return '<div onClick="onEdit('+data.id+',\'view\');" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div>&nbsp;<div onClick="onEdit('+data.id+',\'edit\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>&nbsp;<div onClick="onDelete('+data.id+',\''+data.regis_id+'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+                },
+                className:"text-nowrap"
+            }
+        ]
+    });
 }
 
 function onEdit(id,isView) {

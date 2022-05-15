@@ -48,12 +48,14 @@ Route::get('/request/{id}',[PostRequestController::class, 'show']);
 Route::post('/request',[PostRequestController::class, 'store']);
 
 Route::post('/employee',[PostEmployeeController::class, 'store']);
+Route::get('/employee/list',[PostEmployeeController::class, 'index']);
 Route::delete('/employee/{id}',[PostEmployeeController::class, 'destroy']);
 Route::get('/employee/{id}',[PostEmployeeController::class, 'show']);
 Route::PUT('/employee/{id}',[PostEmployeeController::class, 'update']);
 Route::get('/driver',[PostEmployeeController::class, 'driver']);
 
 Route::post('/vehicle',[PostVehicleController::class, 'store']);
+Route::get('/vehicle/list',[PostVehicleController::class, 'index']);
 Route::delete('/vehicle/{id}',[PostVehicleController::class, 'destroy']);
 Route::get('/vehicle/{id}',[PostVehicleController::class, 'show']);
 Route::PUT('/vehicle/{id}',[PostVehicleController::class, 'update']);

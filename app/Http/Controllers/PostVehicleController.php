@@ -18,7 +18,8 @@ class PostVehicleController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::select("SELECT t1.id,t1.car_id,t1.regis_id,t1.car_brand,t2.customer_name,t3.value_lookup as vehicletype,t4.value_lookup as cartype FROM tb_vehicle t1 INNER JOIN tb_customer t2 ON t2.customer_id = t1.car_location INNER JOIN tb_lookup t3 ON t3.code_lookup = t1.isTrucktype AND t3.name_lookup = 'vehicletype' INNER JOIN tb_lookup t4 ON t4.code_lookup = t1.cartype AND t4.name_lookup = 'usevehicle' WHERE t1.status = ?",[1]);
+        return ["data" => $data];
     }
 
     public function car(){

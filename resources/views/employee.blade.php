@@ -138,13 +138,31 @@
                     </div>
                 </form>
             </div>
-            <div class="card mt-2">
+            {{-- <div class="card mt-2">
                 <section class="m-2">
                     <div class="col-md-12 table-responsive">
                         {!! $dataTable->table() !!}
                     </div>
                 </section>
                 {!! $dataTable->scripts() !!}
+            </div> --}}
+            <div class="card mt-2">
+                <section class="m-2">
+                    <div class="com-md-12 table-responsive">
+                        <table id="table-employee" class="table dataTable">
+                            <thead>
+                                <th>ชื่อ-นามสกุล</th>
+                                <th>อีเมล์</th>
+                                <th>หมายเลขโทรศัพท์</th>
+                                <th>เงินเดือน</th>
+                                <th>ประเภทพนักงาน</th>
+                                <th>หน่วยงาน</th>
+                                <th>#</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -285,6 +303,8 @@
 
 <script>
 
+
+
 const jsonFormat = {
     "titlename": "",
     "name": "",
@@ -299,6 +319,45 @@ const jsonFormat = {
     "department": "",
     "created_by": '{{ Auth::user()->name }}',
     "updated_by": '{{ Auth::user()->name }}'
+}
+
+$(document).ready(async function(){
+    await getEmployee();
+});
+
+async function getEmployee(){
+    const { data } = await $.get('/api/employee/list');
+    ListEmployee(data);
+}
+
+async function ListEmployee(data) {
+    if ($.fn.dataTable.isDataTable('#table-employee')) {
+        $('#table-employee').DataTable().destroy();
+    }
+    $('#table-employee').dataTable({
+        // ajax:{
+        //     url: "/api/expenses/listproduct",
+        //     type: "get"
+        // },
+        data: data,
+        processing: true,
+        destroy: true,
+        columns:[
+            {data: "fullname",className:"text-nowrap"},
+            {data: "email"},
+            {data: "phone"},
+            {data: "salary"},
+            {data: "employee_type"},
+            {data: "department"},
+            {
+                data: null,
+                render:function(data,type,row){
+                    return '<div onClick="onEdit('+data.id+',\'view\');" class="btn btn-sm btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">View</div>&nbsp;<div onClick="onEdit('+data.id+',\'edit\');" class="btn btn-sm btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Edit</div>&nbsp;<div onClick="onDelete('+data.id+',\''+data.fullname+'\');" class="btn btn-sm btn-danger btn-sm">Delete</div>';
+                },
+                className:"text-nowrap"
+            }
+        ]
+    });
 }
 
 function onEdit(id,isView) {
