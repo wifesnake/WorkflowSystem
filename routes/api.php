@@ -13,6 +13,7 @@ use App\Http\Controllers\PostImageController;
 use App\Http\Controllers\PostManageController;
 use App\Http\Controllers\PostOrderController;
 use App\Http\Controllers\PostPermissionController;
+use App\Http\Controllers\PostReportController;
 use App\Http\Controllers\PostTrackController;
 use App\Http\Resources\PostEmployeeResource;
 use Illuminate\Http\Request;
@@ -103,6 +104,8 @@ Route::get('/progress/listheadproduct',[PostManageController::class, 'listheadpr
 Route::get('/progress/listheadorder/{product_id}',[PostManageController::class, 'listheadorder']);
 Route::post('/progress/head/update',[PostManageController::class, 'headupdatestatus']);
 Route::post('/progress/close',[PostManageController::class, 'close']);
+
+Route::get('/report/order/list',[PostReportController::class, 'reportOrder']);
 
 Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
 

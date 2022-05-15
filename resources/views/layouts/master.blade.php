@@ -35,16 +35,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vichean.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
+
+    {{-- export datatable css --}}
 
     <!-- Script -->
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/jquery.signature.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
     <script src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
+    <script src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
+
+    {{-- export datatable --}}
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini">

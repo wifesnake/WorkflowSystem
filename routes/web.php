@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductcarController;
 use App\Http\Controllers\ProductmasterController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\HistoryStatusController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UpdateOrderStatusController;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,6 +74,8 @@ Route::get('/manage',[ManageController::class, 'index']);
 Route::get('/managecar',[ManageController::class, 'car']);
 Route::get('/manageemployeecar',[ManageController::class, 'employeecar']);
 Route::get('/headupdate',[ManageController::class, 'headupdate']);
+
+Route::get('/report',[ReportController::class, 'index']);
 
 });
 
