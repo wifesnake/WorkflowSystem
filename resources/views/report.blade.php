@@ -28,7 +28,10 @@
                                             <th>ที่อยู่ผู้ส่ง</th>
                                             <th>ชื่อผู้รับ</th>
                                             <th>ที่อยู่ผู้รับ</th>
+                                            <th>โทรศัพท์</th>
                                             <th>ประเภทของสินค้า</th>
+                                            <th>จำนวนสินค้า(ชิ้น/กล่อง)</th>
+                                            <th>น้ำหนัก(กิโลกรัม)</th>
                                             <th>ชื่อคนขับรถ</th>
                                             <th>ทะเบียนรถ</th>
                                         </thead>
@@ -37,7 +40,23 @@
                                 </div>
                             </section>
                         </div>
-                        <div class="tab-pane fade" id="nav-expense" role="tabpanel" aria-labelledby="nav-expense-tab">กำลังปรับปรุง</div>
+                        <div class="tab-pane fade" id="nav-expense" role="tabpanel" aria-labelledby="nav-expense-tab">
+                            <section class="mt-2 mb-2">
+                                <div class="com-md-12 table-responsive">
+                                    <table id="table-expense" class="table dataTable">
+                                        <thead>
+                                            <th>รหัสโปรดักส์</th>
+                                            <th>รายรับ</th>
+                                            <th>รายจ่าย</th>
+                                            <th>พนักงานขับรถ</th>
+                                            <th>วันที่รับออเดอร์</th>
+                                            <th>วันที่จัดส่งสำเร็จ</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
                     </div>                      
                 </div>
             </div>
@@ -61,11 +80,17 @@
 <script>
     $(document).ready(function(){
         getOrder();
+        getExspense();
     });
 
     async function getOrder(){
         const { data } = await $.get('/api/report/order/list');
         listOrder(data);
+    }
+
+    async function getExspense(){
+        const { data } = await $.get('/api/report/order/expense');
+        ListExspense(data);
     }
 
     function listOrder(data){
@@ -88,11 +113,53 @@
                 {data: "sender_address"},
                 {data: "reciever_name",className:"text-nowrap"},
                 {data: "reciever_address"},
+                {data: "reciever_phone"},
                 {data: "product_desc"},
+                {data: "product_number"},
+                {data: "weight"},
                 {data: "driver_name",className:"text-nowrap"},
                 {data: "regis_id"}
             ]
         });
+    }
+
+    function ListExspense(data){
+        if ($.fn.dataTable.isDataTable('#table-expense')) {
+            $('#table-expense').DataTable().destroy();
+        }
+        $('#table-expense').dataTable({
+            data: data,
+            processing: true,
+            destroy: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf'
+            ],
+            columns:[
+                {data: "product_id",className:"text-nowrap"},
+                // {data: "receive_amount",className:"text-nowrap"},
+                // {data: "pay_amount",className:"text-nowrap"},
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.receive_amount));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.pay_amount));
+                    }
+                },
+                {data: "driver_name",className:"text-nowrap"},
+                {data: "start_date",className:"text-nowrap"},
+                {data: "end_date",className:"text-nowrap"}
+            ]
+        });
+    }
+
+    function currencyFormat(data){
+        return (data).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
 </script>
 

@@ -20,6 +20,7 @@ class Order extends Model
         "to_phone",
         "product_type",
         "product_desc",
+        "product_number",
         "m_unit",
         "L_unit",
         "weight",

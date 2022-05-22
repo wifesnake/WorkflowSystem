@@ -50,6 +50,7 @@ class PostRequestController extends Controller
         $post->to_phone = $request->to_phone;
         $post->product_type = $request->product_type;
         $post->product_desc = $request->product_desc;
+        $post->product_number = $request->product_number;
         $post->m_unit = $request->m_unit;
         $post->L_unit = $request->L_unit;
         $post->weight = $request->weight;

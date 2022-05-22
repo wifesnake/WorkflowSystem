@@ -217,6 +217,14 @@ $var1 = $ordno;
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-3">
+                                จำนวนสินค้า (ชิ้น/กล่อง) <b class="request-data">**</b> :
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" step="1" name="product_number" id="product_number" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-3">
                                 น้ำหนัก (kg) <b class="request-data">**</b> :
                             </div>
                             <div class="col-md-8">
@@ -263,6 +271,7 @@ $var1 = $ordno;
         "to_phone":"",
         "product_type":"",
         "product_desc":"",
+        "product_number":"",
         "car_type":"",
         "m_unit":"",
         "L_unit":"",
@@ -286,6 +295,7 @@ $var1 = $ordno;
         "to_phone":"",
         "product_type":"",
         "product_desc":"",
+        "product_number":"",
         "car_type":"",
         "m_unit":"",
         "L_unit":"",
@@ -319,74 +329,75 @@ $var1 = $ordno;
         }
     });
 
-$("#save-data").click(function($this) {
+    $("#save-data").click(function($this) {
 
-    swal({
-        title: "",
-        text: "คุณแน่ใจว่าต้องการบันทึกข้อมูลการจัดส่งสินค้านี้ ?",
-        icon: "warning",
-        buttons: {
-            confirm: true,
-            cancel: true,
-        },
-        infoMode: true,
-    }).then(async function(isConfirm) {
-        if (isConfirm) {
+        swal({
+            title: "",
+            text: "คุณแน่ใจว่าต้องการบันทึกข้อมูลการจัดส่งสินค้านี้ ?",
+            icon: "warning",
+            buttons: {
+                confirm: true,
+                cancel: true,
+            },
+            infoMode: true,
+        }).then(async function(isConfirm) {
+            if (isConfirm) {
 
-            await $('#f-field1').find('select,input,textarea').each(function(i, box) {
-                const name = $(box).attr("name");
-                if(name){
-                    Jsonformat[name] = $("[name~="+name+"]").val();
-                }
-            });
-
-            await $('#form1').find('select,input,textarea').each(function(i,doc){
-                const name = $(doc).attr("name");
-                if(name){
-                    Jsonformat[name] = $("[name~="+name+"]").val();
-                }
-            });
-
-            Jsonformat["base64"] = Base64.encode(JSON.stringify(Jsonformat));
-
-            await $.ajax({
-                url: "{{url('api/request')}}",
-                type: "POST",
-                data: Jsonformat,
-                success: function(response, status) {
-                    if(status == "success"){
-                        window.location.href = "{{ url('/workinprogress') }}";
+                await $('#f-field1').find('select,input,textarea').each(function(i, box) {
+                    const name = $(box).attr("name");
+                    if(name){
+                        Jsonformat[name] = $("[name~="+name+"]").val();
                     }
-                },
-            });
+                });
 
-        } else {
+                await $('#form1').find('select,input,textarea').each(function(i,doc){
+                    const name = $(doc).attr("name");
+                    if(name){
+                        Jsonformat[name] = $("[name~="+name+"]").val();
+                    }
+                });
 
-            Jsonformat = {
-                "order_id":"",
-                "po":"",
-                "cust_code":"customer_id",
-                "cust_name":"",
-                "cust_address":"address",
-                "cust_presonalcode":"customer_person_number",
-                "order_remark":"",
-                "to_name":"",
-                "to_address":"",
-                "to_phone":"",
-                "product_type":"",
-                "product_desc":"",
-                "m_unit":"",
-                "L_unit":"",
-                "weight":"",
-                "remark":"",
-                "created_by": '{{ Auth::user()->name }}',
-                "updated_by": '{{ Auth::user()->name }}'
+                Jsonformat["base64"] = Base64.encode(JSON.stringify(Jsonformat));
+
+                await $.ajax({
+                    url: "{{url('api/request')}}",
+                    type: "POST",
+                    data: Jsonformat,
+                    success: function(response, status) {
+                        if(status == "success"){
+                            window.location.href = "{{ url('/workinprogress') }}";
+                        }
+                    },
+                });
+
+            } else {
+
+                Jsonformat = {
+                    "order_id":"",
+                    "po":"",
+                    "cust_code":"customer_id",
+                    "cust_name":"",
+                    "cust_address":"address",
+                    "cust_presonalcode":"customer_person_number",
+                    "order_remark":"",
+                    "to_name":"",
+                    "to_address":"",
+                    "to_phone":"",
+                    "product_type":"",
+                    "product_desc":"",
+                    "product_number":"",
+                    "m_unit":"",
+                    "L_unit":"",
+                    "weight":"",
+                    "remark":"",
+                    "created_by": '{{ Auth::user()->name }}',
+                    "updated_by": '{{ Auth::user()->name }}'
+                }
+
+                return false;
             }
-
-            return false;
-        }
+        });
     });
-});
 </script>
 
 @endsection
