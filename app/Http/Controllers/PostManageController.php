@@ -222,7 +222,7 @@ class PostManageController extends Controller
     }
 
     public function progressGetExpense($product_id){
-        $data = DB::select("SELECT t2.value_lookup as paytype, t1.amount, t1.remark, t3.base64 FROM tb_expent t1 LEFT JOIN tb_lookup t2 ON t2.code_lookup = t1.expent_type and t2.name_lookup = 'paytype' LEFT JOIN tb_image t3 ON t3.type_image = concat('image_',t1.expent_type,'_',t1.amount,'_',t1.remark) WHERE t1.product_id = ? AND t3.status = ?;",[$product_id,1]);
+        $data = DB::select("SELECT t2.value_lookup as paytype, t1.amount, t1.remark, t3.base64 FROM tb_expent t1 LEFT JOIN tb_lookup t2 ON t2.code_lookup = t1.expent_type and t2.name_lookup = 'paytype' LEFT JOIN tb_image t3 ON t3.type_image = concat('image_',t1.expent_type,'_',t1.amount,'_',t1.remark) WHERE t1.product_id = ? /*AND t3.status = ?;*/",[$product_id,1]);
         return [
             "success" => true,
             "data" => $data
