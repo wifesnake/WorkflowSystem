@@ -667,15 +667,15 @@ span.line {
             </ul>
             </li>
             <li class="tab-sign none" style="display: none;">
-                <div class="tab-pic-row">
+                <!-- <div class="tab-pic-row">
                     <div class="tab-pic-label">ใบรับรองการเซ็นรับ</div>
                     <div>วิไลพร แก้วผึ้ง(เจ้าของสินค้า)</div>
-                </div>
-                <div class="tab-pic-row">
-                    <div class="tab-pic-label">ลายเซ็น</div>
-                    <div><img
-                            src="https://fle-asset-internal.oss-ap-southeast-1.aliyuncs.com/deliveryConfirm/1627357848-be3e1947754c4edebbf784219df631a6.jpg"
-                            width="300" alt=""><br></div>
+                </div> -->
+                <div class="tab-pic-row" style=" padding: 30px; ">
+                    <!-- <div class="tab-pic-label">ลายเซ็น</div> -->
+                    <div><img id="signImg"
+                            src=""
+                            alt=""><br></div>
                 </div>
             </li>
             </ul>
@@ -697,6 +697,27 @@ span.line {
 
 <script>
 
+$("p:first").addClass("intro");
+$( "p" ).removeClass( "myClass yourClass" )
+
+$(".tab-title-a").on('click', function(event){
+    $(".tab-title-a").addClass("tab-active");
+    $(".tab-title-b" ).removeClass( "tab-active" );
+
+    $('.tab-con').show();
+    $('.tab-sign').hide();
+
+});
+
+$(".tab-title-b").on('click', function(event){
+    $(".tab-title-b").addClass("tab-active");
+    $(".tab-title-a" ).removeClass( "tab-active" );
+
+    $('.tab-con').hide(); 
+    $('.tab-sign').show();
+
+});
+
 $('.waybill-query-res').hide();
 
 $("#search_tracking").click(function($this) {
@@ -710,7 +731,6 @@ $("#search_tracking").click(function($this) {
         type: "GET",
         data: {},
         success: function(response, status) {
-            console.log(response);
 
             if (status == "success") {
 
@@ -722,8 +742,11 @@ $("#search_tracking").click(function($this) {
                 } else {
 
                     $('.waybill-query-res').show();
+                    $('img#signImg').attr('src', '');
 
                     for (i = 0; i < response.data.length; i++) {
+
+
 
                         var FullDateTime = response.data[i].created_at;
                         const ArreyDateTime = FullDateTime.split(" ");
@@ -736,6 +759,7 @@ $("#search_tracking").click(function($this) {
                         var TextDescription = "";
                         var Remark = "";
 
+                        
                         if (Status == "00") {
 
                             $("#trackingid").text(response.data[i].ord_vehicle);
@@ -777,6 +801,8 @@ $("#search_tracking").click(function($this) {
                         }
 
                         if (Status == "07") {
+
+                            $('img#signImg').attr('src', response.data[i].base64);
 
                             $('.tab-log ul').append('<li class="first-log"><span class="time">' +
                                 UseDate +
