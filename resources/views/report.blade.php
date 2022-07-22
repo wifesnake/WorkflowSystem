@@ -34,6 +34,7 @@
                                             <th>น้ำหนัก(กิโลกรัม)</th>
                                             <th>ชื่อคนขับรถ</th>
                                             <th>ทะเบียนรถ</th>
+                                            <th>ประเภทรถ</th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
@@ -118,7 +119,8 @@
                 {data: "product_number"},
                 {data: "weight"},
                 {data: "driver_name",className:"text-nowrap"},
-                {data: "regis_id"}
+                {data: "regis_id"},
+                {data: "isTrucktype"}
             ]
         });
     }
