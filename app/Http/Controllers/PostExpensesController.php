@@ -21,9 +21,9 @@ class PostExpensesController extends Controller
         " FROM (SELECT * from ord_product where status = ?) t1".
         " INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id".
         " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
-        " INNER JOIN tb_order t4 on t4.order_id = t2.order_id".
-        //" INNER JOIN tb_vehicle t5 on t5.car_id = t1.car_id".
-        " INNER JOIN (select * from tb_lookup where name_lookup = 'vehicletype' ) t6 on t6.code_lookup = t5.isTrucktype  ".
+        //" INNER JOIN tb_order t4 on t4.order_id = t2.order_id".
+        " INNER JOIN tb_vehicle t5 on t5.car_id = t1.car_id".
+        " INNER JOIN (select * from tb_lookup where name_lookup = 'vehicletype' ) t6 on t6.code_lookup = t5.isTrucktype ".
         " WHERE (t1.product_id not in (".
         "SELECT product_id from (".
         "SELECT t1.product_id,t2.ord_vehicle,t2.current_state from ord_productdetail t1 ".
