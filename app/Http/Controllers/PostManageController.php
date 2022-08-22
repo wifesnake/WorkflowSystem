@@ -363,8 +363,7 @@ class PostManageController extends Controller
 
     public function listheadproduct(){
 
-        $data = DB::select("SELECT DISTINCT t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t6.phone as to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM ord_productdetail t1 INNER JOIN ord_product t2 ON t2.product_id = t1.product_id and t2.status = 1 INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id INNER JOIN tb_order t4 on t4.order_id = t1.order_id INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
-
+        $data = DB::select("SELECT DISTINCT t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t6.phone as to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM (select * from ord_product where status = 1)  t2  INNER JOIN ord_productdetail t1 on t2.product_id = t1.product_id INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id INNER JOIN tb_order t4 on t4.order_id = t1.order_id INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
         return [
             "success" => true,
             "message" => "updated successfully",

@@ -18,7 +18,7 @@ class PostExpensesController extends Controller
         "CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,".
         // "t7.current_state,t2.order_id,t1.on_status".
         "t1.on_status".
-        " FROM ord_product t1".
+        " FROM (SELECT * from ord_product where status = ?) t1".
         " INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id".
         " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
         " INNER JOIN tb_order t4 on t4.order_id = t2.order_id".
@@ -29,7 +29,7 @@ class PostExpensesController extends Controller
         "SELECT t1.product_id,t2.ord_vehicle,t2.current_state from ord_productdetail t1 ".
         "LEFT JOIN (SELECT ord_vehicle,max(current_state) as current_state FROM states WHERE current_state = '09' GROUP BY ord_vehicle) t2 on t2.ord_vehicle = t1.order_id".
         ") t1 where ord_vehicle is null".
-        ") or t1.on_status = '02') and t1.status = ?;";
+        ") or t1.on_status = '02') ;";
         $data = DB:: select($sql,[1]);
         return [
             "success" => true,
