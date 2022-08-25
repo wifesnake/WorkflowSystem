@@ -438,6 +438,7 @@ async function init() {
         syncField: '#signature64',
         syncFormat: 'PNG'
     });
+
     $('#clear').click(function(e) {
         e.preventDefault();
         sig.signature('clear');

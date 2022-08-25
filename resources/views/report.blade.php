@@ -24,6 +24,7 @@
                                             <th>รหัสออเดอร์</th>
                                             <th>วันที่รับออเดอร์</th>
                                             <th>วันที่จัดส่งสำเร็จ</th>
+                                            <th>วันที่ตรวจเอกสาร</th>
                                             <th>ชื่อผู้ส่ง</th>
                                             <th>ที่อยู่ผู้ส่ง</th>
                                             <th>ชื่อผู้รับ</th>
@@ -110,6 +111,7 @@
                 {data: "order_id",className:"text-nowrap"},
                 {data: "start_date",className:"text-nowrap"},
                 {data: "end_date",className:"text-nowrap"},
+                {data: "check_doc",className:"text-nowrap"},
                 {data: "sender_name",className:"text-nowrap"},
                 {data: "sender_address"},
                 {data: "reciever_name",className:"text-nowrap"},

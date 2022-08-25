@@ -51,6 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
     <script src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
     <script src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.js') }}" defer></script>
 
     {{-- export datatable --}}
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
