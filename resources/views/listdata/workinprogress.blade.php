@@ -69,7 +69,7 @@
                         // { "data": "m_unit" },
                         { "data": "weight" },
                         { "data": "state_name" },
-                        { "data": "datetime_th"},
+                        { "data": "created_at"},
                         {
                             data: null,
                             render:function(data,type,row){

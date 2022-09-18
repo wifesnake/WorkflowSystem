@@ -28,6 +28,15 @@ class PostReportController extends Controller
         return ["data" => $data];
     }
 
+    public function reportAgency(Request $request){
+        $query = "";
+        if($request->date != ""){
+            $query = " WHERE CONCAT( DATE_FORMAT( pickup_date , '%Y' ) ,'-', DATE_FORMAT( pickup_date , '%m' )) = '".$request->date."'";
+        }
+        $data = DB::select("SELECT ROW_NUMBER() OVER (ORDER BY t1.pickup_date) row_num, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' )) as pickup_date,t4.customer_name,CONCAT(t6.name,' ',t6.lastname) as driver,t5.regis_id as car_sign, t7.value_lookup as car_type,t3.po,t3.order_id,t3.to_name,t3.to_address,t3.product_number,CONCAT( DATE_FORMAT( t8.created_at , '%d' ), '/', DATE_FORMAT( t8.created_at , '%m' ) ,'/', DATE_FORMAT( t8.created_at , '%Y' )) as date_received,CONCAT('') as clear_bill,t1.product_id,IF(ISNULL(t9.amount)>0,0,t9.amount) as income,IF(ISNULL(t10.amount)>0,0,t10.amount) as payment FROM `ord_product` t1 LEFT JOIN ord_productdetail t2 on t2.product_id = t1.product_id LEFT JOIN tb_order t3 on t3.order_id = t2.order_id LEFT JOIN tb_customer t4 on t4.customer_id = t3.cust_code LEFT JOIN tb_vehicle t5 on t5.car_id = t1.car_id LEFT JOIN employees t6 on t6.employee_id = t1.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.isTrucktype AND t7.name_lookup = 'vehicletype' LEFT JOIN (SELECT ord_vehicle, current_state,created_at FROM states WHERE current_state = '07') t8 on t8.ord_vehicle = t3.order_id LEFT JOIN (SELECT product_id, expent_type, SUM(amount) as amount FROM `tb_expent` WHERE expent_type = '001' GROUP BY product_id, expent_type) t9 on t9.product_id = t1.product_id LEFT JOIN (SELECT product_id, expent_type, SUM(amount) as amount FROM `tb_expent` WHERE expent_type = '002' GROUP BY product_id, expent_type) t10 on t10.product_id = t1.product_id".$query." ORDER BY t1.pickup_date DESC;");
+        return ["data" => $data];
+    }
+
     /**
      * Show the form for creating a new resource.
      *

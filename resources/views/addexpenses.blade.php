@@ -138,12 +138,18 @@
                             <table id="table-expenses" class="table dataTable">
                                 <thead>
                                     <th>ประเภทค่าใช้จ่าย</th>
-                                    <th>จำนวนเงิน</th>
+                                    <th>จำนวนเงิน (บาท)</th>
                                     <th>หมายเหตุ</th>
                                     <th>ไฟล์</th>
                                     <th>#</th>
                                 </thead>
                                 <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>รวมทั้งหมด:</th>
+                                        <th colspan="4"></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </section>
@@ -317,7 +323,34 @@
                         return '<td><div onClick="deleteExpense(\''+data.id+'\','+ image_id +')" class="btn btn-sm btn-danger btn-sm">ลบ</div></td>';
                     }
                 }
-            ]
+            ],
+            footerCallback: function (row, data, start, end, display){
+                const api = this.api();
+                console.log(api);
+                // Remove the formatting to get integer data for summation
+                const intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                // Total over all pages
+                const total = api
+                    .column(1)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                const pageTotal = api
+                    .column(1, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // Update footer
+                $(api.column(1).footer()).html(pageTotal + ' ( ' + total + ' )');
+            }
         });
     }
 
