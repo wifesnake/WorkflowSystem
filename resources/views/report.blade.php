@@ -22,6 +22,7 @@
                                     <table id="table-order" class="table dataTable">
                                         <thead>
                                             <th>รหัสออเดอร์</th>
+                                            <th>เลขที่ PO</th>
                                             <th>วันที่รับออเดอร์</th>
                                             <th>วันที่จัดส่งสำเร็จ</th>
                                             <th>วันที่ตรวจเอกสาร</th>
@@ -109,6 +110,7 @@
             ],
             columns:[
                 {data: "order_id",className:"text-nowrap"},
+                {data: "po",className:"text-nowrap"},
                 {data: "start_date",className:"text-nowrap"},
                 {data: "end_date",className:"text-nowrap"},
                 {data: "check_doc",className:"text-nowrap"},
