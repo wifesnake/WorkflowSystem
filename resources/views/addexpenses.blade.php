@@ -138,7 +138,7 @@
                             <table id="table-expenses" class="table dataTable">
                                 <thead>
                                     <th>ประเภทค่าใช้จ่าย</th>
-                                    <th>จำนวนเงิน</th>
+                                    <th>จำนวนเงิน (บาท)</th>
                                     <th>หมายเหตุ</th>
                                     <th>ไฟล์</th>
                                     <th>#</th>
