@@ -107,6 +107,7 @@ Route::post('/progress/close',[PostManageController::class, 'close']);
 
 Route::get('/report/order/list',[PostReportController::class, 'reportOrder']);
 Route::get('/report/order/expense',[PostReportController::class, 'reportExspense']);
+Route::post('/report/order/agency',[PostReportController::class, 'reportAgency']);
 
 Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
 
