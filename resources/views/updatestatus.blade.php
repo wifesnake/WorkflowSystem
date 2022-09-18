@@ -438,6 +438,7 @@ async function init() {
         syncField: '#signature64',
         syncFormat: 'PNG'
     });
+
     $('#clear').click(function(e) {
         e.preventDefault();
         sig.signature('clear');
@@ -524,8 +525,8 @@ async function getOrder(product_id) {
             {
                 data: null,
                 render: function(data, type, row) {
-                    console.log(row);
-                    return '<img src="' + data.base64 + '" width="150px">';
+                    const img = '<img src="' + data.base64 + '" width="150px">';
+                    return data.base64 ? img : "" ;
                 }
             }
         ]

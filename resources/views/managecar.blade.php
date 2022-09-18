@@ -104,7 +104,7 @@
 <script>
 
     let arrayOrder = [];
-    let listProductDetail;
+    let listProductDetail = [];
     let listProduct;
     let ref_product_id;
 

@@ -31,6 +31,9 @@ class RequestController extends Controller
         $leftmenu["formnames"] = $this->getFormDependency();
         //dd($leftmenu);
 
+        //$OrderNo = "VC" . substr(date("Y") , 2 , 2) . str_replace("VE","",$this->GetLastOrder()) . "TH";
+        //dd($OrderNo);
+
         return view('request',$leftmenu);
     }
 

@@ -41,8 +41,12 @@ class PostRequestController extends Controller
      */
     public function store(Request $request)
     {
+        $OrderNo = "VC" . substr(date("Y") , 2 , 2) . str_replace("VE","",$this->GetLastOrder()) . "TH";
+        //$OrderNo = $this->GetLastOrder();
+        //dd($OrderNo);
+
         $post = new Order();
-        $post->order_id = $request->order_id;
+        $post->order_id = $OrderNo;
         $post->po = $request->po;
         $post->cust_code = $request->cust_code;
         $post->to_name = $request->to_name;
@@ -73,7 +77,7 @@ class PostRequestController extends Controller
 
             $state = new States();
             $state->systemcode = null;
-            $state->ord_vehicle = $request->order_id;
+            $state->ord_vehicle = $OrderNo;
             $state->prev_state = null;
             $state->current_state = "00";
             $state->formdata = $request->base64;
@@ -83,7 +87,7 @@ class PostRequestController extends Controller
 
             $flow = new Flow();
             $flow->systemcode = null;
-            $flow->ord_vehicle = $request->order_id;
+            $flow->ord_vehicle = $OrderNo;
             $flow->prev_state = null;
             $flow->current_state = "00";
             $flow->status = 1;
@@ -94,6 +98,19 @@ class PostRequestController extends Controller
             return new PostRequestResource($post);
 
         }
+    }
+
+    protected function GetLastOrder(){
+        $runno = DB::select("select lpad(lpad(runno,6,'0'),8,'VE') as runno FROM tb_runorderno WHERE status = ? and istype='ordervehicle' limit 1",['1']);
+
+        $isRunno = "";
+        foreach ($runno as $key => $value) {
+            foreach($value as $key2 => $value2){
+                $isRunno = $value2;
+            }
+        }
+
+        return $isRunno;
     }
 
     /**
