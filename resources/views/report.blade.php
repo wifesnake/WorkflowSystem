@@ -19,6 +19,14 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
                             <section class="mt-2 mb-2">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input class="form-control" type="month" name="order-date" id="order-date">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="btn btn-primary" onclick="getOrderByDate()">ค้นหา</div>
+                                    </div>
+                                </div>
                                 <div class="com-md-12 table-responsive">
                                     <table id="table-order" class="table dataTable">
                                         <thead>
@@ -46,6 +54,14 @@
                         </div>
                         <div class="tab-pane fade" id="nav-expense" role="tabpanel" aria-labelledby="nav-expense-tab">
                             <section class="mt-2 mb-2">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input class="form-control" type="month" name="expense-date" id="expense-date">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="btn btn-primary" onclick="getExspenseByDate()">ค้นหา</div>
+                                    </div>
+                                </div>
                                 <div class="com-md-12 table-responsive">
                                     <table id="table-expense" class="table dataTable">
                                         <thead>
@@ -124,18 +140,30 @@
     });
 
     async function getOrder(){
-        const { data } = await $.get('/api/report/order/list');
+        const { data } = await $.post('/api/report/order/list',{date: ""});
         listOrder(data);
     }
 
     async function getExspense(){
-        const { data } = await $.get('/api/report/order/expense');
+        const { data } = await $.post('/api/report/order/expense',{date: ""});
         ListExspense(data);
     }
 
     async function getAgency(){
         const { data } = await $.post('/api/report/order/agency',{date: ""});
         ListAgency(data);
+    }
+
+    async function getOrderByDate(){
+        const date = $('[name=order-date]').val();
+        const { data } = await $.post('/api/report/order/list',{date: date});
+        listOrder(data);
+    }
+
+    async function getExspenseByDate(){
+        const date = $('[name=expense-date]').val();
+        const { data } = await $.post('/api/report/order/expense',{date: date});
+        ListExspense(data);
     }
 
     async function getAgencyByDate(){
