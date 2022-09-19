@@ -363,7 +363,7 @@ class PostManageController extends Controller
 
     public function listheadproduct(){
 
-        $data = DB::select("SELECT DISTINCT t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t6.phone as to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM (select * from ord_product where status = 1)  t2  INNER JOIN ord_productdetail t1 on t2.product_id = t1.product_id INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id  INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
+        $data = DB::select("SELECT DISTINCT t1.customer_name , t1.product_id,concat(t6.name,' ',t6.lastname) as fullname,t6.phone as to_phone,t5.regis_id,t7.value_lookup as cartype, CONCAT( DATE_FORMAT( t2.pickup_date , '%d' ), '/', DATE_FORMAT( t2.pickup_date , '%m' ) ,'/', DATE_FORMAT( t2.pickup_date , '%Y' ) ) AS pickup_date FROM (select * from ord_product where status = 1)  t2  INNER JOIN (select  tb_customer.customer_name ,ord_productdetail.order_id , ord_productdetail.product_id from ord_productdetail inner join tb_order on ord_productdetail.order_id = tb_order.order_id inner JOIN tb_customer on tb_order.cust_code = tb_customer.customer_id) t1 on t2.product_id = t1.product_id INNER JOIN (SELECT ord_vehicle,MAX(current_state) as current_state FROM states WHERE current_state = '08' GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t1.order_id  INNER JOIN tb_vehicle t5 on t5.car_id = t2.car_id INNER JOIN employees t6 on t6.employee_id = t2.employee_code LEFT JOIN tb_lookup t7 on t7.code_lookup = t5.cartype and t7.name_lookup = 'vehicletype';");
         return [
             "success" => true,
             "message" => "updated successfully",
@@ -373,7 +373,7 @@ class PostManageController extends Controller
 
     public function listheadorder($product_id){
 
-        $data = DB::select("SELECT t2.order_id,t3.po,t4.customer_name,t3.to_name,t2.ismainorder,t3.current_state FROM ord_product t1 INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id INNER JOIN (SELECT ord_vehicle,max(current_state) as current_state FROM states WHERE current_state GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t2.order_id INNER JOIN tb_order t3 on t3.order_id = t2.order_id INNER JOIN tb_customer t4 on t4.customer_id = t3.cust_code WHERE t1.product_id = ?;",[$product_id]);
+        $data = DB::select("SELECT CONCAT(t7.name , ' ' , t7.lastname) as fullname , t8.regis_id ,t2.order_id,t3.po,t4.customer_name,t3.to_name,t2.ismainorder,t3.current_state FROM ord_product t1 INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id INNER JOIN (SELECT ord_vehicle,max(current_state) as current_state FROM states WHERE current_state GROUP BY ord_vehicle) t3 on t3.ord_vehicle = t2.order_id INNER JOIN tb_order t3 on t3.order_id = t2.order_id INNER JOIN tb_customer t4 on t4.customer_id = t3.cust_code inner join employees t7 on t1.employee_code = t7.employee_id INNER join tb_vehicle t8 on t1.car_id = t8.car_id WHERE t1.product_id = ?;",[$product_id]);
 
         return [
             "success" => true,

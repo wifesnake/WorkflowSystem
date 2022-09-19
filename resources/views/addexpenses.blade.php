@@ -20,6 +20,7 @@
                         <table id="table-product" class="table dataTable">
                             <thead>
                                 <th>เลขที่เอกสาร</th>
+                                <th>ผู้ส่ง</th>
                                 <th>คนขับรถ</th>
                                 <th>หมายเลขโทรศัพท์</th>
                                 <th>ทะเบียนรถ</th>
@@ -60,6 +61,8 @@
                                     <table id="table-order" class="table dataTable">
                                         <thead>
                                             <th>เลขที่ออเดอร์</th>
+                                            <th>คนขับรถ</th>
+                                            <th>ทะเบียน</th>
                                             <th>PO Number.</th>
                                             <th>Customer Name</th>
                                             <th>ผู้รับ</th>
@@ -211,6 +214,7 @@
             destroy: true,
             columns:[
                 {data: "product_id"},
+                {data:"customer_name"},
                 {data: "fullname",className:"text-nowrap"},
                 {data: "to_phone"},
                 {data: "regis_id"},
@@ -272,6 +276,8 @@
             "info":     false,
             columns:[
                 {data: "order_id"},
+                {data: "fullname",className:"text-nowrap"},
+                {data: "regis_id"},
                 {data: "po",className:"text-nowrap"},
                 {data: "customer_name",className:"text-nowrap"},
                 {data: "to_name",className:"text-nowrap"},
@@ -297,6 +303,7 @@
             },
             processing: true,
             destroy: true,
+            pageLength: 100,
             columns:[
                 {
                     data: null,
@@ -326,30 +333,35 @@
             ],
             footerCallback: function (row, data, start, end, display){
                 const api = this.api();
-                console.log(api);
                 // Remove the formatting to get integer data for summation
                 const intVal = function (i) {
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };
 
+                let income = 0;
+                let payment = 0;
+
                 // Total over all pages
-                const total = api
-                    .column(1)
+                api.column(0)
                     .data()
                     .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
+                        if(b.expent_type == "002"){
+                            payment = payment + intVal(b.amount);
+                        }else{
+                            income =income + intVal(b.amount);
+                        }
                     }, 0);
 
-                // Total over this page
-                const pageTotal = api
-                    .column(1, { page: 'current' })
-                    .data()
-                    .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
+                // // Total over this page
+                // const pageTotal = api
+                //     .column(1, { page: 'current' })
+                //     .data()
+                //     .reduce(function (a, b) {
+                //         return b.expent_type == "001" ? intVal(a) + intVal(b) : null;
+                //     }, 0);
     
                 // Update footer
-                $(api.column(1).footer()).html(pageTotal + ' ( ' + total + ' )');
+                $(api.column(1).footer()).html('รายรับ: '+ income + ' รายจ่าย: ' + payment);
             }
         });
     }
