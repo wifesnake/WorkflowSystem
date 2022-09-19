@@ -26,7 +26,7 @@ class PostExpensesController extends Controller
         "CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,".
         "t1.on_status".
         " FROM (SELECT * from ord_product where status = ?) t1".
-        " INNER JOIN (select  tb_customer.customer_name ,ord_productdetail.order_id , ord_productdetail.product_id from ord_productdetail inner join tb_order on ord_productdetail.order_id = tb_order.order_id inner JOIN tb_customer on tb_order.cust_code = tb_customer.customer_id) t2 on t2.product_id = t1.product_id".
+        " INNER JOIN (select t4.customer_name , t2.order_id , t2.product_id from (select order_id , product_id from ord_productdetail group by product_id) t2 inner JOIN tb_order t3 on t3.order_id = t2.order_id inner JOIN tb_customer t4 on t3.cust_code = t4.customer_id) t2 on t2.product_id = t1.product_id".
         " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
         " INNER JOIN tb_vehicle t5 on t5.car_id = t1.car_id".
         " INNER JOIN (select * from tb_lookup where name_lookup = 'vehicletype' ) t6 on t6.code_lookup = t5.isTrucktype ".
