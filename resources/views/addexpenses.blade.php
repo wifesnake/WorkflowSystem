@@ -20,6 +20,7 @@
                         <table id="table-product" class="table dataTable">
                             <thead>
                                 <th>เลขที่เอกสาร</th>
+                                <th>ผู้ส่ง</th>
                                 <th>คนขับรถ</th>
                                 <th>หมายเลขโทรศัพท์</th>
                                 <th>ทะเบียนรถ</th>
@@ -60,6 +61,8 @@
                                     <table id="table-order" class="table dataTable">
                                         <thead>
                                             <th>เลขที่ออเดอร์</th>
+                                            <th>คนขับรถ</th>
+                                            <th>ทะเบียน</th>
                                             <th>PO Number.</th>
                                             <th>Customer Name</th>
                                             <th>ผู้รับ</th>
@@ -211,6 +214,7 @@
             destroy: true,
             columns:[
                 {data: "product_id"},
+                {data:"customer_name"},
                 {data: "fullname",className:"text-nowrap"},
                 {data: "to_phone"},
                 {data: "regis_id"},
@@ -272,6 +276,8 @@
             "info":     false,
             columns:[
                 {data: "order_id"},
+                {data: "fullname",className:"text-nowrap"},
+                {data: "regis_id"},
                 {data: "po",className:"text-nowrap"},
                 {data: "customer_name",className:"text-nowrap"},
                 {data: "to_name",className:"text-nowrap"},

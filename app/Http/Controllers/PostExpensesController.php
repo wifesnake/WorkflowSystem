@@ -14,12 +14,12 @@ class PostExpensesController extends Controller
 
     public function ListProduct(){
         //$data = DB::select("SELECT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone,t4.regis_id,t5.value_lookup, CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date, t1.on_status as on_status_code, t6.value_lookup as on_status FROM `ord_product` t1 INNER JOIN tb_employee_car t2 on t2.car_id = t1.car_id INNER JOIN employees t3 ON t3.employee_id = t2.employee_id INNER JOIN tb_vehicle t4 ON t4.car_id = t1.car_id INNER JOIN tb_lookup t5 ON t5.code_lookup = t4.isTrucktype and t5.name_lookup = 'vehicletype' INNER JOIN tb_lookup t6 ON t6.code_lookup = t1.on_status AND t6.name_lookup = 'order_product' WHERE t1.status = ? and t1.on_status = ? GROUP BY t1.product_id,t3.name,t3.lastname,t3.phone,t4.regis_id,t5.value_lookup,t1.pickup_date,t1.on_status,t6.value_lookup;",[1,"02"]);
-        $sql = "SELECT DISTINCT t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone as to_phone,t5.regis_id,t6.value_lookup as vehicletype,".
+        $sql = "SELECT DISTINCT t2.customer_name , t1.product_id,concat(t3.name,' ',t3.lastname) as fullname,t3.phone as to_phone,t5.regis_id,t6.value_lookup as vehicletype,".
         "CONCAT( DATE_FORMAT( t1.pickup_date , '%d' ), '/', DATE_FORMAT( t1.pickup_date , '%m' ) ,'/', DATE_FORMAT( t1.pickup_date , '%Y' ) ) AS pickup_date,".
         // "t7.current_state,t2.order_id,t1.on_status".
         "t1.on_status".
         " FROM (SELECT * from ord_product where status = ?) t1".
-        " INNER JOIN ord_productdetail t2 on t2.product_id = t1.product_id".
+        " INNER JOIN (select  tb_customer.customer_name ,ord_productdetail.order_id , ord_productdetail.product_id from ord_productdetail inner join tb_order on ord_productdetail.order_id = tb_order.order_id inner JOIN tb_customer on tb_order.cust_code = tb_customer.customer_id) t2 on t2.product_id = t1.product_id".
         " INNER JOIN employees t3 on t3.employee_id = t1.employee_code".
         //" INNER JOIN tb_order t4 on t4.order_id = t2.order_id".
         " INNER JOIN tb_vehicle t5 on t5.car_id = t1.car_id".
@@ -38,7 +38,7 @@ class PostExpensesController extends Controller
     }
 
     public function GetOrder($product_id){
-        $data = DB::select("SELECT t1.order_id,t2.po,t3.customer_name,.t2.to_name,t2.weight, CONCAT( DATE_FORMAT( t4.pickup_date , '%d' ), '/', DATE_FORMAT( t4.pickup_date , '%m' ) ,'/', DATE_FORMAT( t4.pickup_date , '%Y' ) ) AS pickup_date, t1.ismainorder FROM ord_productdetail t1 INNER JOIN tb_order t2 ON t2.order_id = t1.order_id INNER JOIN tb_customer t3 ON t3.customer_id = t2.cust_code INNER JOIN ord_product t4 ON t4.product_id = t1.product_id WHERE t4.status = ? AND t1.product_id = ? GROUP BY t1.order_id,t2.po,t3.customer_name,.t2.to_name,t2.weight,t4.pickup_date,t1.ismainorder;",[1,$product_id]);
+        $data = DB::select("SELECT CONCAT(t7.name , ' ' , t7.lastname) as fullname , t8.regis_id , t1.order_id,t2.po,t3.customer_name,.t2.to_name,t2.weight, CONCAT( DATE_FORMAT( t4.pickup_date , '%d' ), '/', DATE_FORMAT( t4.pickup_date , '%m' ) ,'/', DATE_FORMAT( t4.pickup_date , '%Y' ) ) AS pickup_date, t1.ismainorder FROM ord_productdetail t1 INNER JOIN tb_order t2 ON t2.order_id = t1.order_id INNER JOIN tb_customer t3 ON t3.customer_id = t2.cust_code INNER JOIN ord_product t4 ON t4.product_id = t1.product_id inner join employees t7 on t4.employee_code = t7.employee_id INNER join tb_vehicle t8 on t4.car_id = t8.car_id WHERE t4.status = ? AND t1.product_id = ? GROUP BY t1.order_id,t2.po,t3.customer_name,.t2.to_name,t2.weight,t4.pickup_date,t1.ismainorder;",[1,$product_id]);
         return [
             "success" => true,
             "data" => $data
