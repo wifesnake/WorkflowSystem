@@ -16,6 +16,18 @@
 
             <div class="card mt-2">
                 <section class="m-2">
+                    <div class="row">
+                        <div class="col-12 col-sm12 col-md-4 col-lg-4">
+                            <select class="form-control" name="expense-status" id="expense-status">
+                                <option value="" selected>ทั้งหมด</option>
+                                <option value="02">รอดำเนินการ</option>
+                                <option value="09">รอปิดงาน</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm12 col-md-4 col-lg-4">
+                            <div class="btn btn-primary" onclick="ListProduct()">ค้นหา</div>
+                        </div>
+                    </div>
                     <div class="com-md-12 table-responsive">
                         <table id="table-product" class="table dataTable">
                             <thead>
@@ -202,13 +214,17 @@
     }
 
     async function ListProduct() {
+
+        const status = $('[name=expense-status]').val();
+
         if ($.fn.dataTable.isDataTable('#table-product')) {
             $('#table-product').DataTable().destroy();
         }
         $('#table-product').dataTable({
             ajax:{
                 url: "/api/expenses/listproduct",
-                type: "get"
+                data: {status: status},
+                type: "post"
             },
             processing: true,
             destroy: true,

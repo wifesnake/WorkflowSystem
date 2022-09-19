@@ -89,7 +89,7 @@ Route::get('/listorderproduct',[PostManageController::class , 'listOrderProduct'
 Route::post('/manage/product/updatestatus',[PostManageController:: class, 'updateStatusProduct']);
 Route::post('/manage/car/delete',[PostManageController:: class, 'caremployee_delete']);
 
-Route::get('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
+Route::post('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
 Route::get('/expenses/getorder/{product_id}',[PostExpensesController::class, 'GetOrder']);
 Route::get('/expenses/getexpenses/{product_id}',[PostExpensesController::class, 'GetExpenses']);
 Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']);
