@@ -89,7 +89,7 @@ Route::get('/listorderproduct',[PostManageController::class , 'listOrderProduct'
 Route::post('/manage/product/updatestatus',[PostManageController:: class, 'updateStatusProduct']);
 Route::post('/manage/car/delete',[PostManageController:: class, 'caremployee_delete']);
 
-Route::get('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
+Route::post('/expenses/listproduct',[PostExpensesController::class, 'ListProduct']);
 Route::get('/expenses/getorder/{product_id}',[PostExpensesController::class, 'GetOrder']);
 Route::get('/expenses/getexpenses/{product_id}',[PostExpensesController::class, 'GetExpenses']);
 Route::post('/expenses/addexpense',[PostExpensesController::class, 'addExpense']);
@@ -105,8 +105,8 @@ Route::get('/progress/listheadorder/{product_id}',[PostManageController::class, 
 Route::post('/progress/head/update',[PostManageController::class, 'headupdatestatus']);
 Route::post('/progress/close',[PostManageController::class, 'close']);
 
-Route::get('/report/order/list',[PostReportController::class, 'reportOrder']);
-Route::get('/report/order/expense',[PostReportController::class, 'reportExspense']);
+Route::post('/report/order/list',[PostReportController::class, 'reportOrder']);
+Route::post('/report/order/expense',[PostReportController::class, 'reportExspense']);
 Route::post('/report/order/agency',[PostReportController::class, 'reportAgency']);
 
 Route::get('/tracking/get/{product_id}',[PostTrackController::class, 'get']);
