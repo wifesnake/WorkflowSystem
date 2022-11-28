@@ -163,45 +163,48 @@ $var1 = $ordno;
                             </div>
                         </div>
 
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                ประรถที่ต้องการ <b class="request-data">**</b> :
+                        <div style="display:none;">
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    ประรถที่ต้องการ <b class="request-data">**</b> :
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="car_type" id="car_type" class="form-control">
+                                        <option value="">-- Please Select --</option>
+                                        @foreach ($usevehicle as $item)
+                                        <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <select name="car_type" id="car_type" class="form-control">
-                                    <option value="">-- Please Select --</option>
-                                    @foreach ($usevehicle as $item)
-                                    <option value="{{$item->code_lookup}}">{{$item->value_lookup}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="row col-md-12">
-                            <div class="col-md-3">
-                                {{-- จำนวน <b class="request-data">**</b> : --}}
-                            </div>
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="row col-md-6">
-                                        <div class="col-md-4">
-                                            จำนวนรถเล็ก:
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    {{-- จำนวน <b class="request-data">**</b> : --}}
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="row col-md-6">
+                                            <div class="col-md-4">
+                                                จำนวนรถเล็ก:
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number"name="m_unit" id="m_unit" class="form-control" type="text">
+                                            </div>
                                         </div>
-                                        <div class="col-md-8">
-                                            <input type="number"name="m_unit" id="m_unit" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row col-md-6">
-                                        <div class="col-md-4">
-                                            จำนวนรถใหญ่:
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="number"name="L_unit" id="L_unit" class="form-control" type="text">
+                                        <div class="row col-md-6">
+                                            <div class="col-md-4">
+                                                จำนวนรถใหญ่:
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number"name="L_unit" id="L_unit" class="form-control" type="text">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row col-md-12">
                             <div class="col-md-3">
                                 ชนิดสินค้า <b class="request-data">**</b> :
