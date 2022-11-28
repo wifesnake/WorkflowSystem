@@ -60,8 +60,8 @@ class FlowController extends Controller
             $order->to_address = $json["to_address"];
             $order->to_phone = $json["to_phone"];
             $order->product_desc = $json["product_desc"];
-            $order->m_unit = $json["m_unit"];
-            $order->L_unit = $json["L_unit"];
+            $order->m_unit = null;//$json["m_unit"];
+            $order->L_unit = null;//$json["L_unit"];
             $order->product_type = $json["product_type"];
             $order->weight = $json["weight"];
             $order->remark = $json["remark"];

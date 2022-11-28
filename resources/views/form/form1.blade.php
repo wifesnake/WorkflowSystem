@@ -134,7 +134,8 @@
             </div>
         </div>
 
-        <div class="row col-md-12">
+        @if(false)
+        <!-- <div class="row col-md-12">
             <div class="col-md-3">
                 ประรถที่ต้องการ <b class="request-data">**</b> :
             </div>
@@ -172,7 +173,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        @endif
+
         <div class="row col-md-12">
             <div class="col-md-3">
                 ชนิดสินค้า <b class="request-data">**</b> :

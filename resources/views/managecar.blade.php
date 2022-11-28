@@ -12,14 +12,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="label-listCar">รถสำหรับส่งสินค้า</label>
-                        <select class="form-control" name="listCar"></select>
+                        <select class="form-control selectCar" name="listCar"></select>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <label for="label-listOrder">ออเดอร์</label>
                     <div class="input-group">
-                        <select class="form-control" name="listOrder"></select>
+                        <select class="form-control selectOrder" name="listOrder"></select>
                     </div>
                 </div>
 
@@ -91,6 +91,9 @@
 </div>
 
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <style>
     .text-nowrap{
         white-space: nowrap
@@ -99,9 +102,38 @@
     button.btn.btn-info {
         color: white;
     }
+
+    span.select2-selection.select2-selection--single {
+        display: block;
+        width: 100%;
+        height: calc(1.6em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--single, .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border-color: #80bdff;
+        color: #495057;
+        background-color: #fff;
+        border-color: #a1cbef;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgb(52 144 220 / 25%);
+    }
+
 </style>
 
 <script>
+
+    $('.selectCar').select2();
+    $('.selectOrder').select2();
 
     let arrayOrder = [];
     let listProductDetail = [];
@@ -180,11 +212,12 @@
     async function ListCar() {
         await $.get('/api/cars',function (res) {
             const { data } = res;
+            console.log(data);
             if(data){
                 const option = $("<option selected>").val('').text('-- กรุณาเลือกรถ --');
                 $('[name="listCar"]').append(option);
                 data.forEach(item => {
-                    const opt = $("<option>").val(item.car_id+","+item.employee_id).text("" + item.regis_id+" ("+item.car_brand + ")");
+                    const opt = $("<option>").val(item.car_id+","+item.employee_id).text("" + item.regis_id + " >> " + item.cartype1 + " ("+item.car_brand + ")");
                     $('[name="listCar"]').append(opt);
                 });
             }
