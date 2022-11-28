@@ -115,6 +115,51 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
+                                    <label class="label-control" for="label-list-1">น้ำมัน</label>
+                                    <input type="number" name="list-1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-list-2">เบี้ยเลี้ยง</label>
+                                    <input type="number" name="list-2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-list-3">ค่าพวง</label>
+                                    <input type="number" name="list-3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-list-4">ทางด่วน</label>
+                                    <input type="number" name="list-4" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="label-control" for="label-list-5">อื่นๆ</label>
+                                    <input type="number" name="list-5" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
                                     <label class="label-control" for="label-amount">จำนวน <b class="request-data">**</b></label>
                                     <input type="number" name="amount" id="amount" class="form-control">
                                 </div>
@@ -128,16 +173,16 @@
                                     <textarea name="remark" id="remark" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="label-control" for="label-file">แนบไฟล์ <b class="request-data">**</b></label>
                                     <input type="file" name="file" placeholder="Choose file" id="file">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="col-12">
@@ -153,9 +198,14 @@
                             <table id="table-expenses" class="table dataTable">
                                 <thead>
                                     <th>ประเภทค่าใช้จ่าย</th>
-                                    <th>จำนวนเงิน (บาท)</th>
-                                    <th>หมายเหตุ</th>
-                                    <th>ไฟล์</th>
+                                    {{-- <th>จำนวนเงิน (บาท)</th> --}}
+                                    <th>น้ำมัน</th>
+                                    <th>เบี้ยเลี้ยง</th>
+                                    <th>ค่าพ่วง</th>
+                                    <th>ทางด่วน</th>
+                                    <th>อื่นๆ</th>
+                                    {{-- <th>หมายเหตุ</th> --}}
+                                    {{-- <th>ไฟล์</th> --}}
                                     <th>#</th>
                                 </thead>
                                 <tbody></tbody>
@@ -329,16 +379,19 @@
                         return '<td>'+ str +'</td>';
                     }
                 },
-                {data: "amount"},
-                {data: "remark"},
-                {
-                    data: null,
-                    render:function(data,type,row){
-                        const image = data.image_id ? '<image width="150px" src="'+data.base64+'">' : 'No Image';
+                {data: "oil"},
+                {data: "food"},
+                {data: "trailer"},
+                {data: "toll"},
+                {data: "extra"},
+                // {
+                //     data: null,
+                //     render:function(data,type,row){
+                //         const image = data.image_id ? '<image width="150px" src="'+data.base64+'">' : 'No Image';
 
-                        return '<td>'+image+'</td>';
-                    }
-                },
+                //         return '<td>'+image+'</td>';
+                //     }
+                // },
                 {
                     data:null,
                     render:function(data,type,row){
@@ -384,51 +437,56 @@
 
     async function add_expense() {
         let post = true;
-        if($('#expense_type').val().trim()==""){
-            $('#expense_type').addClass('invalid-field').focus();
-            post = false;
-        }else{
-            $('#expense_type').removeClass('invalid-field');
-            post = true;
-        }
-        if($('#amount').val().trim()==""){
-            $('#amount').addClass('invalid-field').focus();
-            post = false;
-        }else{
-            $('#amount').removeClass('invalid-field');
-            post = true;
-        }
+        // if($('#expense_type').val().trim()==""){
+        //     $('#expense_type').addClass('invalid-field').focus();
+        //     post = false;
+        // }else{
+        //     $('#expense_type').removeClass('invalid-field');
+        //     post = true;
+        // }
+        // if($('#amount').val().trim()==""){
+        //     $('#amount').addClass('invalid-field').focus();
+        //     post = false;
+        // }else{
+        //     $('#amount').removeClass('invalid-field');
+        //     post = true;
+        // }
 
         if(post){
             const jsonData = {
                 product_id: global_product_id,
                 expenese_type : $('#expense_type').val().trim(),
-                amount : $('#amount').val().trim(),
-                remark : $('#remark').val().trim(),
+                amount : 0,
+                oil : $('[name=list-1]').val().trim(),
+                food : $('[name=list-2]').val().trim(),
+                trailer : $('[name=list-3]').val().trim(),
+                toll : $('[name=list-4]').val().trim(),
+                extra : $('[name=list-5]').val().trim(),
+                remark : "",
                 by: "{{ Auth::user()->name }}"
             }
 
-            if($('#file')[0].files.length > 0){
-                var file_data = $('#file').prop('files')[0];
-                var form_data = new FormData();                  
-                form_data.append('file', file_data);
-                form_data.append('product_id',global_product_id);
-                form_data.append('username',"{{ Auth::user()->name }}");
-                const type = "image_"+global_product_id+"_"+jsonData.expenese_type+"_"+jsonData.amount+"_"+jsonData.remark
-                form_data.append('type_image',type);
-                $.ajax({
-                    url: "{{ route('upload.uploadFile') }}", // <-- point to server-side PHP script 
-                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,                         
-                    type: 'post',
-                    success: function(php_script_response){
-                        // <-- display response from the PHP script, if any
-                    }
-                });
-            }
+            // if($('#file')[0].files.length > 0){
+            //     var file_data = $('#file').prop('files')[0];
+            //     var form_data = new FormData();                  
+            //     form_data.append('file', file_data);
+            //     form_data.append('product_id',global_product_id);
+            //     form_data.append('username',"{{ Auth::user()->name }}");
+            //     const type = "image_"+global_product_id+"_"+jsonData.expenese_type
+            //     form_data.append('type_image',type);
+            //     $.ajax({
+            //         url: "{{ route('upload.uploadFile') }}", // <-- point to server-side PHP script 
+            //         dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false,
+            //         data: form_data,                         
+            //         type: 'post',
+            //         success: function(php_script_response){
+            //             // <-- display response from the PHP script, if any
+            //         }
+            //     });
+            // }
 
             $.post('/api/expenses/addexpense',jsonData,(response,status)=>{
                 const { success, message } = response;

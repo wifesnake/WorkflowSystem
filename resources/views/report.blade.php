@@ -105,6 +105,11 @@
                                             <th>วันที่คืนบิล</th>
                                             <th>เลขโปรดักส์</th>
                                             <th>รายรับ</th>
+                                            <th>น้ำมัน</th>
+                                            <th>เบี้ยเลี้ยง</th>
+                                            <th>ค่าพ่วง</th>
+                                            <th>ทางด่วน</th>
+                                            <th>อื่นๆ</th>
                                             <th>รายจ่าย</th>
                                         </thead>
                                         <tbody></tbody>
@@ -273,6 +278,36 @@
                     data: null,
                     render: function(data,type,row){
                         return currencyFormat(Number(data.income));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.oil));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.food));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.trailer));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.toll));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.extra));
                     }
                 },
                 {

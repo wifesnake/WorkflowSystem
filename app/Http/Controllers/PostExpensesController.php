@@ -52,7 +52,7 @@ class PostExpensesController extends Controller
     }
 
     public function GetExpenses($product_id){
-        $data = DB::select("SELECT t1.id,t1.product_id,t1.expent_type,t1.amount,t1.remark,t2.id as image_id,t2.base64 FROM `tb_expent` t1 LEFT JOIN tb_image t2 ON t2.type_image = concat('image_',?,'_',t1.expent_type,'_',t1.amount,'_',t1.remark) and t2.status = 1 where t1.product_id = ?;",[$product_id,$product_id]);
+        $data = DB::select("SELECT t1.id,t1.product_id,t1.expent_type,t1.amount,t1.oil,t1.food,t1.trailer,t1.toll,t1.extra,t1.remark,t2.id as image_id,t2.base64 FROM `tb_expent` t1 LEFT JOIN tb_image t2 ON t2.type_image = concat('image_',?,'_',t1.expent_type,'_',t1.amount,'_',t1.remark) and t2.status = 1 where t1.product_id = ?;",[$product_id,$product_id]);
         return [
             "success" => true,
             "data" => $data
@@ -63,7 +63,12 @@ class PostExpensesController extends Controller
         $model = new ExpenseModel();
         $model->product_id = $request->product_id;
         $model->expent_type = $request->expenese_type;
-        $model->amount = $request->amount;
+        $model->amount = $request->oil + $request->food + $request->trailer + $request->toll + $request->extra;
+        $model->oil = $request->oil;
+        $model->food = $request->food;
+        $model->trailer = $request->trailer;
+        $model->toll = $request->toll;
+        $model->extra = $request->extra;
         $model->remark = $request->remark;
         $model->created_by = $request->by;
         if($model->save()){
