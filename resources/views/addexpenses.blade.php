@@ -501,8 +501,13 @@
                     });
                     $('#expense_type').val('');
                     $('#amount').val('');
-                    $('#remark').val('');
-                    $('#file').val('');
+                    $('[name=list-1]').val('');
+                    $('[name=list-2]').val('');
+                    $('[name=list-3]').val('');
+                    $('[name=list-4]').val('');
+                    $('[name=list-5]').val('');
+                    // $('#remark').val('');
+                    // $('#file').val('');
                     getOrder(global_product_id/*,glodbal_status,global_order_id*/);
                 }else{
                     $(document).Toasts('create', {
