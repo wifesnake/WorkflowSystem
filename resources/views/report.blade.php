@@ -339,7 +339,54 @@
     }
 
     function ListExspenseSummary(data) {
-        console.log(data);
+        let array_data = [];
+        data.forEach(item =>{
+            let array_temp = [item.employees,item.sign_car,item.po,item.to_name,item.oil,item.food,item.trailer,item.toll,item.extra]
+            array_data.push(array_temp)
+        });
+    
+        let render_string = `<table id="table-expensesumary" class="table dataTable">`;
+            render_string += `</table>`;
+            
+        $('#render-table-expensesumary').html(render_string)
+        if ($.fn.dataTable.isDataTable('#table-expensesumary')) {
+            $('#table-expensesumary').DataTable().destroy();
+        }
+        var datatable = $('#table-expensesumary').dataTable({
+            data: array_data,
+            columns: [
+                {
+                    title: "ชื่อพนักงาน"
+                },
+                {
+                    title: "ทะเบียน"
+                },
+                {
+                    title: "หมายเลข PO"
+                },
+                {
+                    title: "รายการ"
+                },
+                {
+                    title: "น้ำมัน"
+                },
+                {
+                    title: "เบี้ยเลี้ยง"
+                },
+                {
+                    title: "ค่าพ่วง"
+                },
+                {
+                    title: "ทางด่วน"
+                },
+                {
+                    title: "อื่นๆ"
+                }
+            ],
+            rowsGroup: [
+                0,1,2,3,4
+            ]
+        })
     }
 
     function currencyFormat(data){
