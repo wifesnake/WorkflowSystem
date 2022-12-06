@@ -13,7 +13,8 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-order-tab" data-bs-toggle="tab" data-bs-target="#nav-order" type="button" role="tab" aria-controls="nav-home" aria-selected="true">รายงานออเดอร์</button>
                             <button class="nav-link" id="nav-expense-tab" data-bs-toggle="tab" data-bs-target="#nav-expense" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานค่าใช้จ่าย</button>
-                            <button class="nav-link" id="nav-expense-tab" data-bs-toggle="tab" data-bs-target="#nav-agency" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานหน่วยงาน</button>
+                            <button class="nav-link" id="nav-agency-tab" data-bs-toggle="tab" data-bs-target="#nav-agency" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานหน่วยงาน</button>
+                            <button class="nav-link" id="nav-expensesummary-tab" data-bs-toggle="tab" data-bs-target="#nav-expensesummary" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">สรุปรายงาน</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -117,6 +118,11 @@
                                 </div>
                             </section>
                         </div>
+                        <div class="tab-pane fade" id="nav-expensesummary" role="tabpanel" aria-labelledby="nav-expensesummary-tab">
+                            <section class="mt-2 mb-2">
+                                <div id="render-table-expensesumary"></div>
+                            </section>
+                        </div>
                     </div>                      
                 </div>
             </div>
@@ -142,6 +148,7 @@
         getOrder();
         getExspense();
         getAgency();
+        getExspenseSummary();
     });
 
     async function getOrder(){
@@ -152,6 +159,11 @@
     async function getExspense(){
         const { data } = await $.post('/api/report/order/expense',{date: ""});
         ListExspense(data);
+    }
+
+    async function getExspenseSummary(){
+        const { data } = await $.post('/api/report/order/expensesummary',{date: ""});
+        ListExspenseSummary(data);
     }
 
     async function getAgency(){
@@ -324,6 +336,10 @@
             //     $('td:eq(0)', nRow).html(iDisplayIndexFull +1);
             // }
         });
+    }
+
+    function ListExspenseSummary(data) {
+        console.log(data);
     }
 
     function currencyFormat(data){
