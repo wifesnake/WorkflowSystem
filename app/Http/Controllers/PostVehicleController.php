@@ -28,7 +28,7 @@ class PostVehicleController extends Controller
     }
 
     public function cars(){
-        $data = DB::select("SELECT ist.value_lookup as CatType2 , ct.value_lookup as cartype1,  t1.id, t1.car_id,t1.regis_id,t1.car_brand,t2.employee_id,t3.name,t3.lastname,concat(t3.name,' ',t3.lastname) as fullname,t4.car_id as iscar FROM tb_vehicle t1 LEFT JOIN tb_employee_car t2 ON t2.car_id = t1.car_id LEFT JOIN employees t3 ON t3.employee_id = t2.employee_id LEFT JOIN (SELECT car_id FROM ord_product WHERE on_status not in ('01','04') and status = ?) t4 ON t4.car_id = t1.car_id LEFT JOIN tb_lookup ist on ist.code_lookup = t1.isTrucktype and ist.name_lookup = 'usevehicle' LEFT JOIN tb_lookup ct on ct.code_lookup = t1.cartype and ct.name_lookup = 'vehicletype' WHERE t4.car_id is null and t3.employee_id is not null and t3.employee_id <> ''",[1]);
+        $data = DB::select("SELECT ist.value_lookup as CatType2 , ct.value_lookup as cartype1,  t1.id, t1.car_id,t1.regis_id,t1.car_brand,t2.employee_id,t3.name,t3.lastname,concat(t3.name,' ',t3.lastname) as fullname,t4.car_id as iscar FROM tb_vehicle t1 LEFT JOIN tb_employee_car t2 ON t2.car_id = t1.car_id LEFT JOIN employees t3 ON t3.employee_id = t2.employee_id LEFT JOIN (SELECT car_id FROM ord_product WHERE on_status not in ('01','04') and status = ?) t4 ON t4.car_id = t1.car_id LEFT JOIN tb_lookup ist on ist.code_lookup = t1.cartype and ist.name_lookup = 'usevehicle' LEFT JOIN tb_lookup ct on ct.code_lookup = t1.isTrucktype and ct.name_lookup = 'vehicletype' WHERE t4.car_id is null and t3.employee_id is not null and t3.employee_id <> ''",[1]);
         return ["data"=>$data];
     }
 
