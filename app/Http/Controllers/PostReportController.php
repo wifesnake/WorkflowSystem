@@ -48,7 +48,7 @@ class PostReportController extends Controller
     }
 
     public function reportExspenseSummary(Request $request){
-        $data = DB::select("SELECT CONCAT(t5.name,' ',t5.lastname) as employees,t6.regis_id as sign_car,t1.po,t1.to_name,t7.oil,t7.food,t7.trailer,t7.toll,t7.extra,t3.product_id FROM `tb_order` t1 INNER JOIN ord_productdetail t2 on t2.order_id = t1.order_id INNER JOIN ord_product t3 on t3.product_id = t2.product_id INNER JOIN tb_employee_car t4 on t4.car_id = t3.car_id INNER JOIN employees t5 on t5.employee_id = t4.employee_id INNER JOIN tb_vehicle t6 on t6.car_id = t3.car_id INNER JOIN tb_expent t7 on t7.product_id = t3.product_id WHERE t1.status = 1 order by t1.created_at desc;");
+        $data = DB::select("SELECT CONCAT(t5.name,' ',t5.lastname) as employees,t6.regis_id as sign_car,t1.po,t1.to_name,t7.oil,t7.food,t7.trailer,t7.toll,t7.extra,t7.amount,t3.product_id FROM `tb_order` t1 INNER JOIN ord_productdetail t2 on t2.order_id = t1.order_id INNER JOIN ord_product t3 on t3.product_id = t2.product_id INNER JOIN tb_employee_car t4 on t4.car_id = t3.car_id INNER JOIN employees t5 on t5.employee_id = t4.employee_id INNER JOIN tb_vehicle t6 on t6.car_id = t3.car_id INNER JOIN tb_expent t7 on t7.product_id = t3.product_id WHERE t1.status = 1 order by t1.created_at desc;");
         return ["data" => $data];
     }
 

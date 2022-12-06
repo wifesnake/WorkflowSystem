@@ -341,7 +341,7 @@
     function ListExspenseSummary(data) {
         let array_data = [];
         data.forEach(item =>{
-            let array_temp = [item.employees,item.sign_car,item.po,item.to_name,item.oil,item.food,item.trailer,item.toll,item.extra]
+            let array_temp = [item.employees,item.sign_car,item.po,item.to_name,item.oil,item.food,item.trailer,item.toll,item.extra,item.amount]
             array_data.push(array_temp)
         });
     
@@ -381,6 +381,9 @@
                 },
                 {
                     title: "อื่นๆ"
+                },
+                {
+                    title: "รวม"
                 }
             ],
             rowsGroup: [
