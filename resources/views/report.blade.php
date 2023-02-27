@@ -14,6 +14,7 @@
                             <button class="nav-link active" id="nav-order-tab" data-bs-toggle="tab" data-bs-target="#nav-order" type="button" role="tab" aria-controls="nav-home" aria-selected="true">รายงานออเดอร์</button>
                             <button class="nav-link" id="nav-expense-tab" data-bs-toggle="tab" data-bs-target="#nav-expense" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานค่าใช้จ่าย</button>
                             <button class="nav-link" id="nav-agency-tab" data-bs-toggle="tab" data-bs-target="#nav-agency" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานหน่วยงาน</button>
+                            <button class="nav-link" id="nav-agency2-tab" data-bs-toggle="tab" data-bs-target="#nav-agency2" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายงานหน่วยงานรายวัน</button>
                             <button class="nav-link" id="nav-expensesummary-tab" data-bs-toggle="tab" data-bs-target="#nav-expensesummary" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">สรุปรายงาน</button>
                         </div>
                     </nav>
@@ -118,11 +119,61 @@
                                 </div>
                             </section>
                         </div>
+
+                        
+                        <div class="tab-pane fade" id="nav-agency2" role="tabpanel" aria-labelledby="nav-expense-tab">
+                            <section class="mt-2 mb-2">
+                                <div class="row">
+                                    
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input class="form-control" type="date" name="agency2-date" id="agency2-date">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+
+                                        <select name="cust_name" id="cust_name" class="form-control">
+                                            <option value="">-- Please Select --</option>
+                                            @foreach ($tb_customer as $item)
+                                            <option value="{{$item->customer_id}}">{{$item->customer_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="btn btn-primary" onclick="getAgency2ByDate()">ค้นหา</div>
+                                    </div>
+                                </div>
+                                <div class="com-md-12 table-responsive">
+                                    <table id="table-agency2" class="table dataTable">
+                                        <thead>
+                                            <th>ลำดับ</th>
+                                            <th>วันที่(วันที่ขึ้นสินค้า)</th>
+                                            <th>หน่วยงาน/คลังสินค้า</th>
+                                            <th>ชื่อพนักงาน</th>
+                                            <th>ทะเบียน</th>
+                                            <th>ประเภทรถ</th>
+                                            <th>เลขที่PO</th>
+                                            <th>เลขออเดอร์</th>
+                                            <th>ผู้รับสินค้า</th>
+                                            <th>เลขโปรดักส์</th>
+                                            <th>น้ำมัน</th>
+                                            <th>เบี้ยเลี้ยง</th>
+                                            <th>ค่าพ่วง</th>
+                                            <th>ทางด่วน</th>
+                                            <th>อื่นๆ</th>
+                                            <th>รายจ่าย</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+
                         <div class="tab-pane fade" id="nav-expensesummary" role="tabpanel" aria-labelledby="nav-expensesummary-tab">
                             <section class="mt-2 mb-2">
                                 <div id="render-table-expensesumary"></div>
                             </section>
                         </div>
+
                     </div>                      
                 </div>
             </div>
@@ -144,11 +195,16 @@
 </style>
 
 <script>
-    $(document).ready(function(){
-        getOrder();
-        getExspense();
-        getAgency();
+
+    $( "#nav-expensesummary-tab" ).click(function() {
         getExspenseSummary();
+    });
+
+    $(document).ready(function(){
+        //getOrder();
+        //getExspense();
+        //getAgency();
+        //getExspenseSummary();
     });
 
     async function getOrder(){
@@ -186,7 +242,16 @@
     async function getAgencyByDate(){
         const date = $('[name=agency-date]').val();
         const { data } = await $.post('/api/report/order/agency',{date: date});
+        console.log(data);
         ListAgency(data);
+    }
+
+    async function getAgency2ByDate(){
+        const date = $('[name=agency2-date]').val();
+        const cust_id = $('#cust_name option:selected').val();
+        const { data } = await $.post('/api/report/order/agency2',{date: date,cust_id:cust_id});
+        console.log(data);
+        ListAgency2(data);
     }
 
     function listOrder(data){
@@ -292,6 +357,78 @@
                         return currencyFormat(Number(data.income));
                     }
                 },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.oil));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.food));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.trailer));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.toll));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.extra));
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data,type,row){
+                        return currencyFormat(Number(data.payment));
+                    }
+                },
+                // {data: "driver_name",className:"text-nowrap"},
+                // {data: "start_date",className:"text-nowrap"},
+                // {data: "end_date",className:"text-nowrap"}
+            ]
+            // "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            //     $('td:eq(0)', nRow).html(iDisplayIndexFull +1);
+            // }
+        });
+    }
+
+    function ListAgency2(data){
+        if ($.fn.dataTable.isDataTable('#table-agency2')) {
+            $('#table-agency2').DataTable().destroy();
+        }
+        var datatable = $('#table-agency2').dataTable({
+            data: data,
+            processing: true,
+            destroy: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf'
+            ],
+            columns:[
+                {data: "row_num",className:"text-nowrap"},
+                {data: "pickup_date",className:"text-nowrap"},
+                {data: "customer_name",className:"text-nowrap"},
+                {data: "driver",className:"text-nowrap"},
+                {data: "car_sign",className:"text-nowrap"},
+                {data: "car_type",className:"text-nowrap"},
+                {data: "po",className:"text-nowrap"},
+                {data: "order_id",className:"text-nowrap"},
+                {data: "to_name",className:"text-nowrap"},
+                {data: "product_id",className:"text-nowrap"},
+                // {data: "income",className:"text-nowrap"},
+                // {data: "payment",className:"text-nowrap"},
+
                 {
                     data: null,
                     render: function(data,type,row){
